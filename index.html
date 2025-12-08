@@ -1,216 +1,693 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-    <title>UKGames- Gizlilik Politikası</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gizlilik Politikası - Color Blocks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #4a6ee0;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+        
+        .date-badge {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin: 25px 0 15px;
+        }
+        
+        h3 {
+            color: #5d6d7e;
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8fafc;
+            border-radius: 10px;
+            border-left: 4px solid #4a6ee0;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .data-table th {
+            background-color: #4a6ee0;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+        
+        .data-table tr:hover {
+            background-color: #f5f7ff;
+        }
+        
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .cookie-table th, .cookie-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .cookie-table th {
+            background-color: #f1f8ff;
+            color: #2c3e50;
+        }
+        
+        .important-note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box {
+            background-color: #ffebee;
+            border: 2px solid #f44336;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .contact-info {
+            background-color: #e8f5e9;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #4a6ee0;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .legal-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .legal-badge {
+            background-color: #f1f8ff;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .flag {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #e1e8ed;
+            color: #7f8c8d;
+        }
+        
+        .consent-box {
+            background-color: #f3f4f6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .accept-btn {
+            background-color: #4a6ee0;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .accept-btn:hover {
+            background-color: #3a5ed0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            .data-table, .cookie-table {
+                font-size: 0.9rem;
+            }
+            
+            .legal-badges {
+                flex-direction: column;
+            }
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #4a6ee0;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 3px 15px rgba(74, 110, 224, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h1>Color Blocks Gizlilik Politikası</h1>
-    <p>Son Güncelleme: 01 Aralık 2025</p>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i> Color Blocks
+            </div>
+            <h1>Gizlilik Politikası</h1>
+            <div class="date-badge">
+                <i class="far fa-calendar-alt"></i> Son Güncelleme: 01/12/2025
+            </div>
+            <p class="subtitle">Verilerinizin güvenliği bizim için önemlidir</p>
+        </header>
 
-## 📋 **GENEL BİLGİLENDİRME**
+        <div class="important-note">
+            <h3><i class="fas fa-exclamation-circle"></i> Önemli Bilgi</h3>
+            <p>Bu gizlilik politikası, [Uygulama/Site Adı]'nı kullandığınız sürece geçerlidir. Politikamızdaki değişikliklerden haberdar olmak için bu sayfayı düzenli olarak kontrol etmenizi öneririz.</p>
+        </div>
 
-Bu gizlilik politikası, UKGames'nın ("biz", "bizim", "uygulamamız") kullanıcılarının ("siz", "sizin") kişisel verilerini nasıl topladığını, kullandığını, paylaştığını ve koruduğunu açıklamaktadır.
+        <div class="section" id="collected-data">
+            <h2><i class="fas fa-database"></i> 1. Toplanan Veriler</h2>
+            
+            <h3>A. Doğrudan Toplanan Veriler:</h3>
+            <ul>
+                <li><strong>Hesap Bilgileri:</strong> Ad, soyad, e-posta adresi</li>
+                <li><strong>Profil Bilgileri:</strong> Kullanıcı adı, profil fotoğrafı</li>
+                <li><strong>İletişim Bilgileri:</strong> Telefon numarası, adres (gerekliyse)</li>
+                <li><strong>Ödeme Bilgileri:</strong> Kredi kartı bilgileri (şifrelenmiş olarak)</li>
+            </ul>
+            
+            <h3>B. Otomatik Toplanan Veriler:</h3>
+            <ul>
+                <li><strong>Cihaz Bilgileri:</strong> Cihaz modeli, işletim sistemi, benzersiz cihaz tanımlayıcıları</li>
+                <li><strong>Kullanım Verileri:</strong> Sayfa görüntülemeleri, tıklamalar, oturum süreleri</li>
+                <li><strong>Konum Verileri:</strong> IP adresi, coğrafi konum (izin verirseniz)</li>
+                <li><strong>Çerezler ve Benzer Teknolojiler:</strong> Oturum çerezleri, kalıcı çerezler</li>
+            </ul>
+            
+            <h3>C. Üçüncü Taraflardan Gelen Veriler:</h3>
+            <ul>
+                <li>Sosyal medya hesapları (Google, Facebook, Apple ile giriş yaparsanız)</li>
+                <li>Analiz araçları (Google Analytics)</li>
+            </ul>
+        </div>
 
-**Geçerlilik:** Bu politika UKGames oyunlarını kullandığınız sürece geçerlidir.
+        <div class="section" id="usage-purpose">
+            <h2><i class="fas fa-bullseye"></i> 2. Verilerin Kullanım Amaçları</h2>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Amaç</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hizmet Sağlama</strong></td>
+                        <td>Uygulamayı çalıştırmak, özellikleri sunmak</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kişiselleştirme</strong></td>
+                        <td>Size özel içerik ve öneriler sunmak</td>
+                    </tr>
+                    <tr>
+                        <td><strong>İletişim</strong></td>
+                        <td>Bildirimler, güncellemeler, destek mesajları göndermek</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Analiz ve Geliştirme</strong></td>
+                        <td>Uygulamayı geliştirmek, hataları düzeltmek</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Güvenlik</strong></td>
+                        <td>Dolandırıcılığı önlemek, güvenliği sağlamak</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Yasal Yükümlülükler</strong></td>
+                        <td>Kanuni gerekliliklere uymak</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
----
+        <div class="section" id="data-sharing">
+            <h2><i class="fas fa-share-alt"></i> 3. Veri Paylaşımı</h2>
+            
+            <h3>Paylaştığımız Taraflar:</h3>
+            <ul>
+                <li><strong>Hizmet Sağlayıcılar:</strong> Hosting, ödeme işlemcileri, analiz araçları</li>
+                <li><strong>Yasal Zorunluluklar:</strong> Mahkeme kararı veya kanuni gereklilik durumunda</li>
+                <li><strong>İş Ortakları:</strong> Sadece sizin onayınızla ve sınırlı ölçüde</li>
+                <li><strong>Satış veya Birleşme Durumunda:</strong> İş transferi sırasında</li>
+            </ul>
+            
+            <h3>Paylaşmadığımız Taraflar:</h3>
+            <ul>
+                <li>Reklam ağları (açıkça izin vermediğiniz sürece)</li>
+                <li>Veri simsarları</li>
+                <li>Üçüncü taraf pazarlamacılar</li>
+            </ul>
+        </div>
 
-## 1️⃣ **TOPLANAN VERİLER**
+        <div class="section" id="cookies">
+            <h2><i class="fas fa-cookie-bite"></i> 4. Çerezler (Cookies)</h2>
+            
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Çerez Türü</th>
+                        <th>Amaç</th>
+                        <th>Süre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Zorunlu Çerezler</strong></td>
+                        <td>Temel fonksiyonlar için gerekli</td>
+                        <td>Oturum süresi</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performans Çerezleri</strong></td>
+                        <td>Kullanım analizi</td>
+                        <td>1-2 yıl</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fonksiyonel Çerezler</strong></td>
+                        <td>Tercihleri hatırlama</td>
+                        <td>1 yıl</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hedefleme Çerezleri</strong></td>
+                        <td>Reklam kişiselleştirme</td>
+                        <td>İzin süresi</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p><strong>Çerez Kontrolü:</strong> Tarayıcı ayarlarınızdan çerezleri kontrol edebilirsiniz.</p>
+        </div>
 
-### A. Doğrudan Toplanan Veriler:
-- **Hesap Bilgileri:** Ad, soyad, e-posta adresi
-- **Profil Bilgileri:** Kullanıcı adı, profil fotoğrafı
-- **İletişim Bilgileri:** Telefon numarası, adres (gerekliyse)
-- **Ödeme Bilgileri:** Kredi kartı bilgileri (şifrelenmiş olarak)
+        <div class="section" id="third-party">
+            <h2><i class="fas fa-external-link-alt"></i> 5. Üçüncü Taraf Hizmetleri</h2>
+            
+            <ul>
+                <li>
+                    <strong>Google Analytics:</strong> Kullanım analizi
+                    <br><a href="https://policies.google.com/privacy" target="_blank">Google'ın Gizlilik Politikası</a>
+                </li>
+                <li>
+                    <strong>AdMob/Google Ads:</strong> Reklam gösterimi
+                    <br><a href="https://adssettings.google.com" target="_blank">Reklam Kişiselleştirme Ayarları</a>
+                </li>
+                <li>
+                    <strong>Firebase:</strong> Veri depolama, analiz
+                    <br><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Gizlilik Politikası</a>
+                </li>
+                <li>
+                    <strong>Ödeme İşlemcileri:</strong> Stripe, PayPal
+                    <br>İlgili gizlilik politikaları
+                </li>
+            </ul>
+        </div>
 
-### B. Otomatik Toplanan Veriler:
-- **Cihaz Bilgileri:** Cihaz modeli, işletim sistemi, benzersiz cihaz tanımlayıcıları
-- **Kullanım Verileri:** Sayfa görüntülemeleri, tıklamalar, oturum süreleri
-- **Konum Verileri:** IP adresi, coğrafi konum (izin verirseniz)
-- **Çerezler ve Benzer Teknolojiler:** Oturum çerezleri, kalıcı çerezler
+        <div class="section" id="data-security">
+            <h2><i class="fas fa-lock"></i> 6. Veri Güvenliği</h2>
+            
+            <p>Verilerinizi korumak için:</p>
+            <ul>
+                <li><strong>Şifreleme:</strong> Veri iletimi ve depolama sırasında SSL/TLS şifrelemesi</li>
+                <li><strong>Erişim Kontrolü:</strong> Sadece yetkili personel erişimi</li>
+                <li><strong>Düzenli Denetimler:</strong> Güvenlik testleri ve kontroller</li>
+                <li><strong>Veri Minimizasyonu:</strong> Sadece gerekli verileri toplama</li>
+            </ul>
+        </div>
 
-### C. Üçüncü Taraflardan Gelen Veriler:
-- Sosyal medya hesapları (Google, Facebook, Apple ile giriş yaparsanız)
-- Analiz araçları (Google Analytics)
+        <div class="section" id="user-rights">
+            <h2><i class="fas fa-user-check"></i> 7. Kullanıcı Hakları</h2>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Hak</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Bilgi Edinme</strong></td>
+                        <td>Hangi verilerinizi işlediğimizi öğrenme</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Erişim</strong></td>
+                        <td>Verilerinize erişim talep etme</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Düzeltme</strong></td>
+                        <td>Yanlış verileri düzeltme</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Silme</strong></td>
+                        <td>Verilerinizin silinmesini talep etme</td>
+                    </tr>
+                    <tr>
+                        <td><strong>İşleme Sınırlama</strong></td>
+                        <td>Veri işlemeyi kısıtlama</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Veri Taşınabilirliği</strong></td>
+                        <td>Verilerinizi başka bir yere aktarma</td>
+                    </tr>
+                    <tr>
+                        <td><strong>İtiraz</strong></td>
+                        <td>İşlemeye itiraz etme</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Haklarınızı Kullanmak İçin:</h3>
+            <ul>
+                <li>E-posta: <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a></li>
+                <li>Adres: Yıldırım / BURSA / TÜRKİYE</li>
+                <li>Uygulama içi: Ayarlar > Gizlilik bölümü</li>
+            </ul>
+        </div>
 
----
+        <div class="section" id="retention">
+            <h2><i class="fas fa-clock"></i> 8. Veri Saklama Süreleri</h2>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Veri Türü</th>
+                        <th>Saklama Süresi</th>
+                        <th>Silme Sonrası</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hesap Bilgileri</td>
+                        <td>Hesap aktif olduğu sürece</td>
+                        <td>6 ay sonra tamamen silinir</td>
+                    </tr>
+                    <tr>
+                        <td>Kullanım Verileri</td>
+                        <td>2 yıl</td>
+                        <td>Anonimleştirilir</td>
+                    </tr>
+                    <tr>
+                        <td>Ödeme Geçmişi</td>
+                        <td>Yasal zorunluluk süresi (10 yıl)</td>
+                        <td>Arşivlenir</td>
+                    </tr>
+                    <tr>
+                        <td>İletişim Kayıtları</td>
+                        <td>1 yıl</td>
+                        <td>Şifrelenmiş yedekten silinir</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-## 2️⃣ **VERİLERİN KULLANIM AMAÇLARI**
+        <div class="warning-box">
+            <h3><i class="fas fa-child"></i> 9. Çocukların Gizliliği</h3>
+            <ul>
+                <li>Uygulamamız 13 yaş altı kullanıcılar için tasarlanmamıştır</li>
+                <li>13 yaş altı kullanıcı tespit edersek hesabı askıya alırız</li>
+                <li>Ebeveynler, çocuklarının verileri hakkında bilgi talep edebilir</li>
+            </ul>
+        </div>
 
-Topladığımız verileri şu amaçlarla kullanıyoruz:
+        <div class="section" id="legal-framework">
+            <h2><i class="fas fa-balance-scale"></i> Yasal Çerçeve</h2>
+            
+            <div class="legal-badges">
+                <div class="legal-badge">
+                    <span class="flag">🇹🇷</span> Kişisel Verilerin Korunması Kanunu (KVKK)
+                </div>
+                <div class="legal-badge">
+                    <span class="flag">🇪🇺</span> Genel Veri Koruma Tüzüğü (GDPR)
+                </div>
+                <div class="legal-badge">
+                    <span class="flag">🇺🇸</span> California Tüketici Gizlilik Yasası (CCPA)
+                </div>
+                <div class="legal-badge">
+                    <span class="flag">🛡️</span> Çevrimiçi Gizlilik Koruma Yasası (COPPA)
+                </div>
+            </div>
+        </div>
 
-| Amaç | Açıklama |
-|------|----------|
-| **Hizmet Sağlama** | Uygulamayı çalıştırmak, özellikleri sunmak |
-| **Kişiselleştirme** | Size özel içerik ve öneriler sunmak |
-| **İletişim** | Bildirimler, güncellemeler, destek mesajları göndermek |
-| **Analiz ve Geliştirme** | Uygulamayı geliştirmek, hataları düzeltmek |
-| **Güvenlik** | Dolandırıcılığı önlemek, güvenliği sağlamak |
-| **Yasal Yükümlülükler** | Kanuni gerekliliklere uymak |
+        <div class="contact-info">
+            <h2><i class="fas fa-envelope"></i> İletişim</h2>
+            
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div>
+                    <strong>Veri Sorumlusu:</strong><br>
+                    UKGames
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                    <strong>Adres:</strong><br>
+                    Yıldırım / BURSA / TÜRKİYE
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                    <strong>E-posta:</strong><br>
+                    <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a>
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div>
+                    <strong>Telefon:</strong><br>
+                    [Telefon Numarası]
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div>
+                    <strong>Web:</strong><br>
+                    <a href="[URL]">[İletişim Formu URL'si]</a>
+                </div>
+            </div>
+        </div>
 
----
+        <div class="consent-box">
+            <h3>Gizlilik Politikası Onayı</h3>
+            <p>Bu uygulamayı kullanmaya devam ederek, bu gizlilik politikasını kabul etmiş sayılırsınız.</p>
+            <button class="accept-btn" onclick="acceptPolicy()">
+                <i class="fas fa-check-circle"></i> Politikayı Kabul Ediyorum
+            </button>
+        </div>
 
-## 3️⃣ **VERİ PAYLAŞIMI**
+        <div class="footer">
+            <p>© 2025 UKGames. Tüm hakları saklıdır.</p>
+            <p>Son güncelleme: 01/12/2025</p>
+        </div>
+    </div>
 
-### Paylaştığımız Taraflar:
-- **Hizmet Sağlayıcılar:** Hosting, ödeme işlemcileri, analiz araçları
-- **Yasal Zorunluluklar:** Mahkeme kararı veya kanuni gereklilik durumunda
-- **İş Ortakları:** Sadece sizin onayınızla ve sınırlı ölçüde
-- **Satış veya Birleşme Durumunda:** İş transferi sırasında
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
-### Paylaşmadığımız Taraflar:
-- Reklam ağları (açıkça izin vermediğiniz sürece)
-- Veri simsarları
-- Üçüncü taraf pazarlamacılar
-
----
-
-## 4️⃣ **ÇEREZLER (COOKIES)**
-
-| Çerez Türü | Amaç | Süre |
-|------------|------|------|
-| **Zorunlu Çerezler** | Temel fonksiyonlar için gerekli | Oturum süresi |
-| **Performans Çerezleri** | Kullanım analizi | 1-2 yıl |
-| **Fonksiyonel Çerezler** | Tercihleri hatırlama | 1 yıl |
-| **Hedefleme Çerezleri** | Reklam kişiselleştirme | İzin süresi |
-
-**Çerez Kontrolü:** Tarayıcı ayarlarınızdan çerezleri kontrol edebilirsiniz.
-
----
-
-## 5️⃣ **ÜÇÜNCÜ TARAF HİZMETLERİ**
-
-Kullandığımız üçüncü taraf hizmetler:
-
-1. **Google Analytics:** Kullanım analizi
-   - [Google'ın Gizlilik Politikası](https://policies.google.com/privacy)
-   
-2. **AdMob/Google Ads:** Reklam gösterimi
-   - [Reklam Kişiselleştirme Ayarları](https://adssettings.google.com)
-
-3. **Firebase:** Veri depolama, analiz
-   - [Firebase Gizlilik Politikası](https://firebase.google.com/support/privacy)
-
-4. **Ödeme İşlemcileri:** Stripe, PayPal
-   - İlgili gizlilik politikaları
-
----
-
-## 6️⃣ **VERİ GÜVENLİĞİ**
-
-Verilerinizi korumak için:
-- **Şifreleme:** Veri iletimi ve depolama sırasında SSL/TLS şifrelemesi
-- **Erişim Kontrolü:** Sadece yetkili personel erişimi
-- **Düzenli Denetimler:** Güvenlik testleri ve kontroller
-- **Veri Minimizasyonu:** Sadece gerekli verileri toplama
-
----
-
-## 7️⃣ **KULLANICI HAKLARI**
-
-KVKK ve GDPR kapsamındaki haklarınız:
-
-| Hak | Açıklama |
-|-----|----------|
-| **Bilgi Edinme** | Hangi verilerinizi işlediğimizi öğrenme |
-| **Erişim** | Verilerinize erişim talep etme |
-| **Düzeltme** | Yanlış verileri düzeltme |
-| **Silme** | Verilerinizin silinmesini talep etme |
-| **İşleme Sınırlama** | Veri işlemeyi kısıtlama |
-| **Veri Taşınabilirliği** | Verilerinizi başka bir yere aktarma |
-| **İtiraz** | İşlemeye itiraz etme |
-
-**Haklarınızı Kullanmak İçin:**
-- E-posta: ugka81@gmail.com
-- Adres: Yıldırım / Bursa TÜRKİYE
-- Uygulama içi: Ayarlar > Gizlilik bölümü
-
----
-
-## 8️⃣ **VERİ SAKLAMA SÜRELERİ**
-
-| Veri Türü | Saklama Süresi | Silme Sonrası |
-|-----------|----------------|---------------|
-| Hesap Bilgileri | Hesap aktif olduğu sürece | 6 ay sonra tamamen silinir |
-| Kullanım Verileri | 2 yıl | Anonimleştirilir |
-| Ödeme Geçmişi | Yasal zorunluluk süresi (10 yıl) | Arşivlenir |
-| İletişim Kayıtları | 1 yıl | Şifrelenmiş yedekten silinir |
-
----
-
-## 9️⃣ **ÇOCUKLARIN GİZLİLİĞİ**
-
-- Uygulamamız 13 yaş altı kullanıcılar için tasarlanmamıştır
-- 13 yaş altı kullanıcı tespit edersek hesabı askıya alırız
-- Ebeveynler, çocuklarının verileri hakkında bilgi talep edebilir
-
----
-
-## 🔟 **ULUSLARARASI VERİ TRANSFERİ**
-
-Verileriniz Amerika'da saklanır. Uluslararası transfer durumunda:
-- Avrupa Komisyonu onaylı standart sözleşmeli hükümler
-- Yeterli koruma sağlayan ülkelere transfer
-- Açık rızanız ile transfer
-
----
-
-## 1️⃣1️⃣ **POLİTİKA DEĞİŞİKLİKLERİ**
-
-- Önemli değişikliklerde 30 gün önceden e-posta ile bilgilendiririz
-- Uygulama içi bildirim göndeririz
-- Güncel politika her zaman [URL] adresinde yayınlanır
-
-**Önemli Değişiklik Örnekleri:**
-- Veri kullanım amaçlarında değişiklik
-- Paylaşılan üçüncü taraflarda değişiklik
-- Kullanıcı haklarında kısıtlama
-
----
-
-## 1️⃣2️⃣ **İLETİŞİM**
-
-Gizlilik ile ilgili sorularınız için:
-
-**Veri Sorumlusu:** UKGames
-**Adres:** Yıldırım / Bursa TÜRKİYE
-**E-posta:** ugka81@gmail.com
-**Telefon:** [Telefon Numarası]
-**Web:** [İletişim Formu URL'si]
-
-**Veri Koruma Görevlisi (GDPR için):**
-- Adı: Uğur Kayhandemir
-- E-posta: ugka81@gmail.com
-
----
-
-## 1️⃣3️⃣ **YASAL ÇERÇEVE**
-
-Bu politika aşağıdaki mevzuata uygun hazırlanmıştır:
-- 🇹🇷 **Kişisel Verilerin Korunması Kanunu (KVKK)** - 6698 sayılı kanun
-- 🇪🇺 **Genel Veri Koruma Tüzüğü (GDPR)** - 2016/679 sayılı tüzük
-- 🇺🇸 **California Tüketici Gizlilik Yasası (CCPA)**
-- **Çevrimiçi Gizlilik Koruma Yasası (COPPA)**
-
----
-
-## ⚠️ **ÖNEMLİ UYARILAR**
-
-1. **Şifre Sorumluluğu:** Hesap şifrenizi kimseyle paylaşmayın
-2. **Herkese Açık Paylaşım:** Herkese açık paylaştığınız içeriklerden sorumlusunuz
-3. **Bağlantılar:** Üçüncü taraf sitelerinin gizlilik politikalarından sorumlu değiliz
-4. **Güvenlik İhlali:** Şüpheli durumda hemen ugka81@gmail.com'a bildirin
-
----
-
-**Onayınız:** Bu uygulamayı kullanmaya devam ederek, bu gizlilik politikasını kabul etmiş sayılırsınız.
-
-*Son güncelleme: [01/12/2025]*
-
-**App Store/Google Play için Özet:**
-"Verileriniz güvenliğimiz önceliğimizdir. Sadece hizmeti geliştirmek için sınırlı veri topluyor, asla gereksiz paylaşım yapmıyoruz. Detaylı politikamızı uygulama içinden veya web sitemizden okuyabilirsiniz."
-
-    <h2>2. İletişim</h2>
-    <p>Gizlilik Politikamız hakkında sorularınız varsa, lütfen bize şu adresten ulaşın: ugka81.gamil.com</p>
+    <script>
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Policy acceptance
+        function acceptPolicy() {
+            localStorage.setItem('privacyPolicyAccepted', 'true');
+            alert('Gizlilik politikasını kabul ettiniz. Teşekkür ederiz!');
+        }
+        
+        // Check if policy was already accepted
+        if (localStorage.getItem('privacyPolicyAccepted') === 'true') {
+            console.log('Gizlilik politikası zaten kabul edilmiş.');
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Print functionality
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+        });
+    </script>
 </body>
 </html>
