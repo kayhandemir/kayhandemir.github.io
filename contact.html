@@ -278,7 +278,7 @@
                 </div>
             </div>
             
-            <div class="social-icons">
+           <div class="social-icons">
                 <a href="https://www.facebook.com/profile.php?id=100028871127084"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://github.com/kayhandemir"><i class="fab fa-twitter"></i></a>
                 <a href="https://www.instagram.com/ugurkayhandemir/"><i class="fab fa-instagram"></i></a>
@@ -289,27 +289,32 @@
         <!-- İletişim Formu Bölümü -->
         <div class="contact-form">
             <h2>Mesaj Gönderin</h2>
-            <form id="contactForm">
+            <!-- DEĞİŞTİRİLMİŞ FORM TAG'I -->
+            <form id="contactForm" action="https://formspree.io/f/mnneyjwq" method="POST">
                 <div class="form-group">
                     <label for="name">Ad Soyad *</label>
-                    <input type="text" id="name" class="form-control" placeholder="Adınız ve soyadınız" required>
+                    <!-- NAME ATTRIBUTE EKLENDİ -->
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Adınız ve soyadınız" required>
                     <div class="error-message" id="nameError">Lütfen geçerli bir ad giriniz.</div>
                 </div>
                 
                 <div class="form-group">
                     <label for="email">E-posta Adresi *</label>
-                    <input type="email" id="email" class="form-control" placeholder="ornek@email.com" required>
+                    <!-- NAME ATTRIBUTE EKLENDİ -->
+                    <input type="email" id="email" name="email" class="form-control" placeholder="ornek@email.com" required>
                     <div class="error-message" id="emailError">Lütfen geçerli bir e-posta adresi giriniz.</div>
                 </div>
                 
                 <div class="form-group">
                     <label for="phone">Telefon Numarası</label>
-                    <input type="tel" id="phone" class="form-control" placeholder="+90 (5__) ___ __ __">
+                    <!-- NAME ATTRIBUTE EKLENDİ -->
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="+90 (5__) ___ __ __">
                 </div>
                 
                 <div class="form-group">
                     <label for="subject">Konu *</label>
-                    <select id="subject" class="form-control" required>
+                    <!-- NAME ATTRIBUTE EKLENDİ -->
+                    <select id="subject" name="subject" class="form-control" required>
                         <option value="" disabled selected>Konu seçiniz</option>
                         <option value="genel">Genel Soru</option>
                         <option value="teklif">İş Teklifi</option>
@@ -321,9 +326,17 @@
                 
                 <div class="form-group">
                     <label for="message">Mesajınız *</label>
-                    <textarea id="message" class="form-control" placeholder="Mesajınızı buraya yazın..." required></textarea>
+                    <!-- NAME ATTRIBUTE EKLENDİ -->
+                    <textarea id="message" name="message" class="form-control" placeholder="Mesajınızı buraya yazın..." required></textarea>
                     <div class="error-message" id="messageError">Lütfen mesajınızı yazınız (en az 10 karakter).</div>
                 </div>
+                
+                <!-- FORMSFREE SPAM KORUMASI -->
+                <input type="text" name="_gotcha" style="display:none">
+                
+                <!-- REPLYTO VE SUBJECT İÇİN GİZLİ ALANLAR -->
+                <input type="hidden" name="_replyto" id="_replyto">
+                <input type="hidden" name="_subject" id="_subject">
                 
                 <button type="submit" class="submit-btn">
                     <i class="fas fa-paper-plane"></i> Mesajı Gönder
@@ -339,12 +352,41 @@
 
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            // ÖNCE VALİDASYON YAP
+            if (!validateForm()) {
+                e.preventDefault(); // Form gönderimini durdur
+                return false;
+            }
             
-            // Hata mesajlarını temizle
+            // Form geçerliyse, gizli alanları doldur
+            document.getElementById('_replyto').value = document.getElementById('email').value;
+            document.getElementById('_subject').value = 'İletişim Formu: ' + document.getElementById('subject').options[document.getElementById('subject').selectedIndex].text;
+            
+            // Yükleme göstergesi
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
+            submitBtn.disabled = true;
+            
+            // Form gönderildikten sonra yükleme göstergesini kaldırmak için
+            // Formspree'nin yönlendirmesini bekleyemeyeceğimiz için,
+            // başarılı mesajını göstermek için farklı bir yöntem kullanacağız
+            
+            // Formspree redirect kullanmak için:
+            // 1. Formspree dashboard'dan "Redirect URL" ayarla
+            // 2. Burada setTimeout ile yönlendirme simüle et
+            
+            // Alternatif: Form gönderildikten sonra başarı mesajı göster
+            setTimeout(() => {
+                // Bu kısım form gönderildikten sonra çalışacak
+                // Ancak form gönderimi başarılı mı başarısız mı bilemeyiz
+                // Bu yüzden Formspree'den redirect URL kullanmak daha iyi
+            }, 2000);
+        });
+        
+        function validateForm() {
             clearErrors();
             
-            // Form değerlerini al
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const subject = document.getElementById('subject').value;
@@ -377,59 +419,19 @@
                 isValid = false;
             }
             
-            // Eğer form geçerliyse
-            if (isValid) {
-              // Formspree ile gönderim (en kolay yöntem)
-            const formData = new FormData(this);
-            
-            // Yükleme durumu göster
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
-            submitBtn.disabled = true;
-            
-            // Formspree endpoint - BUNU KENDİ FORMSPREE ADRESİNLE DEĞİŞTİR
-            fetch('https://formspree.io/f/mnneyjwq', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Başarılı mesajını göster
-                    document.getElementById('successMessage').style.display = 'flex';
-                    
-                    // Formu temizle
-                    document.getElementById('contactForm').reset();
-                    
-                    // 5 saniye sonra başarılı mesajını gizle
-                    setTimeout(() => {
-                        document.getElementById('successMessage').style.display = 'none';
-                    }, 5000);
-                    
-                    // Konsola bilgi yaz
-                    console.log('Form başarıyla gönderildi!');
-                } else {
-                    throw new Error('Gönderim hatası!');
-                }
-            })
-            .catch(error => {
-                console.error('Hata:', error);
-                alert('Mesaj gönderilemedi. Lütfen tekrar deneyin veya ugka81@gmail.com adresine e-posta gönderin.');
-            })
-            .finally(() => {
-                // Butonu eski haline getir
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            });
+            return isValid;
         }
         
         function showError(elementId, message) {
             const element = document.getElementById(elementId);
             element.textContent = message;
             element.style.display = 'block';
+            
+            // Input'a odaklan
+            if (elementId.includes('name')) document.getElementById('name').focus();
+            else if (elementId.includes('email')) document.getElementById('email').focus();
+            else if (elementId.includes('subject')) document.getElementById('subject').focus();
+            else if (elementId.includes('message')) document.getElementById('message').focus();
         }
         
         function clearErrors() {
@@ -437,58 +439,30 @@
             errors.forEach(error => {
                 error.style.display = 'none';
             });
-            
-            // Başarılı mesajını da gizle
-            document.getElementById('successMessage').style.display = 'none';
         }
-    });
         
-        // DÜZELTİLMİŞ: Telefon numarası formatlama - Backspace dostu
+        // Telefon formatlama
         document.getElementById('phone').addEventListener('input', function(e) {
-            let input = e.target;
-            let value = input.value.replace(/\D/g, ''); // Sadece rakamları al
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.substring(0, 10);
             
-            // Backspace tuşu kontrolü
-            if (e.inputType === 'deleteContentBackward') {
-                return; // Backspace tuşuna basıldığında formatlamayı atla
+            if (value.length > 0) {
+                value = value.match(/.{1,3}/g).join(' ');
+                e.target.value = '+90 ' + value;
             }
-            
-            // Eğer +90 ile başlamıyorsa ekle
-            if (!value.startsWith('90') && value.length > 0) {
-                value = '90' + value;
-            }
-            
-            // Maksimum 10 rakam (90 + 10 haneli numara)
-            if (value.length > 12) { // 90 + 10 = 12 karakter
-                value = value.substring(0, 12);
-            }
-            
-            // Formatlı hale getir
-            let formattedValue = '+90';
-            if (value.length > 2) {
-                formattedValue += ' (' + value.substring(2, 5);
-            }
-            if (value.length > 5) {
-                formattedValue += ') ' + value.substring(5, 8);
-            }
-            if (value.length > 8) {
-                formattedValue += ' ' + value.substring(8, 10);
-            }
-            if (value.length > 10) {
-                formattedValue += ' ' + value.substring(10, 12);
-            }
-            
-            // Değeri güncelle
-            input.value = formattedValue;
         });
         
-        // Backspace için ek kontrol
-        document.getElementById('phone').addEventListener('keydown', function(e) {
-            if (e.key === 'Backspace') {
-                // Backspace tuşuna basıldığında, bir sonraki input event'inde işlem yapılacak
-                // input event listener'ı bu durumu handle edecek
-            }
-        });
+        // Form gönderildikten sonra başarı mesajı için
+        // URL'de success parametresi varsa
+        if (window.location.search.includes('success=true')) {
+            document.getElementById('successMessage').style.display = 'flex';
+            document.getElementById('contactForm').reset();
+            
+            // 5 saniye sonra gizle
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        }
     </script>
 </body>
 </html>
