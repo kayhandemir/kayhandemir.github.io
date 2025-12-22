@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanım Şartları - UKGames</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS: index.html İLE AYNI TEMEL TASARIM */
+        :root {
+            --primary: #2575fc;
+            --secondary: #6a11cb;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #e0e0e0;
+            --text-muted: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, rgba(37, 117, 252, 0.1) 0%, rgba(106, 17, 203, 0.1) 100%);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* İÇERİK ALANI */
+        .content-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content-container {
+                margin: 20px;
+                padding: 20px;
+            }
+            h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo">UKGames</a>
+            <nav class="nav-links">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="contact.html">İletişim</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-container">
+            <h1>Kullanım Şartları</h1>
+            <p class="last-updated">Son Güncelleme: 23 Aralık 2025</p>
+
+            <section>
+                <h2>1. Giriş</h2>
+                <p>Hoş geldiniz. Bu Kullanım Şartları ("Şartlar"), <strong>UKGames</strong> ("biz", "bize" veya "bizim") tarafından geliştirilen mobil oyunların (Color Blocks, ZigZag Mix ve diğerleri) ve web sitesinin kullanımını düzenler. Oyunlarımızı indirerek, kurarak veya web sitemizi kullanarak bu şartları kabul etmiş sayılırsınız.</p>
+            </section>
+
+            <section>
+                <h2>2. Lisans ve Kullanım Hakkı</h2>
+                <p>UKGames, oyunlarımızı kişisel ve ticari olmayan amaçlarla kullanmanız için size sınırlı, geri alınabilir ve devredilemez bir lisans verir. Bu lisans kapsamında şunları yapmanız yasaktır:</p>
+                <ul>
+                    <li>Oyunların kaynak kodlarını çözmek (Decompile), tersine mühendislik yapmak veya kopyalamak.</li>
+                    <li>Oyunları hile, otomasyon yazılımı (bot) veya yetkisiz üçüncü taraf yazılımlarla kullanmak.</li>
+                    <li>Oyunun herhangi bir parçasını ticari amaçla satmak veya kiralamak.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>3. Fikri Mülkiyet</h2>
+                <p>Oyunlarımızdaki tüm içerik; grafikler, karakter tasarımları, kodlar, müzikler ve "UKGames" markası fikri mülkiyet yasalarıyla korunmaktadır. Bu materyallerin izinsiz kullanımı yasal işlem gerektirebilir.</p>
+            </section>
+
+            <section>
+                <h2>4. Kullanıcı Davranışları</h2>
+                <p>Hizmetlerimizi kullanırken genel ahlak kurallarına uymayı, diğer oyuncuları rahatsız etmemeyi ve yasalara aykırı davranışlarda bulunmamayı kabul edersiniz. Kötüye kullanım tespiti durumunda, UKGames hizmete erişiminizi kısıtlama hakkını saklı tutar.</p>
+            </section>
+
+            <section>
+                <h2>5. Sorumluluk Reddi (Disclaimer)</h2>
+                <p>Hizmetlerimiz "OLDUĞU GİBİ" (AS-IS) sunulmaktadır. UKGames, oyunların her cihazda hatasız çalışacağını veya kesintisiz olacağını garanti etmez. Oyun içindeki ilerlemenin kaybolması veya teknik aksaklıklardan doğabilecek veri kayıplarından UKGames sorumlu tutulamaz.</p>
+            </section>
+
+            <section>
+                <h2>6. Güncellemeler ve Değişiklikler</h2>
+                <p>UKGames, bu kullanım şartlarını veya oyun özelliklerini dilediği zaman güncelleme hakkını saklı tutar. Önemli değişiklikler yapıldığında, uygulama içi bildirim veya web sitesi üzerinden duyuru yapılabilir.</p>
+            </section>
+
+            <section>
+                <h2>7. İletişim</h2>
+                <p>Bu şartlar hakkında herhangi bir sorunuz varsa, lütfen bizimle iletişime geçmekten çekinmeyin:</p>
+                <p><strong>E-posta:</strong> ugka81@gmail.com</p>
+                <p>Ayrıca <a href="contact.html" style="color: var(--primary);">İletişim Formu</a> üzerinden de bize ulaşabilirsiniz.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 UKGames. Tüm hakları saklıdır.</p>
+        <div style="margin-top: 10px;">
+            <a href="index.html">Ana Sayfa</a> |
+            <a href="privacy-policy.html">Gizlilik Politikası</a>
+        </div>
+    </footer>
+
+</body>
+</html>
