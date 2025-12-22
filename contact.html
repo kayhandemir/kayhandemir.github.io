@@ -6,7 +6,7 @@
     <title>İletişim Formu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS AYNI KALACAK */
+        /* CSS AYNI KALACAK - Sadece ufak dokunuşlar */
         * {
             margin: 0;
             padding: 0;
@@ -48,8 +48,6 @@
             padding: 50px 40px;
         }
 
-        /* ... DİĞER CSS KODLARI AYNI ... */
-        
         .contact-info h2 {
             font-size: 32px;
             margin-bottom: 20px;
@@ -190,9 +188,12 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(37, 117, 252, 0.3);
         }
-
-        .submit-btn:active {
-            transform: translateY(0);
+        
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .success-message {
@@ -204,6 +205,12 @@
             display: none;
             align-items: center;
             gap: 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .error-message {
@@ -218,41 +225,20 @@
                 flex-direction: column;
                 max-width: 600px;
             }
-            
-            .contact-info {
-                padding: 40px 30px;
-            }
-            
-            .contact-form {
+            .contact-info, .contact-form {
                 padding: 40px 30px;
             }
         }
 
         @media (max-width: 576px) {
-            .contact-info h2,
-            .contact-form h2 {
+            .contact-info h2, .contact-form h2 {
                 font-size: 28px;
-            }
-            
-            .info-item {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .info-item i {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-            
-            .social-icons {
-                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- İletişim Bilgileri Bölümü -->
         <div class="contact-info">
             <h2>Bizimle İletişime Geçin</h2>
             <p>Sorularınız, önerileriniz veya işbirliği teklifleriniz için bize ulaşabilirsiniz. Ekibimiz en kısa sürede size dönüş yapacaktır.</p>
@@ -281,14 +267,13 @@
             </div>
             
             <div class="social-icons">
-                <a href="https://www.facebook.com/profile.php?id=100028871127084"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://github.com/kayhandemir"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com/ugurkayhandemir/"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/uğur-kayhandemir"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100028871127084" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://github.com/kayhandemir" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.instagram.com/ugurkayhandemir/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/uğur-kayhandemir" target="_blank"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
         
-        <!-- İletişim Formu Bölümü -->
         <div class="contact-form">
             <h2>Mesaj Gönderin</h2>
             <form id="contactForm" action="https://formspree.io/f/mnneyjwq" method="POST">
@@ -306,7 +291,7 @@
                 
                 <div class="form-group">
                     <label for="phone">Telefon Numarası</label>
-                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="+90 (5__) ___ __ __">
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="+90 (5__) ___ __ __" maxlength="19">
                     <div class="error-message" id="phoneError">Lütfen geçerli bir telefon numarası giriniz.</div>
                 </div>
                 
@@ -328,11 +313,7 @@
                     <div class="error-message" id="messageError">Lütfen mesajınızı yazınız (en az 10 karakter).</div>
                 </div>
                 
-                <!-- FORMSFREE GİZLİ ALANLARI -->
                 <input type="text" name="_gotcha" style="display:none">
-                <input type="hidden" name="_replyto" id="_replyto">
-                <input type="hidden" name="_subject" id="_subject" value="İletişim Formu Mesajı">
-                
                 <button type="submit" class="submit-btn">
                     <i class="fas fa-paper-plane"></i> Mesajı Gönder
                 </button>
@@ -341,171 +322,185 @@
                     <i class="fas fa-check-circle"></i>
                     <span>Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.</span>
                 </div>
+                
+                <div class="error-message" id="generalError" style="margin-top:15px; text-align:center;">
+                    Bir hata oluştu. Lütfen tekrar deneyiniz.
+                </div>
             </form>
         </div>
     </div>
 
     <script>
-        // LOCALSTORAGE HATASINI ENGELLEYEN KOD
-        Object.defineProperty(window, 'localStorage', {
-            value: {
-                getItem: function() { return null; },
-                setItem: function() { return null; },
-                removeItem: function() { return null; },
-                clear: function() { return null; }
-            },
-            writable: false
-        });
-
-        // TELEFON FORMATLAMA FONKSİYONU - DÜZGÜN ÇALIŞAN
-        function formatPhoneNumber(input) {
-            // Sadece rakamları al
-            let numbers = input.replace(/\D/g, '');
-            
-            // +90'dan sonraki kısmı al (ilk 2-3 rakamı atla)
-            if (numbers.startsWith('90')) {
-                numbers = numbers.substring(2);
-            } else if (numbers.startsWith('0')) {
-                numbers = numbers.substring(1);
-            }
-            
-            // 10 haneden fazlasını kes
-            if (numbers.length > 10) {
-                numbers = numbers.substring(0, 10);
-            }
-            
-            // Format: +90 (5XX) XXX XX XX
-            if (numbers.length === 0) {
-                return '';
-            } else if (numbers.length <= 3) {
-                return '+90 (' + numbers;
-            } else if (numbers.length <= 6) {
-                return '+90 (' + numbers.substring(0, 3) + ') ' + numbers.substring(3);
-            } else if (numbers.length <= 8) {
-                return '+90 (' + numbers.substring(0, 3) + ') ' + numbers.substring(3, 6) + ' ' + numbers.substring(6);
-            } else {
-                return '+90 (' + numbers.substring(0, 3) + ') ' + numbers.substring(3, 6) + ' ' + numbers.substring(6, 8) + ' ' + numbers.substring(8, 10);
-            }
+        // 1. LocalStorage Koruması (WebView/Unity için gerekli olabilir)
+        try {
+            Object.defineProperty(window, 'localStorage', {
+                value: {
+                    getItem: () => null,
+                    setItem: () => null,
+                    removeItem: () => null,
+                    clear: () => null
+                },
+                writable: false
+            });
+        } catch (e) {
+            console.log("LocalStorage override error ignored");
         }
 
-        // TELEFON INPUT EVENT HANDLER
-        document.getElementById('phone').addEventListener('input', function(e) {
-            const cursorPosition = e.target.selectionStart;
-            const oldValue = e.target.value;
+        // 2. Telefon Formatlama Fonksiyonu
+        const phoneInput = document.getElementById('phone');
+        
+        phoneInput.addEventListener('input', function (e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
             
-            // Formatla
-            const formatted = formatPhoneNumber(oldValue);
-            e.target.value = formatted;
-            
-            // Cursor pozisyonunu koru
-            const newCursorPosition = cursorPosition + (formatted.length - oldValue.length);
-            e.target.setSelectionRange(newCursorPosition, newCursorPosition);
+            // +90 ile başlamıyorsa biz ekleyelim mantığı yerine, kullanıcı ne yazarsa onu formatlayalım
+            // Kullanıcı silme işlemi yapıyorsa müdahale etmeyelim (cursor sorunu için basit çözüm)
+            if(!e.inputType || !e.inputType.includes('delete')) {
+                 // Eğer 90 ile başlamıyorsa, standart TR formatı varsayımı
+                if (x[1] === '90') {
+                    e.target.value = !x[2] ? '+90' : '+90 (' + x[2] + (x[3] ? ') ' + x[3] : '') + (x[4] ? ' ' + x[4] : '') + (x[5] ? ' ' + x[5] : '');
+                } else if(x[1] === '05') {
+                     // 05 ile başlıyorsa +90'a çevir
+                    let clean = e.target.value.replace(/\D/g, '');
+                    clean = '90' + clean.substring(1);
+                    let m = clean.match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+                    e.target.value = !m[2] ? '+90' : '+90 (' + m[2] + (m[3] ? ') ' + m[3] : '') + (m[4] ? ' ' + m[4] : '') + (m[5] ? ' ' + m[5] : '');
+                }
+            }
         });
 
-        // TELEFON VALIDASYONU
         function validatePhone(phone) {
-            if (!phone || phone.trim() === '') {
-                return true; // Telefon zorunlu değil
-            }
-            
-            // Sadece rakamları al
+            if (!phone || phone.trim() === '') return true; // Boş bırakılabilir
+            // En az 10 rakam içermeli
             const numbers = phone.replace(/\D/g, '');
-            
-            // 10 veya 11 rakam olmalı (0 veya 90 ile başlayabilir)
-            if (numbers.length === 10 || numbers.length === 11) {
-                // Türkiye telefon numarası formatı
-                const turkishPhoneRegex = /^(05|5|90|0)?[0-9]{10}$/;
-                return turkishPhoneRegex.test(numbers);
-            }
-            
-            return false;
+            return numbers.length >= 10;
         }
 
-        // FORM SUBMIT HANDLER
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            // Validasyon yap
+        // 3. Form Gönderim İşlemi (AJAX ile)
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Sayfa yenilenmesini engelle
+            
+            // Validasyon
             if (!validateForm()) {
-                e.preventDefault();
                 return false;
             }
             
-            // Gizli alanları doldur
-            document.getElementById('_replyto').value = document.getElementById('email').value;
-            document.getElementById('_subject').value = 'İletişim Formu: ' + 
-                document.getElementById('subject').options[document.getElementById('subject').selectedIndex].text;
+            const form = e.target;
+            const submitBtn = form.querySelector('.submit-btn');
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('generalError');
             
-            // Yükleme göstergesi
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
+            // Butonu yükleniyor moduna al
+            const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
             submitBtn.disabled = true;
-            
-            // Form gönderildikten sonra butonu eski haline getir
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            // Form verilerini hazırla
+            const formData = new FormData(form);
+            // Formspree'ye özel alanları manuel ekle
+            formData.append("_replyto", document.getElementById('email').value);
+            formData.append("_subject", 'İletişim Formu: ' + document.getElementById('subject').value);
+
+            try {
+                // AJAX isteği gönder
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Başarılı
+                    successMsg.style.display = 'flex';
+                    form.reset(); // Formu temizle
+                    
+                    // 5 saniye sonra başarı mesajını gizle (isteğe bağlı)
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 5000);
+                } else {
+                    // Sunucu hatası
+                    const data = await response.json();
+                    if (Object.hasOwn(data, 'errors')) {
+                        errorMsg.innerText = data["errors"].map(error => error["message"]).join(", ");
+                    } else {
+                        errorMsg.innerText = "Sunucu tarafında bir hata oluştu.";
+                    }
+                    errorMsg.style.display = 'block';
+                }
+            } catch (error) {
+                // Ağ hatası
+                errorMsg.innerText = "İnternet bağlantı hatası. Lütfen tekrar deneyin.";
+                errorMsg.style.display = 'block';
+            } finally {
+                // Butonu eski haline getir
+                submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
-            }, 3000);
-            
-            return true;
+            }
         });
         
-        // VALİDASYON FONKSİYONU - TELEFON VALIDASYONU EKLENDİ
+        // 4. Validasyon Fonksiyonu
         function validateForm() {
             clearErrors();
             
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value.trim();
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone');
+            const subject = document.getElementById('subject');
+            const message = document.getElementById('message');
             
+            let firstErrorElement = null; // İlk hatayı yakalamak için
             let isValid = true;
             
             // İsim kontrolü
-            if (name.length < 2) {
-                showError('nameError', 'Lütfen geçerli bir ad giriniz (en az 2 karakter).');
+            if (name.value.trim().length < 2) {
+                showError('nameError');
+                if(!firstErrorElement) firstErrorElement = name;
                 isValid = false;
             }
             
             // Email kontrolü
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                showError('emailError', 'Lütfen geçerli bir e-posta adresi giriniz.');
+            if (!emailPattern.test(email.value.trim())) {
+                showError('emailError');
+                if(!firstErrorElement) firstErrorElement = email;
                 isValid = false;
             }
             
-            // TELEFON KONTROLÜ (zorunlu değil ama format kontrolü)
-            if (phone && !validatePhone(phone)) {
-                showError('phoneError', 'Lütfen geçerli bir Türkiye telefon numarası giriniz. Örnek: +90 (5XX) XXX XX XX');
+            // Telefon kontrolü
+            if (!validatePhone(phone.value)) {
+                showError('phoneError');
+                if(!firstErrorElement) firstErrorElement = phone;
                 isValid = false;
             }
             
             // Konu kontrolü
-            if (!subject) {
-                showError('subjectError', 'Lütfen bir konu seçiniz.');
+            if (!subject.value) {
+                showError('subjectError');
+                if(!firstErrorElement) firstErrorElement = subject;
                 isValid = false;
             }
             
             // Mesaj kontrolü
-            if (message.length < 10) {
-                showError('messageError', 'Mesajınız en az 10 karakter olmalıdır.');
+            if (message.value.trim().length < 10) {
+                showError('messageError');
+                if(!firstErrorElement) firstErrorElement = message;
                 isValid = false;
+            }
+            
+            // Eğer hata varsa ilk hataya odaklan
+            if (!isValid && firstErrorElement) {
+                firstErrorElement.focus();
             }
             
             return isValid;
         }
         
-        function showError(elementId, message) {
-            const element = document.getElementById(elementId);
-            element.textContent = message;
-            element.style.display = 'block';
-            
-            // İlgili input'a odaklan
-            if (elementId.includes('name')) document.getElementById('name').focus();
-            else if (elementId.includes('email')) document.getElementById('email').focus();
-            else if (elementId.includes('phone')) document.getElementById('phone').focus();
-            else if (elementId.includes('subject')) document.getElementById('subject').focus();
-            else if (elementId.includes('message')) document.getElementById('message').focus();
+        function showError(elementId) {
+            document.getElementById(elementId).style.display = 'block';
         }
         
         function clearErrors() {
@@ -513,24 +508,6 @@
             errors.forEach(error => {
                 error.style.display = 'none';
             });
-        }
-        
-        // SAYFA YÜKLENDİĞİNDE TELEFON FORMATLAMAYI UYGULA
-        document.addEventListener('DOMContentLoaded', function() {
-            const phoneInput = document.getElementById('phone');
-            if (phoneInput.value) {
-                phoneInput.value = formatPhoneNumber(phoneInput.value);
-            }
-        });
-        
-        // URL'DE SUCCESS PARAMETRESİ VARSA
-        if (window.location.search.includes('success=true')) {
-            document.getElementById('successMessage').style.display = 'flex';
-            document.getElementById('contactForm').reset();
-            
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
         }
     </script>
 </body>
