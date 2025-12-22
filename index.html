@@ -3,691 +3,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gizlilik Politikası - Color Blocks</title>
+    <title>UKGames - Mobil Oyun Geliştiricisi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #2575fc;
+            --secondary: #6a11cb;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #e0e0e0;
+            --text-muted: #a0a0a0;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        
-        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
             line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            padding: 20px;
+        }
+
+        /* HEADER & HERO */
+        header {
+            background: linear-gradient(135deg, rgba(37, 117, 252, 0.1) 0%, rgba(106, 17, 203, 0.1) 100%);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .navbar {
             max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
         }
-        
-        .container {
-            background-color: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 3px solid #4a6ee0;
-        }
-        
+
         .logo {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        
-        .subtitle {
-            color: #7f8c8d;
-            font-size: 1.2rem;
-            margin-bottom: 25px;
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        
-        .date-badge {
-            display: inline-block;
-            background-color: #e3f2fd;
-            color: #1565c0;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 600;
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: radial-gradient(circle at center, rgba(106, 17, 203, 0.15) 0%, rgba(18, 18, 18, 0) 70%);
+        }
+
+        .hero h1 {
+            font-size: 48px;
             margin-bottom: 20px;
         }
-        
-        h1 {
-            color: #2c3e50;
-            margin: 30px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ecf0f1;
+
+        .hero span {
+            color: var(--primary);
         }
-        
-        h2 {
-            color: #34495e;
-            margin: 25px 0 15px;
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
         }
-        
-        h3 {
-            color: #5d6d7e;
-            margin: 20px 0 10px;
+
+        /* OYUNLAR BÖLÜMÜ */
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        
-        p {
-            margin-bottom: 15px;
-            text-align: justify;
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto 0;
+            border-radius: 2px;
         }
-        
-        ul, ol {
-            margin: 15px 0;
-            padding-left: 30px;
+
+        .games-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
         }
-        
-        li {
-            margin-bottom: 8px;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-            padding: 25px;
-            background-color: #f8fafc;
-            border-radius: 10px;
-            border-left: 4px solid #4a6ee0;
-        }
-        
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .data-table th {
-            background-color: #4a6ee0;
-            color: white;
-            padding: 15px;
-            text-align: left;
-        }
-        
-        .data-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e1e8ed;
-        }
-        
-        .data-table tr:hover {
-            background-color: #f5f7ff;
-        }
-        
-        .cookie-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        .cookie-table th, .cookie-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .cookie-table th {
-            background-color: #f1f8ff;
-            color: #2c3e50;
-        }
-        
-        .important-note {
-            background-color: #fff8e1;
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        
-        .warning-box {
-            background-color: #ffebee;
-            border: 2px solid #f44336;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
-        
-        .contact-info {
-            background-color: #e8f5e9;
-            padding: 25px;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-        
-        .contact-item {
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
             display: flex;
-            align-items: center;
-            margin-bottom: 15px;
+            flex-direction: column;
         }
-        
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #4a6ee0;
-            color: white;
-            border-radius: 50%;
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: var(--primary);
+        }
+
+        .game-image {
+            height: 200px;
+            background-color: #333; /* Resim yüklenene kadar gri alan */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* Placeholder resimler için stiller (Unity logoları vb.) */
+        .color-blocks-img {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
         }
         
-        .legal-badges {
+        .zigzag-mix-img {
+            background: linear-gradient(45deg, #f7b733, #fc4a1a);
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-icon {
+            font-size: 60px;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .game-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .game-desc {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .tech-tags {
+            display: flex;
             gap: 10px;
-            margin: 20px 0;
+            margin-bottom: 20px;
         }
-        
-        .legal-badge {
-            background-color: #f1f8ff;
-            padding: 8px 16px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
+
+        .tag {
+            background: rgba(255,255,255,0.1);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 600;
         }
-        
-        .flag {
-            font-size: 1.2rem;
-            margin-right: 8px;
-        }
-        
-        .footer {
+
+        .play-btn {
+            display: block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
             text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid #e1e8ed;
-            color: #7f8c8d;
-        }
-        
-        .consent-box {
-            background-color: #f3f4f6;
-            padding: 20px;
+            padding: 12px;
             border-radius: 10px;
-            margin: 30px 0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .play-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* HAKKIMDA & FOOTER */
+        .about-section {
+            background: #151520;
+            padding: 80px 20px;
             text-align: center;
         }
-        
-        .accept-btn {
-            background-color: #4a6ee0;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 15px;
-            transition: background-color 0.3s;
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
-        
-        .accept-btn:hover {
-            background-color: #3a5ed0;
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 14px;
+            color: var(--text-muted);
         }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            .section {
-                padding: 15px;
-            }
-            
-            .data-table, .cookie-table {
-                font-size: 0.9rem;
-            }
-            
-            .legal-badges {
-                flex-direction: column;
-            }
-        }
-        
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #4a6ee0;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        footer a {
+            color: var(--text-muted);
+            margin: 0 10px;
             text-decoration: none;
-            font-size: 1.5rem;
-            box-shadow: 0 3px 15px rgba(74, 110, 224, 0.3);
-            transition: all 0.3s;
         }
-        
-        .back-to-top:hover {
-            transform: translateY(-5px);
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .games-container { grid-template-columns: 1fr; }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="logo">
-                <i class="fas fa-shield-alt"></i> Color Blocks
-            </div>
-            <h1>Gizlilik Politikası</h1>
-            <div class="date-badge">
-                <i class="far fa-calendar-alt"></i> Son Güncelleme: 01/12/2025
-            </div>
-            <p class="subtitle">Verilerinizin güvenliği bizim için önemlidir</p>
-        </header>
 
-        <div class="important-note">
-            <h3><i class="fas fa-exclamation-circle"></i> Önemli Bilgi</h3>
-            <p>Bu gizlilik politikası, Color Blocks kullandığınız sürece geçerlidir. Politikamızdaki değişikliklerden haberdar olmak için bu sayfayı düzenli olarak kontrol etmenizi öneririz.</p>
+    <header>
+        <div class="navbar">
+            <div class="logo">UKGames</div>
+            <nav class="nav-links">
+                <a href="#games">Oyunlar</a>
+                <a href="#about">Hakkında</a>
+                <a href="contact.html">İletişim</a> </nav>
         </div>
+    </header>
 
-        <div class="section" id="collected-data">
-            <h2><i class="fas fa-database"></i> 1. Toplanan Veriler</h2>
-            
-            <h3>A. Doğrudan Toplanan Veriler:</h3>
-            <ul>
-                <li><strong>Hesap Bilgileri:</strong> Ad, soyad, e-posta adresi</li>
-                <li><strong>Profil Bilgileri:</strong> Kullanıcı adı, profil fotoğrafı</li>
-                <li><strong>İletişim Bilgileri:</strong> Telefon numarası, adres (gerekliyse)</li>
-                <li><strong>Ödeme Bilgileri:</strong> Kredi kartı bilgileri (şifrelenmiş olarak)</li>
-            </ul>
-            
-            <h3>B. Otomatik Toplanan Veriler:</h3>
-            <ul>
-                <li><strong>Cihaz Bilgileri:</strong> Cihaz modeli, işletim sistemi, benzersiz cihaz tanımlayıcıları</li>
-                <li><strong>Kullanım Verileri:</strong> Sayfa görüntülemeleri, tıklamalar, oturum süreleri</li>
-                <li><strong>Konum Verileri:</strong> IP adresi, coğrafi konum (izin verirseniz)</li>
-                <li><strong>Çerezler ve Benzer Teknolojiler:</strong> Oturum çerezleri, kalıcı çerezler</li>
-            </ul>
-            
-            <h3>C. Üçüncü Taraflardan Gelen Veriler:</h3>
-            <ul>
-                <li>Sosyal medya hesapları (Google, Facebook, Apple ile giriş yaparsanız)</li>
-                <li>Analiz araçları (Google Analytics)</li>
-            </ul>
-        </div>
+    <section class="hero">
+        <h1>Eğlenceyi <br><span>Kodluyoruz</span></h1>
+        <p>Unity ile geliştirilmiş, performans odaklı ve sürükleyici mobil oyun deneyimleri.</p>
+        <a href="#games" class="play-btn" style="display:inline-block; width:auto; padding: 12px 30px;">Oyunları Keşfet</a>
+    </section>
 
-        <div class="section" id="usage-purpose">
-            <h2><i class="fas fa-bullseye"></i> 2. Verilerin Kullanım Amaçları</h2>
+    <section id="games">
+        <h2 class="section-title">Oyunlarımız</h2>
+        <div class="games-container">
             
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Amaç</th>
-                        <th>Açıklama</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Hizmet Sağlama</strong></td>
-                        <td>Uygulamayı çalıştırmak, özellikleri sunmak</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kişiselleştirme</strong></td>
-                        <td>Size özel içerik ve öneriler sunmak</td>
-                    </tr>
-                    <tr>
-                        <td><strong>İletişim</strong></td>
-                        <td>Bildirimler, güncellemeler, destek mesajları göndermek</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Analiz ve Geliştirme</strong></td>
-                        <td>Uygulamayı geliştirmek, hataları düzeltmek</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Güvenlik</strong></td>
-                        <td>Dolandırıcılığı önlemek, güvenliği sağlamak</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Yasal Yükümlülükler</strong></td>
-                        <td>Kanuni gerekliliklere uymak</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="section" id="data-sharing">
-            <h2><i class="fas fa-share-alt"></i> 3. Veri Paylaşımı</h2>
-            
-            <h3>Paylaştığımız Taraflar:</h3>
-            <ul>
-                <li><strong>Hizmet Sağlayıcılar:</strong> Hosting, ödeme işlemcileri, analiz araçları</li>
-                <li><strong>Yasal Zorunluluklar:</strong> Mahkeme kararı veya kanuni gereklilik durumunda</li>
-                <li><strong>İş Ortakları:</strong> Sadece sizin onayınızla ve sınırlı ölçüde</li>
-                <li><strong>Satış veya Birleşme Durumunda:</strong> İş transferi sırasında</li>
-            </ul>
-            
-            <h3>Paylaşmadığımız Taraflar:</h3>
-            <ul>
-                <li>Reklam ağları (açıkça izin vermediğiniz sürece)</li>
-                <li>Veri simsarları</li>
-                <li>Üçüncü taraf pazarlamacılar</li>
-            </ul>
-        </div>
-
-        <div class="section" id="cookies">
-            <h2><i class="fas fa-cookie-bite"></i> 4. Çerezler (Cookies)</h2>
-            
-            <table class="cookie-table">
-                <thead>
-                    <tr>
-                        <th>Çerez Türü</th>
-                        <th>Amaç</th>
-                        <th>Süre</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Zorunlu Çerezler</strong></td>
-                        <td>Temel fonksiyonlar için gerekli</td>
-                        <td>Oturum süresi</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Performans Çerezleri</strong></td>
-                        <td>Kullanım analizi</td>
-                        <td>1-2 yıl</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Fonksiyonel Çerezler</strong></td>
-                        <td>Tercihleri hatırlama</td>
-                        <td>1 yıl</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hedefleme Çerezleri</strong></td>
-                        <td>Reklam kişiselleştirme</td>
-                        <td>İzin süresi</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <p><strong>Çerez Kontrolü:</strong> Tarayıcı ayarlarınızdan çerezleri kontrol edebilirsiniz.</p>
-        </div>
-
-        <div class="section" id="third-party">
-            <h2><i class="fas fa-external-link-alt"></i> 5. Üçüncü Taraf Hizmetleri</h2>
-            
-            <ul>
-                <li>
-                    <strong>Google Analytics:</strong> Kullanım analizi
-                    <br><a href="https://policies.google.com/privacy" target="_blank">Google'ın Gizlilik Politikası</a>
-                </li>
-                <li>
-                    <strong>AdMob/Google Ads:</strong> Reklam gösterimi
-                    <br><a href="https://adssettings.google.com" target="_blank">Reklam Kişiselleştirme Ayarları</a>
-                </li>
-                <li>
-                    <strong>Firebase:</strong> Veri depolama, analiz
-                    <br><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Gizlilik Politikası</a>
-                </li>
-                <li>
-                    <strong>Ödeme İşlemcileri:</strong> Stripe, PayPal
-                    <br>İlgili gizlilik politikaları
-                </li>
-            </ul>
-        </div>
-
-        <div class="section" id="data-security">
-            <h2><i class="fas fa-lock"></i> 6. Veri Güvenliği</h2>
-            
-            <p>Verilerinizi korumak için:</p>
-            <ul>
-                <li><strong>Şifreleme:</strong> Veri iletimi ve depolama sırasında SSL/TLS şifrelemesi</li>
-                <li><strong>Erişim Kontrolü:</strong> Sadece yetkili personel erişimi</li>
-                <li><strong>Düzenli Denetimler:</strong> Güvenlik testleri ve kontroller</li>
-                <li><strong>Veri Minimizasyonu:</strong> Sadece gerekli verileri toplama</li>
-            </ul>
-        </div>
-
-        <div class="section" id="user-rights">
-            <h2><i class="fas fa-user-check"></i> 7. Kullanıcı Hakları</h2>
-            
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Hak</th>
-                        <th>Açıklama</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Bilgi Edinme</strong></td>
-                        <td>Hangi verilerinizi işlediğimizi öğrenme</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Erişim</strong></td>
-                        <td>Verilerinize erişim talep etme</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Düzeltme</strong></td>
-                        <td>Yanlış verileri düzeltme</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Silme</strong></td>
-                        <td>Verilerinizin silinmesini talep etme</td>
-                    </tr>
-                    <tr>
-                        <td><strong>İşleme Sınırlama</strong></td>
-                        <td>Veri işlemeyi kısıtlama</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Veri Taşınabilirliği</strong></td>
-                        <td>Verilerinizi başka bir yere aktarma</td>
-                    </tr>
-                    <tr>
-                        <td><strong>İtiraz</strong></td>
-                        <td>İşlemeye itiraz etme</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <h3>Haklarınızı Kullanmak İçin:</h3>
-            <ul>
-                <li>E-posta: <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a></li>
-                <li>Adres: Yıldırım / BURSA / TÜRKİYE</li>
-                <li>Uygulama içi: Ayarlar > Gizlilik bölümü</li>
-            </ul>
-        </div>
-
-        <div class="section" id="retention">
-            <h2><i class="fas fa-clock"></i> 8. Veri Saklama Süreleri</h2>
-            
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Veri Türü</th>
-                        <th>Saklama Süresi</th>
-                        <th>Silme Sonrası</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Hesap Bilgileri</td>
-                        <td>Hesap aktif olduğu sürece</td>
-                        <td>6 ay sonra tamamen silinir</td>
-                    </tr>
-                    <tr>
-                        <td>Kullanım Verileri</td>
-                        <td>2 yıl</td>
-                        <td>Anonimleştirilir</td>
-                    </tr>
-                    <tr>
-                        <td>Ödeme Geçmişi</td>
-                        <td>Yasal zorunluluk süresi (10 yıl)</td>
-                        <td>Arşivlenir</td>
-                    </tr>
-                    <tr>
-                        <td>İletişim Kayıtları</td>
-                        <td>1 yıl</td>
-                        <td>Şifrelenmiş yedekten silinir</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="warning-box">
-            <h3><i class="fas fa-child"></i> 9. Çocukların Gizliliği</h3>
-            <ul>
-                <li>Uygulamamız 13 yaş altı kullanıcılar için tasarlanmamıştır</li>
-                <li>13 yaş altı kullanıcı tespit edersek hesabı askıya alırız</li>
-                <li>Ebeveynler, çocuklarının verileri hakkında bilgi talep edebilir</li>
-            </ul>
-        </div>
-
-        <div class="section" id="legal-framework">
-            <h2><i class="fas fa-balance-scale"></i> Yasal Çerçeve</h2>
-            
-            <div class="legal-badges">
-                <div class="legal-badge">
-                    <span class="flag">🇹🇷</span> Kişisel Verilerin Korunması Kanunu (KVKK)
+            <div class="game-card">
+                <div class="game-image color-blocks-img">
+                    <i class="fas fa-cubes game-icon"></i>
                 </div>
-                <div class="legal-badge">
-                    <span class="flag">🇪🇺</span> Genel Veri Koruma Tüzüğü (GDPR)
-                </div>
-                <div class="legal-badge">
-                    <span class="flag">🇺🇸</span> California Tüketici Gizlilik Yasası (CCPA)
-                </div>
-                <div class="legal-badge">
-                    <span class="flag">🛡️</span> Çevrimiçi Gizlilik Koruma Yasası (COPPA)
+                <div class="game-content">
+                    <h3 class="game-title">Color Blocks</h3>
+                    <div class="tech-tags">
+                        <span class="tag">Puzzle</span>
+                        <span class="tag">Unity 2D</span>
+                        <span class="tag">Strategy</span>
+                    </div>
+                    <p class="game-desc">
+                        Klasik blok yerleştirme mekaniğini renk eşleştirme stratejisiyle birleştirin. 
+                        Doğru renkleri yan yana getirin, patlatın ve en yüksek skoru elde edin.
+                    </p>
+                    <a href="https://play.google.com/store/apps/details?id=com.UKGames.ColorBlocks" target="_blank" class="play-btn">
+                        <i class="fab fa-google-play"></i> Hemen İndir
+                    </a>
                 </div>
             </div>
+
+            <div class="game-card">
+                <div class="game-image zigzag-mix-img">
+                    <i class="fas fa-road game-icon"></i>
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">ZigZag Mix</h3>
+                    <div class="tech-tags">
+                        <span class="tag">Arcade</span>
+                        <span class="tag">Refleks</span>
+                        <span class="tag">Endless</span>
+                    </div>
+                    <p class="game-desc">
+                        Yolun dışına çıkmadan ne kadar ilerleyebilirsin? Reflekslerinizi test eden, 
+                        hızlanan temposuyla heyecanı hiç düşmeyen bir sonsuz koşu deneyimi.
+                    </p>
+                    <a href="https://play.google.com/store/apps/details?id=com.UGame.ZigZagMix" target="_blank" class="play-btn">
+                        <i class="fab fa-google-play"></i> Hemen İndir
+                    </a>
+                </div>
+            </div>
+
         </div>
+    </section>
 
-        <div class="contact-info">
-            <h2><i class="fas fa-envelope"></i> İletişim</h2>
-            
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-building"></i>
-                </div>
-                <div>
-                    <strong>Veri Sorumlusu:</strong><br>
-                    UKGames
-                </div>
-            </div>
-            
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div>
-                    <strong>Adres:</strong><br>
-                    Yıldırım / BURSA / TÜRKİYE
-                </div>
-            </div>
-            
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div>
-                    <strong>E-posta:</strong><br>
-                    <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a>
-                </div>
-            </div>
-            
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-phone"></i>
-                </div>
-                <div>
-                    <strong>Telefon:</strong><br>
-                    [Telefon Numarası]
-                </div>
-            </div>
-            
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-globe"></i>
-                </div>
-                <div>
-                    <strong>Web:</strong><br>
-                    <a href="contact.html">iletişim Formu</a>
-                </div>
-            </div>
+    <section id="about" class="about-section">
+        <div class="about-content">
+            <h2 class="section-title">Geliştirici Hakkında</h2>
+            <p style="color: #a0a0a0; margin-bottom: 20px;">
+                Merhaba, ben <strong>Uğur Kayhan Demir</strong>. Unity motoru kullanarak yüksek performanslı 
+                mobil oyunlar geliştiriyorum. Temiz kod yapısı (C#), optimize edilmiş grafikler ve 
+                akıcı kullanıcı deneyimi (UX) önceliğimdir.
+            </p>
+            <p style="color: #a0a0a0;">
+                Oyunlarımda performansı artırmak için en güncel yazılım tekniklerini kullanıyor 
+                ve oyunculara sorunsuz bir deneyim sunmayı hedefliyorum.
+            </p>
         </div>
+    </section>
 
-        <div class="consent-box">
-            <h3>Gizlilik Politikası Onayı</h3>
-            <p>Bu uygulamayı kullanmaya devam ederek, bu gizlilik politikasını kabul etmiş sayılırsınız.</p>
-            <button class="accept-btn" onclick="acceptPolicy()">
-                <i class="fas fa-check-circle"></i> Politikayı Kabul Ediyorum
-            </button>
+    <footer>
+        <div class="social-links" style="margin-bottom: 20px; font-size: 20px;">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
         </div>
-
-        <div class="footer">
-            <p>© 2025 UKGames. Tüm hakları saklıdır.</p>
-            <p>Son güncelleme: 01/12/2025</p>
+        <p>&copy; 2025 UKGames. Tüm hakları saklıdır.</p>
+        <div style="margin-top: 10px;">
+            <a href="privacy-policy.html">Gizlilik Politikası</a> | 
+            <a href="terms.html">Kullanım Şartları</a>
         </div>
-    </div>
+    </footer>
 
-    <a href="#" class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-
-    <script>
-        // Back to top button
-        const backToTopButton = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.style.display = 'flex';
-            } else {
-                backToTopButton.style.display = 'none';
-            }
-        });
-        
-        backToTopButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
-        // Policy acceptance
-        function acceptPolicy() {
-            localStorage.setItem('privacyPolicyAccepted', 'true');
-            alert('Gizlilik politikasını kabul ettiniz. Teşekkür ederiz!');
-        }
-        
-        // Check if policy was already accepted
-        if (localStorage.getItem('privacyPolicyAccepted') === 'true') {
-            console.log('Gizlilik politikası zaten kabul edilmiş.');
-        }
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 20,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Print functionality
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'p') {
-                e.preventDefault();
-                window.print();
-            }
-        });
-    </script>
 </body>
 </html>
