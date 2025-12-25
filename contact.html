@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İletişim Formu</title>
+    <title>Iletişim - UKGames</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS AYNI KALACAK - Sadece ufak dokunuşlar */
+        /* CSS: terms.html İLE AYNI TEMEL TASARIM */
+        :root {
+            --primary: #2575fc;
+            --secondary: #6a11cb;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #e0e0e0;
+            --text-muted: #a0a0a0;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,27 +24,70 @@
         }
 
         body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
         }
 
+        /* HEADER - terms.html ile aynı */
+        header {
+            background: linear-gradient(135deg, rgba(37, 117, 252, 0.1) 0%, rgba(106, 17, 203, 0.1) 100%);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* CONTAINER */
         .container {
             display: flex;
             max-width: 1200px;
             width: 100%;
-            background: white;
+            margin: 60px auto;
+            background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .contact-info {
             flex: 1;
-            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             padding: 50px 40px;
             display: flex;
@@ -46,6 +98,7 @@
         .contact-form {
             flex: 1.2;
             padding: 50px 40px;
+            background: var(--card-bg);
         }
 
         .contact-info h2 {
@@ -53,6 +106,7 @@
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 15px;
+            color: white;
         }
 
         .contact-info h2:after {
@@ -66,16 +120,16 @@
             border-radius: 2px;
         }
 
-        .contact-info p {
+        .contact-info > p {
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 30px;
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
         .info-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 25px;
         }
 
@@ -89,6 +143,18 @@
             align-items: center;
             justify-content: center;
             margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .info-item h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.5;
         }
 
         .social-icons {
@@ -112,12 +178,12 @@
 
         .social-icons a:hover {
             background: white;
-            color: #2575fc;
+            color: var(--primary);
             transform: translateY(-5px);
         }
 
         .contact-form h2 {
-            color: #333;
+            color: white;
             font-size: 32px;
             margin-bottom: 30px;
             position: relative;
@@ -131,7 +197,7 @@
             left: 0;
             width: 60px;
             height: 4px;
-            background: #2575fc;
+            background: var(--primary);
             border-radius: 2px;
         }
 
@@ -144,22 +210,38 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #555;
+            color: var(--text-light);
         }
 
         .form-control {
             width: 100%;
             padding: 15px;
-            border: 2px solid #e1e1e1;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
             border-radius: 10px;
             font-size: 16px;
+            color: var(--text-light);
             transition: all 0.3s ease;
         }
 
         .form-control:focus {
-            border-color: #2575fc;
+            border-color: var(--primary);
             outline: none;
+            background: rgba(255,255,255,0.08);
             box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+        select.form-control {
+            cursor: pointer;
+        }
+
+        select.form-control option {
+            background: var(--card-bg);
+            color: var(--text-light);
         }
 
         textarea.form-control {
@@ -168,7 +250,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(to right, #2575fc, #6a11cb);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             border: none;
             padding: 16px 40px;
@@ -190,15 +272,15 @@
         }
         
         .submit-btn:disabled {
-            background: #ccc;
+            background: #444;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
 
         .success-message {
-            background: #d4edda;
-            color: #155724;
+            background: rgba(46, 213, 115, 0.1);
+            color: #2ed573;
             padding: 15px;
             border-radius: 10px;
             margin-top: 20px;
@@ -206,6 +288,7 @@
             align-items: center;
             gap: 10px;
             animation: fadeIn 0.5s ease;
+            border: 1px solid rgba(46, 213, 115, 0.3);
         }
 
         @keyframes fadeIn {
@@ -214,19 +297,65 @@
         }
 
         .error-message {
-            color: #dc3545;
+            color: #ff4757;
             font-size: 14px;
             margin-top: 5px;
             display: none;
         }
 
+        #generalError {
+            background: rgba(255, 71, 87, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
         @media (max-width: 992px) {
             .container {
                 flex-direction: column;
                 max-width: 600px;
+                margin: 40px 20px;
             }
             .contact-info, .contact-form {
                 padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links a {
+                margin-left: 0;
+                margin: 0 10px;
+            }
+
+            .container {
+                margin: 20px;
             }
         }
 
@@ -234,15 +363,31 @@
             .contact-info h2, .contact-form h2 {
                 font-size: 28px;
             }
+            
+            .contact-info, .contact-form {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- HEADER - terms.html ile aynı -->
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo">UKGames</a>
+            <nav class="nav-links">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="contact.html">İletişim</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
         <div class="contact-info">
             <h2>Bizimle İletişime Geçin</h2>
             <p>Sorularınız, önerileriniz veya işbirliği teklifleriniz için bize ulaşabilirsiniz. Ekibimiz en kısa sürede size dönüş yapacaktır.</p>
-           <div class="info-item">
+            
+            <div class="info-item">
                 <i class="fas fa-map-marker-alt"></i>
                 <div>
                     <h3>Adres</h3>
@@ -276,7 +421,7 @@
         
         <div class="contact-form">
             <h2>Mesaj Gönderin</h2>
-               <form id="contactForm" action="https://formspree.io/f/xeejpgbv" method="POST">
+            <form id="contactForm" action="https://formspree.io/f/xeejpgbv" method="POST">
                 <div class="form-group">
                     <label for="name">Ad Soyad *</label>
                     <input type="text" id="name" name="name" class="form-control" placeholder="Adınız ve soyadınız" required>
@@ -312,10 +457,13 @@
                     <textarea id="message" name="message" class="form-control" placeholder="Mesajınızı buraya yazın..." required></textarea>
                     <div class="error-message" id="messageError">Lütfen mesajınızı yazınız (en az 10 karakter).</div>
                 </div>
+                
                 <input type="text" name="_gotcha" style="display:none">
+                
                 <button type="submit" class="submit-btn">
                     <i class="fas fa-paper-plane"></i> Mesajı Gönder
                 </button>
+                
                 <div class="success-message" id="successMessage">
                     <i class="fas fa-check-circle"></i>
                     <span>Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.</span>
@@ -327,6 +475,16 @@
             </form>
         </div>
     </div>
+
+    <!-- FOOTER - terms.html ile aynı -->
+    <footer>
+        <p>&copy; 2025 UKGames. Tüm hakları saklıdır.</p>
+        <div style="margin-top: 10px;">
+            <a href="index.html">Ana Sayfa</a> |
+            <a href="privacy-policy.html">Gizlilik Politikası</a> |
+            <a href="terms.html">Kullanım Şartları</a>
+        </div>
+    </footer>
 
     <script>
         // 1. LocalStorage Koruması (WebView/Unity için gerekli olabilir)
@@ -350,14 +508,10 @@
         phoneInput.addEventListener('input', function (e) {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
             
-            // +90 ile başlamıyorsa biz ekleyelim mantığı yerine, kullanıcı ne yazarsa onu formatlayalım
-            // Kullanıcı silme işlemi yapıyorsa müdahale etmeyelim (cursor sorunu için basit çözüm)
             if(!e.inputType || !e.inputType.includes('delete')) {
-                 // Eğer 90 ile başlamıyorsa, standart TR formatı varsayımı
                 if (x[1] === '90') {
                     e.target.value = !x[2] ? '+90' : '+90 (' + x[2] + (x[3] ? ') ' + x[3] : '') + (x[4] ? ' ' + x[4] : '') + (x[5] ? ' ' + x[5] : '');
                 } else if(x[1] === '05') {
-                     // 05 ile başlıyorsa +90'a çevir
                     let clean = e.target.value.replace(/\D/g, '');
                     clean = '90' + clean.substring(1);
                     let m = clean.match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
@@ -367,17 +521,15 @@
         });
 
         function validatePhone(phone) {
-            if (!phone || phone.trim() === '') return true; // Boş bırakılabilir
-            // En az 10 rakam içermeli
+            if (!phone || phone.trim() === '') return true;
             const numbers = phone.replace(/\D/g, '');
             return numbers.length >= 10;
         }
 
         // 3. Form Gönderim İşlemi (AJAX ile)
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Sayfa yenilenmesini engelle
+            e.preventDefault();
             
-            // Validasyon
             if (!validateForm()) {
                 return false;
             }
@@ -387,21 +539,17 @@
             const successMsg = document.getElementById('successMessage');
             const errorMsg = document.getElementById('generalError');
             
-            // Butonu yükleniyor moduna al
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
             submitBtn.disabled = true;
             errorMsg.style.display = 'none';
             successMsg.style.display = 'none';
 
-            // Form verilerini hazırla
             const formData = new FormData(form);
-            // Formspree'ye özel alanları manuel ekle
             formData.append("_replyto", document.getElementById('email').value);
             formData.append("_subject", 'İletişim Formu: ' + document.getElementById('subject').value);
 
             try {
-                // AJAX isteği gönder
                 const response = await fetch(form.action, {
                     method: form.method,
                     body: formData,
@@ -411,16 +559,13 @@
                 });
 
                 if (response.ok) {
-                    // Başarılı
                     successMsg.style.display = 'flex';
-                    form.reset(); // Formu temizle
+                    form.reset();
                     
-                    // 5 saniye sonra başarı mesajını gizle (isteğe bağlı)
                     setTimeout(() => {
                         successMsg.style.display = 'none';
                     }, 5000);
                 } else {
-                    // Sunucu hatası
                     const data = await response.json();
                     if (Object.hasOwn(data, 'errors')) {
                         errorMsg.innerText = data["errors"].map(error => error["message"]).join(", ");
@@ -430,11 +575,9 @@
                     errorMsg.style.display = 'block';
                 }
             } catch (error) {
-                // Ağ hatası
                 errorMsg.innerText = "İnternet bağlantı hatası. Lütfen tekrar deneyin.";
                 errorMsg.style.display = 'block';
             } finally {
-                // Butonu eski haline getir
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
             }
@@ -450,17 +593,15 @@
             const subject = document.getElementById('subject');
             const message = document.getElementById('message');
             
-            let firstErrorElement = null; // İlk hatayı yakalamak için
+            let firstErrorElement = null;
             let isValid = true;
             
-            // İsim kontrolü
             if (name.value.trim().length < 2) {
                 showError('nameError');
                 if(!firstErrorElement) firstErrorElement = name;
                 isValid = false;
             }
             
-            // Email kontrolü
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(email.value.trim())) {
                 showError('emailError');
@@ -468,28 +609,24 @@
                 isValid = false;
             }
             
-            // Telefon kontrolü
             if (!validatePhone(phone.value)) {
                 showError('phoneError');
                 if(!firstErrorElement) firstErrorElement = phone;
                 isValid = false;
             }
             
-            // Konu kontrolü
             if (!subject.value) {
                 showError('subjectError');
                 if(!firstErrorElement) firstErrorElement = subject;
                 isValid = false;
             }
             
-            // Mesaj kontrolü
             if (message.value.trim().length < 10) {
                 showError('messageError');
                 if(!firstErrorElement) firstErrorElement = message;
                 isValid = false;
             }
             
-            // Eğer hata varsa ilk hataya odaklan
             if (!isValid && firstErrorElement) {
                 firstErrorElement.focus();
             }
