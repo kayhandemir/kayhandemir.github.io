@@ -6,9 +6,9 @@
     <title>Iletişim - UKGames</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS: terms.html İLE AYNI TEMEL TASARIM */
-        :root {
-            --primary: #2575fc;
+        /* CSS:  terms.html İLE AYNI TEMEL TASARIM */
+        : root {
+            --primary:  #2575fc;
             --secondary: #6a11cb;
             --dark-bg: #121212;
             --card-bg: #1e1e1e;
@@ -18,7 +18,7 @@
 
         * {
             margin: 0;
-            padding: 0;
+            padding:  0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -27,13 +27,14 @@
             background-color: var(--dark-bg);
             color: var(--text-light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* HEADER - terms.html ile aynı */
+        /* HEADER - Geliştirilmiş Mobil Versiyon */
         header {
             background: linear-gradient(135deg, rgba(37, 117, 252, 0.1) 0%, rgba(106, 17, 203, 0.1) 100%);
-            padding: 20px 0;
-            position: sticky;
+            padding: 15px 0;
+            position:  sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(10px);
@@ -51,7 +52,7 @@
 
         .logo {
             font-size: 24px;
-            font-weight: 800;
+            font-weight:  800;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -60,12 +61,18 @@
             text-decoration: none;
         }
 
-        .nav-links a {
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        . nav-links a {
             color: var(--text-light);
             text-decoration: none;
-            margin-left: 20px;
             font-weight: 500;
             transition: color 0.3s;
+            white-space: nowrap;
         }
 
         .nav-links a:hover {
@@ -76,8 +83,8 @@
         .container {
             display: flex;
             max-width: 1200px;
-            width: 100%;
-            margin: 60px auto;
+            width: calc(100% - 40px);
+            margin: 40px auto;
             background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
@@ -85,10 +92,10 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .contact-info {
+        . contact-info {
             flex: 1;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
+            color:  white;
             padding: 50px 40px;
             display: flex;
             flex-direction: column;
@@ -102,8 +109,8 @@
         }
 
         .contact-info h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom:  20px;
             position: relative;
             padding-bottom: 15px;
             color: white;
@@ -121,7 +128,7 @@
         }
 
         .contact-info > p {
-            font-size: 16px;
+            font-size: clamp(14px, 2vw, 16px);
             line-height: 1.6;
             margin-bottom: 30px;
             opacity: 0.95;
@@ -133,8 +140,8 @@
             margin-bottom: 25px;
         }
 
-        .info-item i {
-            font-size: 20px;
+        . info-item i {
+            font-size: 18px;
             width: 40px;
             height: 40px;
             background: rgba(255, 255, 255, 0.2);
@@ -147,20 +154,22 @@
         }
 
         .info-item h3 {
-            font-size: 18px;
+            font-size: clamp(16px, 2. 5vw, 18px);
             margin-bottom: 5px;
         }
 
         .info-item p {
-            font-size: 14px;
+            font-size: clamp(13px, 2vw, 14px);
             opacity: 0.9;
             line-height: 1.5;
+            word-break: break-word;
         }
 
         .social-icons {
             display: flex;
             margin-top: 30px;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
         .social-icons a {
@@ -182,16 +191,16 @@
             transform: translateY(-5px);
         }
 
-        .contact-form h2 {
+        . contact-form h2 {
             color: white;
-            font-size: 32px;
+            font-size: clamp(24px, 5vw, 32px);
             margin-bottom: 30px;
             position: relative;
             padding-bottom: 15px;
         }
 
         .contact-form h2:after {
-            content: '';
+            content:  '';
             position: absolute;
             bottom: 0;
             left: 0;
@@ -202,7 +211,7 @@
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom:  25px;
             position: relative;
         }
 
@@ -211,6 +220,7 @@
             margin-bottom: 8px;
             font-weight: 600;
             color: var(--text-light);
+            font-size: clamp(14px, 2vw, 16px);
         }
 
         .form-control {
@@ -219,7 +229,7 @@
             background: rgba(255,255,255,0.05);
             border: 2px solid rgba(255,255,255,0.1);
             border-radius: 10px;
-            font-size: 16px;
+            font-size: clamp(14px, 2vw, 16px);
             color: var(--text-light);
             transition: all 0.3s ease;
         }
@@ -235,8 +245,16 @@
             color: var(--text-muted);
         }
 
-        select.form-control {
+        select. form-control {
             cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 20px;
+            padding-right:  45px;
         }
 
         select.form-control option {
@@ -245,21 +263,22 @@
         }
 
         textarea.form-control {
-            min-height: 150px;
+            min-height: 120px;
             resize: vertical;
+            font-family: inherit;
         }
 
         .submit-btn {
             background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
+            color:  white;
             border: none;
             padding: 16px 40px;
-            font-size: 18px;
+            font-size: clamp(16px, 2. 5vw, 18px);
             font-weight: 600;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 100%;
+            width:  100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -268,7 +287,7 @@
 
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(37, 117, 252, 0.3);
+            box-shadow:  0 10px 20px rgba(37, 117, 252, 0.3);
         }
         
         .submit-btn:disabled {
@@ -282,13 +301,14 @@
             background: rgba(46, 213, 115, 0.1);
             color: #2ed573;
             padding: 15px;
-            border-radius: 10px;
+            border-radius:  10px;
             margin-top: 20px;
             display: none;
             align-items: center;
             gap: 10px;
             animation: fadeIn 0.5s ease;
             border: 1px solid rgba(46, 213, 115, 0.3);
+            font-size: clamp(13px, 2vw, 14px);
         }
 
         @keyframes fadeIn {
@@ -298,7 +318,7 @@
 
         .error-message {
             color: #ff4757;
-            font-size: 14px;
+            font-size: clamp(12px, 2vw, 14px);
             margin-top: 5px;
             display: none;
         }
@@ -315,9 +335,9 @@
             text-align: center;
             padding: 40px 20px;
             border-top: 1px solid rgba(255,255,255,0.05);
-            font-size: 14px;
+            font-size: clamp(12px, 2vw, 14px);
             color: var(--text-muted);
-            margin-top: 60px;
+            margin-top: 40px;
         }
 
         footer a {
@@ -328,50 +348,224 @@
         }
 
         footer a:hover {
-            color: var(--primary);
+            color:  var(--primary);
         }
 
-        /* Responsive */
+        /* Responsive - Tablet */
         @media (max-width: 992px) {
             .container {
                 flex-direction: column;
-                max-width: 600px;
-                margin: 40px 20px;
-            }
-            .contact-info, .contact-form {
-                padding: 40px 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .nav-links a {
-                margin-left: 0;
-                margin: 0 10px;
-            }
-
-            .container {
-                margin: 20px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .contact-info h2, .contact-form h2 {
-                font-size: 28px;
+                width: calc(100% - 30px);
+                margin: 30px auto;
             }
             
             .contact-info, .contact-form {
+                padding: 40px 30px;
+            }
+
+            header {
+                padding: 12px 0;
+            }
+        }
+
+        /* Responsive - Mobile */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .container {
+                width: calc(100% - 20px);
+                margin: 20px auto;
+                border-radius: 15px;
+            }
+
+            .contact-info, .contact-form {
                 padding: 30px 20px;
+            }
+
+            .info-item {
+                margin-bottom: 20px;
+            }
+
+            .info-item i {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+
+            .social-icons {
+                margin-top: 20px;
+                gap: 12px;
+            }
+
+            .social-icons a {
+                width: 38px;
+                height: 38px;
+            }
+
+            . form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-control {
+                padding: 12px;
+            }
+
+            textarea.form-control {
+                min-height: 100px;
+            }
+
+            . submit-btn {
+                padding:  14px 30px;
+            }
+
+            footer {
+                padding: 30px 15px;
+                margin-top: 30px;
+            }
+
+            footer a {
+                margin: 0 5px;
+                display: inline-block;
+                margin-top: 5px;
+            }
+        }
+
+        /* Responsive - Small Mobile */
+        @media (max-width: 480px) {
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            . logo {
+                font-size: 18px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .container {
+                width: calc(100% - 15px);
+                margin: 15px auto;
+            }
+
+            .contact-info, .contact-form {
+                padding: 25px 15px;
+            }
+
+            .contact-info h2:after,
+            .contact-form h2:after {
+                width: 50px;
+                height: 3px;
+            }
+
+            . form-control {
+                padding: 10px 12px;
+            }
+
+            select.form-control {
+                padding-right: 40px;
+                background-size: 18px;
+            }
+
+            .submit-btn {
+                padding: 12px 25px;
+            }
+        }
+
+        /* iPhone SE ve küçük ekranlar */
+        @media (max-width: 375px) {
+            .logo {
+                font-size: 16px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .container {
+                margin: 10px auto;
+            }
+
+            .contact-info, .contact-form {
+                padding: 20px 12px;
+            }
+
+            . info-item i {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+                margin-right: 12px;
+            }
+
+            . social-icons a {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Landscape mode for mobile */
+        @media (max-width: 992px) and (orientation: landscape) {
+            .container {
+                margin: 20px auto;
+            }
+
+            .contact-info, .contact-form {
+                padding: 25px 20px;
+            }
+
+            . info-item {
+                margin-bottom: 15px;
+            }
+
+            . form-group {
+                margin-bottom: 15px;
+            }
+
+            textarea.form-control {
+                min-height: 80px;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .submit-btn: hover {
+                transform: none;
+            }
+
+            .submit-btn:active {
+                transform: scale(0.98);
+            }
+
+            .social-icons a:hover {
+                transform: none;
+            }
+
+            .social-icons a:active {
+                transform: scale(0.9);
             }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER - terms.html ile aynı -->
+    <!-- HEADER -->
     <header>
         <div class="navbar">
             <a href="index.html" class="logo">UKGames</a>
@@ -385,7 +579,7 @@
     <div class="container">
         <div class="contact-info">
             <h2>Bizimle İletişime Geçin</h2>
-            <p>Sorularınız, önerileriniz veya işbirliği teklifleriniz için bize ulaşabilirsiniz. Ekibimiz en kısa sürede size dönüş yapacaktır.</p>
+            <p>Sorularınız, önerileriniz veya işbirliği teklifleriniz için bize ulaşabilirsiniz.  Ekibimiz en kısa sürede size dönüş yapacaktır.</p>
             
             <div class="info-item">
                 <i class="fas fa-map-marker-alt"></i>
@@ -412,10 +606,10 @@
             </div>
             
             <div class="social-icons">
-                <a href="https://www.facebook.com/profile.php?id=100028871127084" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://github.com/kayhandemir" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.instagram.com/ugurkayhandemir/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/uğur-kayhandemir" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100028871127084" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://github.com/kayhandemir" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.instagram.com/ugurkayhandemir/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/uğur-kayhandemir" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
         
@@ -466,23 +660,23 @@
                 
                 <div class="success-message" id="successMessage">
                     <i class="fas fa-check-circle"></i>
-                    <span>Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.</span>
+                    <span>Mesajınız başarıyla gönderildi!  En kısa sürede size dönüş yapacağız. </span>
                 </div>
                 
-                <div class="error-message" id="generalError" style="margin-top:15px; text-align:center;">
-                    Bir hata oluştu. Lütfen tekrar deneyiniz.
+                <div class="error-message" id="generalError" style="margin-top: 15px; text-align:center;">
+                    Bir hata oluştu.  Lütfen tekrar deneyiniz.
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- FOOTER - terms.html ile aynı -->
+    <!-- FOOTER -->
     <footer>
         <p>&copy; 2025 UKGames. Tüm hakları saklıdır.</p>
-        <div style="margin-top: 10px;">
+        <div style="margin-top:  10px;">
             <a href="index.html">Ana Sayfa</a> |
             <a href="privacy-policy.html">Gizlilik Politikası</a> |
-            <a href="terms.html">Kullanım Şartları</a>
+            <a href="terms. html">Kullanım Şartları</a>
         </div>
     </footer>
 
@@ -508,20 +702,20 @@
         phoneInput.addEventListener('input', function (e) {
             let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
             
-            if(!e.inputType || !e.inputType.includes('delete')) {
+            if(! e.inputType || ! e.inputType.includes('delete')) {
                 if (x[1] === '90') {
-                    e.target.value = !x[2] ? '+90' : '+90 (' + x[2] + (x[3] ? ') ' + x[3] : '') + (x[4] ? ' ' + x[4] : '') + (x[5] ? ' ' + x[5] : '');
+                    e.target.value = ! x[2] ? '+90' : '+90 (' + x[2] + (x[3] ? ') ' + x[3] : '') + (x[4] ? ' ' + x[4] : '') + (x[5] ? ' ' + x[5] : '');
                 } else if(x[1] === '05') {
                     let clean = e.target.value.replace(/\D/g, '');
                     clean = '90' + clean.substring(1);
                     let m = clean.match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-                    e.target.value = !m[2] ? '+90' : '+90 (' + m[2] + (m[3] ? ') ' + m[3] : '') + (m[4] ? ' ' + m[4] : '') + (m[5] ? ' ' + m[5] : '');
+                    e.target.value = !m[2] ? '+90' : '+90 (' + m[2] + (m[3] ? ') ' + m[3] : '') + (m[4] ? ' ' + m[4] :  '') + (m[5] ? ' ' + m[5] :  '');
                 }
             }
         });
 
         function validatePhone(phone) {
-            if (!phone || phone.trim() === '') return true;
+            if (! phone || phone.trim() === '') return true;
             const numbers = phone.replace(/\D/g, '');
             return numbers.length >= 10;
         }
@@ -535,7 +729,7 @@
             }
             
             const form = e.target;
-            const submitBtn = form.querySelector('.submit-btn');
+            const submitBtn = form.querySelector('. submit-btn');
             const successMsg = document.getElementById('successMessage');
             const errorMsg = document.getElementById('generalError');
             
@@ -547,13 +741,13 @@
 
             const formData = new FormData(form);
             formData.append("_replyto", document.getElementById('email').value);
-            formData.append("_subject", 'İletişim Formu: ' + document.getElementById('subject').value);
+            formData.append("_subject", 'İletişim Formu:  ' + document.getElementById('subject').value);
 
             try {
                 const response = await fetch(form.action, {
                     method: form.method,
                     body: formData,
-                    headers: {
+                    headers:  {
                         'Accept': 'application/json'
                     }
                 });
@@ -570,7 +764,7 @@
                     if (Object.hasOwn(data, 'errors')) {
                         errorMsg.innerText = data["errors"].map(error => error["message"]).join(", ");
                     } else {
-                        errorMsg.innerText = "Sunucu tarafında bir hata oluştu.";
+                        errorMsg.innerText = "Sunucu tarafında bir hata oluştu. ";
                     }
                     errorMsg.style.display = 'block';
                 }
@@ -591,14 +785,14 @@
             const email = document.getElementById('email');
             const phone = document.getElementById('phone');
             const subject = document.getElementById('subject');
-            const message = document.getElementById('message');
+            const message = document. getElementById('message');
             
             let firstErrorElement = null;
             let isValid = true;
             
             if (name.value.trim().length < 2) {
                 showError('nameError');
-                if(!firstErrorElement) firstErrorElement = name;
+                if(! firstErrorElement) firstErrorElement = name;
                 isValid = false;
             }
             
@@ -609,7 +803,7 @@
                 isValid = false;
             }
             
-            if (!validatePhone(phone.value)) {
+            if (! validatePhone(phone.value)) {
                 showError('phoneError');
                 if(!firstErrorElement) firstErrorElement = phone;
                 isValid = false;
@@ -623,11 +817,11 @@
             
             if (message.value.trim().length < 10) {
                 showError('messageError');
-                if(!firstErrorElement) firstErrorElement = message;
+                if(! firstErrorElement) firstErrorElement = message;
                 isValid = false;
             }
             
-            if (!isValid && firstErrorElement) {
+            if (! isValid && firstErrorElement) {
                 firstErrorElement.focus();
             }
             
@@ -639,8 +833,8 @@
         }
         
         function clearErrors() {
-            const errors = document.querySelectorAll('.error-message');
-            errors.forEach(error => {
+            const errors = document.querySelectorAll('. error-message');
+            errors. forEach(error => {
                 error.style.display = 'none';
             });
         }
