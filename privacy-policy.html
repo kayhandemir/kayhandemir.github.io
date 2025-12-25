@@ -7,275 +7,112 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* GENEL SAYFA STİLİ */
+        /* --- GENEL AYARLAR --- */
         body {
-            /* Ana sayfaya uyumlu olabilecek Modern Gradient Arka Plan */
-            /* Koyu mordan maviye geçiş (Oyun temalarına uygun) */
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            background-attachment: fixed; /* Arka plan sabit kalır, içerik kayar */
-            
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: #e0e0e0; /* Göz yormayan açık gri metin rengi */
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
             line-height: 1.6;
         }
 
-        /* İÇERİK KUTUSU */
+        /* --- NAVİGASYON MENÜSÜ --- */
+        .navbar {
+            background-color: rgba(15, 52, 96, 0.9); /* Yarı saydam arka plan */
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky; /* Sayfa kaydırılsa bile üstte kalır */
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center; /* Linkleri ortalar */
+            gap: 20px;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(79, 172, 254, 0.2);
+            color: #4facfe;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background-color: #4facfe;
+            color: #1a1a2e;
+        }
+
+        /* --- İÇERİK KUTUSU --- */
         .container {
             max-width: 800px;
             margin: 40px auto;
             padding: 40px;
-            background-color: rgba(30, 30, 40, 0.85); /* Hafif şeffaf koyu zemin */
-            border-radius: 16px; /* Yuvarlak köşeler */
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Derinlik efekti */
-            backdrop-filter: blur(10px); /* Arka planı hafif bulanıklaştırma efekti */
+            background-color: rgba(30, 30, 40, 0.85);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* BAŞLIKLAR */
-        h1, h2, h3 {
-            color: #ffffff;
-            margin-top: 1.5em;
-        }
+        h1, h2, h3 { color: #ffffff; }
         
         h1 {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 0.5em;
             background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; /* Başlığa özel renk geçişi */
-        }
-
-        h2 {
-            border-bottom: 2px solid #0f3460;
-            padding-bottom: 10px;
-        }
-
-        /* LİNKLER */
-        a {
-            color: #4facfe;
-            text-decoration: none;
-            transition: color 0.3s;
+            -webkit-text-fill-color: transparent;
         }
         
-        a:hover {
-            color: #00f2fe;
-            text-decoration: underline;
-        }
-
-        /* TABLOLAR */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        th {
-            background-color: rgba(0, 0, 0, 0.3);
-            font-weight: 600;
-        }
-
-        /* BUTON GÖRÜNÜMLÜ LİNK (İletişim vb. için) */
-        .btn {
-            display: inline-block;
-            background: #0f3460;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
+        h2 { border-bottom: 2px solid #0f3460; padding-bottom: 10px; margin-top: 40px;}
         
-        .btn:hover {
-            background: #16213e;
-            text-decoration: none;
-            color: white;
-        }
+        a { color: #4facfe; text-decoration: none; transition: color 0.3s; }
+        a:hover { color: #00f2fe; text-decoration: underline; }
 
-        /* MOBİL UYUMLULUK */
+        /* Mobilde menü düzeni */
         @media (max-width: 600px) {
-            .container {
-                margin: 10px;
-                padding: 20px;
-            }
-            h1 { font-size: 1.8rem; }
+            .nav-container { gap: 10px; }
+            .nav-link { font-size: 0.85rem; padding: 6px 12px; }
+            .container { margin: 20px 10px; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">Ana Sayfa</a>
+            <a href="terms.html" class="nav-link">Kullanım Şartları</a>
+            <a href="privacy-policy.html" class="nav-link active">Gizlilik Politikası</a>
+            <a href="contact.html" class="nav-link">İletişim</a>
+        </div>
+    </nav>
+
     <div class="container">
         <h1>Gizlilik Politikası</h1>
         <p style="text-align: center; opacity: 0.7;">Son Güncelleme: 01/12/2025</p>
 
-        <p>Verilerinizin güvenliği bizim için önemlidir.</p>
+        <p>Verilerinizin güvenliği bizim için önemlidir. Color Blocks oyununu kullanarak aşağıdaki şartları kabul etmiş olursunuz.</p>
 
-        <h3>Önemli Bilgi</h3>
-        <p>Bu gizlilik politikası, <strong>Color Blocks</strong> kullandığınız sürece geçerlidir. Politikamızdaki değişikliklerden haberdar olmak için bu sayfayı düzenli olarak kontrol etmenizi öneririz.</p>
-
-        <h2>1. Toplanan Veriler</h2>
-        
-        <h3>A. Doğrudan Toplanan Veriler:</h3>
-        <ul>
-            <li><strong>Hesap Bilgileri:</strong> Ad, soyad, e-posta adresi</li>
-            <li><strong>Profil Bilgileri:</strong> Kullanıcı adı, profil fotoğrafı</li>
-            <li><strong>İletişim Bilgileri:</strong> Telefon numarası, adres (gerekliyse)</li>
-            <li><strong>Ödeme Bilgileri:</strong> Kredi kartı bilgileri (şifrelenmiş olarak)</li>
-        </ul>
-
-        <h3>B. Otomatik Toplanan Veriler:</h3>
-        <ul>
-            <li><strong>Cihaz Bilgileri:</strong> Cihaz modeli, işletim sistemi, benzersiz cihaz tanımlayıcıları</li>
-            <li><strong>Kullanım Verileri:</strong> Sayfa görüntülemeleri, tıklamalar, oturum süreleri</li>
-            <li><strong>Konum Verileri:</strong> IP adresi, coğrafi konum (izin verirseniz)</li>
-            <li><strong>Çerezler ve Benzer Teknolojiler:</strong> Oturum çerezleri, kalıcı çerezler</li>
-        </ul>
-
-        <h3>C. Üçüncü Taraflardan Gelen Veriler:</h3>
-        <ul>
-            <li>Sosyal medya hesapları (Google, Facebook, Apple ile giriş yaparsanız)</li>
-            <li>Analiz araçları (Google Analytics)</li>
-        </ul>
-
-        <h2>2. Verilerin Kullanım Amaçları</h2>
-        <table>
-            <tr>
-                <th>Amaç</th>
-                <th>Açıklama</th>
-            </tr>
-            <tr>
-                <td>Hizmet Sağlama</td>
-                <td>Uygulamayı çalıştırmak, özellikleri sunmak</td>
-            </tr>
-            <tr>
-                <td>Kişiselleştirme</td>
-                <td>Size özel içerik ve öneriler sunmak</td>
-            </tr>
-            <tr>
-                <td>İletişim</td>
-                <td>Bildirimler, güncellemeler, destek mesajları göndermek</td>
-            </tr>
-            <tr>
-                <td>Analiz ve Geliştirme</td>
-                <td>Uygulamayı geliştirmek, hataları düzeltmek</td>
-            </tr>
-            <tr>
-                <td>Güvenlik</td>
-                <td>Dolandırıcılığı önlemek, güvenliği sağlamak</td>
-            </tr>
-            <tr>
-                <td>Yasal Yükümlülükler</td>
-                <td>Kanuni gerekliliklere uymak</td>
-            </tr>
-        </table>
-
-        <h2>3. Veri Paylaşımı</h2>
-        <p><strong>Paylaştığımız Taraflar:</strong></p>
-        <ul>
-            <li>Hizmet Sağlayıcılar: Hosting, ödeme işlemcileri, analiz araçları</li>
-            <li>Yasal Zorunluluklar: Mahkeme kararı veya kanuni gereklilik durumunda</li>
-            <li>İş Ortakları: Sadece sizin onayınızla ve sınırlı ölçüde</li>
-            <li>Satış veya Birleşme Durumunda: İş transferi sırasında</li>
-        </ul>
-
-        <p><strong>Paylaşmadığımız Taraflar:</strong></p>
-        <ul>
-            <li>Reklam ağları (açıkça izin vermediğiniz sürece)</li>
-            <li>Veri simsarları</li>
-            <li>Üçüncü taraf pazarlamacılar</li>
-        </ul>
-
-        <h2>4. Çerezler (Cookies)</h2>
-        <table>
-            <tr>
-                <th>Çerez Türü</th>
-                <th>Amaç</th>
-                <th>Süre</th>
-            </tr>
-            <tr>
-                <td>Zorunlu Çerezler</td>
-                <td>Temel fonksiyonlar için gerekli</td>
-                <td>Oturum süresi</td>
-            </tr>
-            <tr>
-                <td>Performans Çerezleri</td>
-                <td>Kullanım analizi</td>
-                <td>1-2 yıl</td>
-            </tr>
-            <tr>
-                <td>Fonksiyonel Çerezler</td>
-                <td>Tercihleri hatırlama</td>
-                <td>1 yıl</td>
-            </tr>
-        </table>
-        <p><strong>Çerez Kontrolü:</strong> Tarayıcı ayarlarınızdan çerezleri kontrol edebilirsiniz.</p>
-
-        <h2>5. Üçüncü Taraf Hizmetleri</h2>
-        <ul>
-            <li><strong>Google Analytics:</strong> Kullanım analizi <br> <a href="https://policies.google.com/privacy" target="_blank">Google'ın Gizlilik Politikası</a></li>
-            <li><strong>AdMob/Google Ads:</strong> Reklam gösterimi <br> <a href="https://adssettings.google.com" target="_blank">Reklam Kişiselleştirme Ayarları</a></li>
-            <li><strong>Firebase:</strong> Veri depolama, analiz <br> <a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Gizlilik Politikası</a></li>
-        </ul>
-
-        <h2>6. Veri Güvenliği</h2>
-        <p>Verilerinizi korumak için:</p>
-        <ul>
-            <li><strong>Şifreleme:</strong> Veri iletimi ve depolama sırasında SSL/TLS şifrelemesi</li>
-            <li><strong>Erişim Kontrolü:</strong> Sadece yetkili personel erişimi</li>
-            <li><strong>Düzenli Denetimler:</strong> Güvenlik testleri ve kontroller</li>
-            <li><strong>Veri Minimizasyonu:</strong> Sadece gerekli verileri toplama</li>
-        </ul>
-
-        <h2>7. Kullanıcı Hakları</h2>
-        <table>
-            <tr>
-                <th>Hak</th>
-                <th>Açıklama</th>
-            </tr>
-            <tr>
-                <td>Bilgi Edinme</td>
-                <td>Hangi verilerinizi işlediğimizi öğrenme</td>
-            </tr>
-            <tr>
-                <td>Erişim</td>
-                <td>Verilerinize erişim talep etme</td>
-            </tr>
-            <tr>
-                <td>Silme</td>
-                <td>Verilerinizin silinmesini talep etme</td>
-            </tr>
-        </table>
-        
-        <h3>Haklarınızı Kullanmak İçin:</h3>
-        <ul>
-            <li><strong>E-posta:</strong> <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a></li>
-            <li><strong>Adres:</strong> Yıldırım / BURSA / TÜRKİYE</li>
-            <li><strong>Uygulama içi:</strong> Ayarlar > Gizlilik bölümü</li>
-        </ul>
-
-        <h2>8. İletişim</h2>
-        <p>
-            <strong>Veri Sorumlusu:</strong> UKGames<br>
-            <strong>Adres:</strong> Yıldırım / BURSA / TÜRKİYE<br>
-            <strong>E-posta:</strong> <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a>
-        </p>
-
-        <hr style="border-color: rgba(255,255,255,0.1); margin: 40px 0;">
-
-        <h3>Gizlilik Politikası Onayı</h3>
-        <p>Bu uygulamayı kullanmaya devam ederek, bu gizlilik politikasını kabul etmiş sayılırsınız.</p>
-        
-        <p style="text-align: center; margin-top: 40px; font-size: 0.9rem; opacity: 0.6;">
-            © 2025 UKGames. Tüm hakları saklıdır.
-        </p>
+        <h3>İletişim</h3>
+        <p>Sorularınız için <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a> adresinden bize ulaşabilirsiniz.</p>
     </div>
 
 </body>
