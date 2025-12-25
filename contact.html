@@ -3,510 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İletişim Formu</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>İletişim - Color Blocks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* CSS AYNI KALACAK - Sadece ufak dokunuşlar */
-        * {
+        /* --- GENEL AYARLAR (Diğer sayfalarla aynı) --- */
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            display: flex;
-            max-width: 1200px;
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .contact-info {
-            flex: 1;
-            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
-            color: white;
-            padding: 50px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .contact-form {
-            flex: 1.2;
-            padding: 50px 40px;
-        }
-
-        .contact-info h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .contact-info h2:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: white;
-            border-radius: 2px;
-        }
-
-        .contact-info p {
-            font-size: 16px;
             line-height: 1.6;
-            margin-bottom: 30px;
-            opacity: 0.9;
         }
 
-        .info-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
+        /* --- NAVBAR (Kopyala/Yapıştır yapıldı) --- */
+        .navbar {
+            background-color: rgba(15, 52, 96, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-
-        .info-item i {
-            font-size: 20px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
+        .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
-            align-items: center;
             justify-content: center;
-            margin-right: 15px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-
-        .social-icons {
-            display: flex;
-            margin-top: 30px;
-            gap: 15px;
-        }
-
-        .social-icons a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+        .nav-link {
+            color: #e0e0e0;
             text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 20px;
             transition: all 0.3s ease;
         }
-
-        .social-icons a:hover {
-            background: white;
-            color: #2575fc;
-            transform: translateY(-5px);
+        .nav-link:hover {
+            background-color: rgba(79, 172, 254, 0.2);
+            color: #4facfe;
+            transform: translateY(-2px);
+        }
+        .nav-link.active {
+            background-color: #4facfe;
+            color: #1a1a2e;
         }
 
-        .contact-form h2 {
-            color: #333;
-            font-size: 32px;
+        /* --- İÇERİK KUTUSU --- */
+        .container {
+            max-width: 600px; /* İletişim formu için biraz daha dar */
+            margin: 40px auto;
+            padding: 40px;
+            background-color: rgba(30, 30, 40, 0.85);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            opacity: 0.8;
             margin-bottom: 30px;
-            position: relative;
-            padding-bottom: 15px;
         }
 
-        .contact-form h2:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: #2575fc;
-            border-radius: 2px;
-        }
-
+        /* --- FORM ELEMANLARI --- */
         .form-group {
-            margin-bottom: 25px;
-            position: relative;
+            margin-bottom: 20px;
         }
 
-        .form-group label {
+        label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #555;
+            color: #4facfe;
         }
 
-        .form-control {
+        input, textarea {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e1e1;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: #2575fc;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.1);
-        }
-
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: linear-gradient(to right, #2575fc, #6a11cb);
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             color: white;
-            border: none;
-            padding: 16px 40px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box; /* Padding taşmasını engeller */
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #4facfe;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        button.submit-btn {
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            padding: 14px;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            border-radius: 8px;
+            color: #1a1a2e;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(37, 117, 252, 0.3);
-        }
-        
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        button.submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
         }
 
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-            align-items: center;
-            gap: 10px;
-            animation: fadeIn 0.5s ease;
+        /* İletişim Bilgileri Kısmı */
+        .contact-info {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.9rem;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .contact-info a {
+            color: #4facfe;
+            text-decoration: none;
         }
 
-        .error-message {
-            color: #dc3545;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        @media (max-width: 992px) {
-            .container {
-                flex-direction: column;
-                max-width: 600px;
-            }
-            .contact-info, .contact-form {
-                padding: 40px 30px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .contact-info h2, .contact-form h2 {
-                font-size: 28px;
-            }
+        @media (max-width: 600px) {
+            .container { margin: 20px 10px; padding: 25px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="contact-info">
-            <h2>Bizimle İletişime Geçin</h2>
-            <p>Sorularınız, önerileriniz veya işbirliği teklifleriniz için bize ulaşabilirsiniz. Ekibimiz en kısa sürede size dönüş yapacaktır.</p>
-           <div class="info-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <div>
-                    <h3>Adres</h3>
-                    <p>Yıldırım<br>Bursa, Türkiye</p>
-                </div>
-            </div>
-            
-            <div class="info-item">
-                <i class="fas fa-phone"></i>
-                <div>
-                    <h3>Telefon</h3>
-                    <p>+90 (224) 224 00 00</p>
-                </div>
-            </div>
-            
-            <div class="info-item">
-                <i class="fas fa-envelope"></i>
-                <div>
-                    <h3>E-posta</h3>
-                    <p>ugka81@gmail.com</p>
-                </div>
-            </div>
-            
-            <div class="social-icons">
-                <a href="https://www.facebook.com/profile.php?id=100028871127084" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://github.com/kayhandemir" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.instagram.com/ugurkayhandemir/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/uğur-kayhandemir" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">Ana Sayfa</a>
+            <a href="terms.html" class="nav-link">Kullanım Şartları</a>
+            <a href="privacy-policy.html" class="nav-link">Gizlilik Politikası</a>
+            <a href="contact.html" class="nav-link active">İletişim</a>
         </div>
-        
-        <div class="contact-form">
-            <h2>Mesaj Gönderin</h2>
-               <form id="contactForm" action="https://formspree.io/f/xeejpgbv" method="POST">
-                <div class="form-group">
-                    <label for="name">Ad Soyad *</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Adınız ve soyadınız" required>
-                    <div class="error-message" id="nameError">Lütfen geçerli bir ad giriniz.</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">E-posta Adresi *</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="ornek@email.com" required>
-                    <div class="error-message" id="emailError">Lütfen geçerli bir e-posta adresi giriniz.</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Telefon Numarası</label>
-                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="+90 (5__) ___ __ __" maxlength="19">
-                    <div class="error-message" id="phoneError">Lütfen geçerli bir telefon numarası giriniz.</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject">Konu *</label>
-                    <select id="subject" name="subject" class="form-control" required>
-                        <option value="" disabled selected>Konu seçiniz</option>
-                        <option value="genel">Genel Soru</option>
-                        <option value="teklif">İş Teklifi</option>
-                        <option value="destek">Teknik Destek</option>
-                        <option value="diger">Diğer</option>
-                    </select>
-                    <div class="error-message" id="subjectError">Lütfen bir konu seçiniz.</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Mesajınız *</label>
-                    <textarea id="message" name="message" class="form-control" placeholder="Mesajınızı buraya yazın..." required></textarea>
-                    <div class="error-message" id="messageError">Lütfen mesajınızı yazınız (en az 10 karakter).</div>
-                </div>
-                <input type="text" name="_gotcha" style="display:none">
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Mesajı Gönder
-                </button>
-                <div class="success-message" id="successMessage">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.</span>
-                </div>
-                
-                <div class="error-message" id="generalError" style="margin-top:15px; text-align:center;">
-                    Bir hata oluştu. Lütfen tekrar deneyiniz.
-                </div>
-            </form>
+    </nav>
+
+    <div class="container">
+        <h1>Bize Ulaşın</h1>
+        <p class="subtitle">Oyunlarımız hakkında soru, öneri veya destek talepleriniz için bize yazabilirsiniz.</p>
+
+        <form action="mailto:ugka81@gmail.com" method="post" enctype="text/plain">
+            <div class="form-group">
+                <label for="name">İsim</label>
+                <input type="text" id="name" name="name" placeholder="Adınız Soyadınız" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-posta</label>
+                <input type="email" id="email" name="email" placeholder="ornek@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Konu</label>
+                <input type="text" id="subject" name="subject" placeholder="Mesajınızın konusu" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Mesaj</label>
+                <textarea id="message" name="message" rows="5" placeholder="Mesajınızı buraya yazın..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">GÖNDER</button>
+        </form>
+
+        <div class="contact-info">
+            <p>Veya doğrudan e-posta gönderin:</p>
+            <strong><a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a></strong>
+            <p style="margin-top: 10px; opacity: 0.6;">Yıldırım / BURSA / TÜRKİYE</p>
         </div>
     </div>
 
-    <script>
-        // 1. LocalStorage Koruması (WebView/Unity için gerekli olabilir)
-        try {
-            Object.defineProperty(window, 'localStorage', {
-                value: {
-                    getItem: () => null,
-                    setItem: () => null,
-                    removeItem: () => null,
-                    clear: () => null
-                },
-                writable: false
-            });
-        } catch (e) {
-            console.log("LocalStorage override error ignored");
-        }
-
-        // 2. Telefon Formatlama Fonksiyonu
-        const phoneInput = document.getElementById('phone');
-        
-        phoneInput.addEventListener('input', function (e) {
-            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-            
-            // +90 ile başlamıyorsa biz ekleyelim mantığı yerine, kullanıcı ne yazarsa onu formatlayalım
-            // Kullanıcı silme işlemi yapıyorsa müdahale etmeyelim (cursor sorunu için basit çözüm)
-            if(!e.inputType || !e.inputType.includes('delete')) {
-                 // Eğer 90 ile başlamıyorsa, standart TR formatı varsayımı
-                if (x[1] === '90') {
-                    e.target.value = !x[2] ? '+90' : '+90 (' + x[2] + (x[3] ? ') ' + x[3] : '') + (x[4] ? ' ' + x[4] : '') + (x[5] ? ' ' + x[5] : '');
-                } else if(x[1] === '05') {
-                     // 05 ile başlıyorsa +90'a çevir
-                    let clean = e.target.value.replace(/\D/g, '');
-                    clean = '90' + clean.substring(1);
-                    let m = clean.match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-                    e.target.value = !m[2] ? '+90' : '+90 (' + m[2] + (m[3] ? ') ' + m[3] : '') + (m[4] ? ' ' + m[4] : '') + (m[5] ? ' ' + m[5] : '');
-                }
-            }
-        });
-
-        function validatePhone(phone) {
-            if (!phone || phone.trim() === '') return true; // Boş bırakılabilir
-            // En az 10 rakam içermeli
-            const numbers = phone.replace(/\D/g, '');
-            return numbers.length >= 10;
-        }
-
-        // 3. Form Gönderim İşlemi (AJAX ile)
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Sayfa yenilenmesini engelle
-            
-            // Validasyon
-            if (!validateForm()) {
-                return false;
-            }
-            
-            const form = e.target;
-            const submitBtn = form.querySelector('.submit-btn');
-            const successMsg = document.getElementById('successMessage');
-            const errorMsg = document.getElementById('generalError');
-            
-            // Butonu yükleniyor moduna al
-            const originalBtnText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
-            submitBtn.disabled = true;
-            errorMsg.style.display = 'none';
-            successMsg.style.display = 'none';
-
-            // Form verilerini hazırla
-            const formData = new FormData(form);
-            // Formspree'ye özel alanları manuel ekle
-            formData.append("_replyto", document.getElementById('email').value);
-            formData.append("_subject", 'İletişim Formu: ' + document.getElementById('subject').value);
-
-            try {
-                // AJAX isteği gönder
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    // Başarılı
-                    successMsg.style.display = 'flex';
-                    form.reset(); // Formu temizle
-                    
-                    // 5 saniye sonra başarı mesajını gizle (isteğe bağlı)
-                    setTimeout(() => {
-                        successMsg.style.display = 'none';
-                    }, 5000);
-                } else {
-                    // Sunucu hatası
-                    const data = await response.json();
-                    if (Object.hasOwn(data, 'errors')) {
-                        errorMsg.innerText = data["errors"].map(error => error["message"]).join(", ");
-                    } else {
-                        errorMsg.innerText = "Sunucu tarafında bir hata oluştu.";
-                    }
-                    errorMsg.style.display = 'block';
-                }
-            } catch (error) {
-                // Ağ hatası
-                errorMsg.innerText = "İnternet bağlantı hatası. Lütfen tekrar deneyin.";
-                errorMsg.style.display = 'block';
-            } finally {
-                // Butonu eski haline getir
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-            }
-        });
-        
-        // 4. Validasyon Fonksiyonu
-        function validateForm() {
-            clearErrors();
-            
-            const name = document.getElementById('name');
-            const email = document.getElementById('email');
-            const phone = document.getElementById('phone');
-            const subject = document.getElementById('subject');
-            const message = document.getElementById('message');
-            
-            let firstErrorElement = null; // İlk hatayı yakalamak için
-            let isValid = true;
-            
-            // İsim kontrolü
-            if (name.value.trim().length < 2) {
-                showError('nameError');
-                if(!firstErrorElement) firstErrorElement = name;
-                isValid = false;
-            }
-            
-            // Email kontrolü
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email.value.trim())) {
-                showError('emailError');
-                if(!firstErrorElement) firstErrorElement = email;
-                isValid = false;
-            }
-            
-            // Telefon kontrolü
-            if (!validatePhone(phone.value)) {
-                showError('phoneError');
-                if(!firstErrorElement) firstErrorElement = phone;
-                isValid = false;
-            }
-            
-            // Konu kontrolü
-            if (!subject.value) {
-                showError('subjectError');
-                if(!firstErrorElement) firstErrorElement = subject;
-                isValid = false;
-            }
-            
-            // Mesaj kontrolü
-            if (message.value.trim().length < 10) {
-                showError('messageError');
-                if(!firstErrorElement) firstErrorElement = message;
-                isValid = false;
-            }
-            
-            // Eğer hata varsa ilk hataya odaklan
-            if (!isValid && firstErrorElement) {
-                firstErrorElement.focus();
-            }
-            
-            return isValid;
-        }
-        
-        function showError(elementId) {
-            document.getElementById(elementId).style.display = 'block';
-        }
-        
-        function clearErrors() {
-            const errors = document.querySelectorAll('.error-message');
-            errors.forEach(error => {
-                error.style.display = 'none';
-            });
-        }
-    </script>
 </body>
 </html>
