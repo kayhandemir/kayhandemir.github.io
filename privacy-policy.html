@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gizlilik Politikası - UKGames</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare. com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS:  index.html İLE AYNI TEMEL TASARIM */
-        : root {
-            --primary:  #2575fc;
+        /* CSS: terms.html İLE AYNI TEMEL TASARIM */
+        :root {
+            --primary: #2575fc;
             --secondary: #6a11cb;
             --dark-bg: #121212;
             --card-bg: #1e1e1e;
@@ -18,7 +18,7 @@
 
         * {
             margin: 0;
-            padding:  0;
+            padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -33,16 +33,16 @@
         header {
             background: linear-gradient(135deg, rgba(37, 117, 252, 0.1) 0%, rgba(106, 17, 203, 0.1) 100%);
             padding: 20px 0;
-            position:  sticky;
+            position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        . navbar {
+        .navbar {
             max-width: 1200px;
-            margin:  0 auto;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -51,7 +51,7 @@
 
         .logo {
             font-size: 24px;
-            font-weight:  800;
+            font-weight: 800;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -77,7 +77,7 @@
             max-width: 900px;
             margin: 60px auto;
             padding: 40px;
-            background:  var(--card-bg);
+            background: var(--card-bg);
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.05);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -90,12 +90,12 @@
             text-align: center;
         }
 
-        . last-updated {
+        .last-updated {
             text-align: center;
             color: var(--text-muted);
             font-size: 14px;
             margin-bottom: 40px;
-            font-style:  italic;
+            font-style: italic;
         }
 
         h2 {
@@ -103,14 +103,14 @@
             margin-top: 30px;
             margin-bottom: 15px;
             font-size: 22px;
-            border-bottom:  1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 10px;
         }
 
         h3 {
-            color: #ffffff;
+            color: var(--text-light);
             margin-top: 20px;
-            margin-bottom:  10px;
+            margin-bottom: 10px;
             font-size: 18px;
         }
 
@@ -119,9 +119,9 @@
             color: #ccc;
         }
 
-        ul {
+        ul, ol {
             margin-bottom: 20px;
-            padding-left:  20px;
+            padding-left: 20px;
         }
 
         li {
@@ -129,24 +129,8 @@
             color: #ccc;
         }
 
-        /* TABLOLAR */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        th {
-            background-color:  rgba(0, 0, 0, 0.3);
-            font-weight: 600;
-            color: var(--primary);
+        strong {
+            color: var(--text-light);
         }
 
         /* LİNKLER */
@@ -155,10 +139,60 @@
             text-decoration: none;
             transition: color 0.3s;
         }
-
-        a: hover {
+        
+        a:hover {
             color: var(--secondary);
             text-decoration: underline;
+        }
+
+        /* TABLOLAR */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            background-color: rgba(37, 117, 252, 0.1);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        td {
+            color: #ccc;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* AYIRICI ÇİZGİ */
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin: 40px 0;
+        }
+
+        /* VURGU KUTUSU */
+        .highlight-box {
+            background: rgba(37, 117, 252, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
         }
 
         /* FOOTER */
@@ -181,20 +215,34 @@
             color: var(--primary);
         }
 
-        /* HR */
-        hr {
-            border-color: rgba(255,255,255,0.1);
-            margin: 40px 0;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links a {
+                margin-left: 0;
+                margin: 0 10px;
+            }
+
             .content-container {
                 margin: 20px;
-                padding: 20px;
+                padding: 25px;
             }
-            h1 { font-size: 28px; }
-            h2 { font-size: 18px; }
+            
+            h1 { 
+                font-size: 28px; 
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -213,17 +261,21 @@
     <main>
         <div class="content-container">
             <h1>Gizlilik Politikası</h1>
-            <p class="last-updated">Son Güncelleme: 25 Aralık 2025</p>
+            <p class="last-updated">Son Güncelleme: 01 Aralık 2025</p>
+
+            <div class="highlight-box">
+                <p><strong>Verilerinizin güvenliği bizim için önemlidir.</strong></p>
+            </div>
 
             <section>
-                <h2>1. Giriş</h2>
-                <p>Verilerinizin güvenliği bizim için önemlidir. Bu Gizlilik Politikası, <strong>UKGames</strong> tarafından geliştirilen mobil oyunlar (Color Blocks, ZigZag Mix ve diğerleri) ve web sitesinin kullanıcı verilerini nasıl topladığını, kullandığını ve koruduğunu açıklar.</p>
+                <h3>Önemli Bilgi</h3>
+                <p>Bu gizlilik politikası, <strong>Color Blocks</strong> kullandığınız sürece geçerlidir. Politikamızdaki değişikliklerden haberdar olmak için bu sayfayı düzenli olarak kontrol etmenizi öneririz.</p>
             </section>
 
             <section>
-                <h2>2. Toplanan Veriler</h2>
+                <h2>1. Toplanan Veriler</h2>
                 
-                <h3>A. Doğrudan Toplanan Veriler: </h3>
+                <h3>A. Doğrudan Toplanan Veriler:</h3>
                 <ul>
                     <li><strong>Hesap Bilgileri:</strong> Ad, soyad, e-posta adresi</li>
                     <li><strong>Profil Bilgileri:</strong> Kullanıcı adı, profil fotoğrafı</li>
@@ -239,7 +291,7 @@
                     <li><strong>Çerezler ve Benzer Teknolojiler:</strong> Oturum çerezleri, kalıcı çerezler</li>
                 </ul>
 
-                <h3>C.  Üçüncü Taraflardan Gelen Veriler:</h3>
+                <h3>C. Üçüncü Taraflardan Gelen Veriler:</h3>
                 <ul>
                     <li>Sosyal medya hesapları (Google, Facebook, Apple ile giriş yaparsanız)</li>
                     <li>Analiz araçları (Google Analytics)</li>
@@ -247,50 +299,54 @@
             </section>
 
             <section>
-                <h2>3. Verilerin Kullanım Amaçları</h2>
+                <h2>2. Verilerin Kullanım Amaçları</h2>
                 <table>
-                    <tr>
-                        <th>Amaç</th>
-                        <th>Açıklama</th>
-                    </tr>
-                    <tr>
-                        <td>Hizmet Sağlama</td>
-                        <td>Uygulamayı çalıştırmak, özellikleri sunmak</td>
-                    </tr>
-                    <tr>
-                        <td>Kişiselleştirme</td>
-                        <td>Size özel içerik ve öneriler sunmak</td>
-                    </tr>
-                    <tr>
-                        <td>İletişim</td>
-                        <td>Bildirimler, güncellemeler, destek mesajları göndermek</td>
-                    </tr>
-                    <tr>
-                        <td>Analiz ve Geliştirme</td>
-                        <td>Uygulamayı geliştirmek, hataları düzeltmek</td>
-                    </tr>
-                    <tr>
-                        <td>Güvenlik</td>
-                        <td>Dolandırıcılığı önlemek, güvenliği sağlamak</td>
-                    </tr>
-                    <tr>
-                        <td>Yasal Yükümlülükler</td>
-                        <td>Kanuni gerekliliklere uymak</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Amaç</th>
+                            <th>Açıklama</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hizmet Sağlama</td>
+                            <td>Uygulamayı çalıştırmak, özellikleri sunmak</td>
+                        </tr>
+                        <tr>
+                            <td>Kişiselleştirme</td>
+                            <td>Size özel içerik ve öneriler sunmak</td>
+                        </tr>
+                        <tr>
+                            <td>İletişim</td>
+                            <td>Bildirimler, güncellemeler, destek mesajları göndermek</td>
+                        </tr>
+                        <tr>
+                            <td>Analiz ve Geliştirme</td>
+                            <td>Uygulamayı geliştirmek, hataları düzeltmek</td>
+                        </tr>
+                        <tr>
+                            <td>Güvenlik</td>
+                            <td>Dolandırıcılığı önlemek, güvenliği sağlamak</td>
+                        </tr>
+                        <tr>
+                            <td>Yasal Yükümlülükler</td>
+                            <td>Kanuni gerekliliklere uymak</td>
+                        </tr>
+                    </tbody>
                 </table>
             </section>
 
             <section>
-                <h2>4. Veri Paylaşımı</h2>
-                <p><strong>Paylaştığımız Taraflar:</strong></p>
+                <h2>3. Veri Paylaşımı</h2>
+                <h3>Paylaştığımız Taraflar:</h3>
                 <ul>
-                    <li>Hizmet Sağlayıcılar:  Hosting, ödeme işlemcileri, analiz araçları</li>
+                    <li>Hizmet Sağlayıcılar: Hosting, ödeme işlemcileri, analiz araçları</li>
                     <li>Yasal Zorunluluklar: Mahkeme kararı veya kanuni gereklilik durumunda</li>
                     <li>İş Ortakları: Sadece sizin onayınızla ve sınırlı ölçüde</li>
                     <li>Satış veya Birleşme Durumunda: İş transferi sırasında</li>
                 </ul>
 
-                <p><strong>Paylaşmadığımız Taraflar: </strong></p>
+                <h3>Paylaşmadığımız Taraflar:</h3>
                 <ul>
                     <li>Reklam ağları (açıkça izin vermediğiniz sürece)</li>
                     <li>Veri simsarları</li>
@@ -299,43 +355,53 @@
             </section>
 
             <section>
-                <h2>5. Çerezler (Cookies)</h2>
+                <h2>4. Çerezler (Cookies)</h2>
                 <table>
-                    <tr>
-                        <th>Çerez Türü</th>
-                        <th>Amaç</th>
-                        <th>Süre</th>
-                    </tr>
-                    <tr>
-                        <td>Zorunlu Çerezler</td>
-                        <td>Temel fonksiyonlar için gerekli</td>
-                        <td>Oturum süresi</td>
-                    </tr>
-                    <tr>
-                        <td>Performans Çerezleri</td>
-                        <td>Kullanım analizi</td>
-                        <td>1-2 yıl</td>
-                    </tr>
-                    <tr>
-                        <td>Fonksiyonel Çerezler</td>
-                        <td>Tercihleri hatırlama</td>
-                        <td>1 yıl</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Çerez Türü</th>
+                            <th>Amaç</th>
+                            <th>Süre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Zorunlu Çerezler</td>
+                            <td>Temel fonksiyonlar için gerekli</td>
+                            <td>Oturum süresi</td>
+                        </tr>
+                        <tr>
+                            <td>Performans Çerezleri</td>
+                            <td>Kullanım analizi</td>
+                            <td>1-2 yıl</td>
+                        </tr>
+                        <tr>
+                            <td>Fonksiyonel Çerezler</td>
+                            <td>Tercihleri hatırlama</td>
+                            <td>1 yıl</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <p><strong>Çerez Kontrolü:</strong> Tarayıcı ayarlarınızdan çerezleri kontrol edebilirsiniz. </p>
+                <p><strong>Çerez Kontrolü:</strong> Tarayıcı ayarlarınızdan çerezleri kontrol edebilirsiniz.</p>
             </section>
 
             <section>
-                <h2>6. Üçüncü Taraf Hizmetleri</h2>
+                <h2>5. Üçüncü Taraf Hizmetleri</h2>
                 <ul>
-                    <li><strong>Google Analytics: </strong> Kullanım analizi<br><a href="https://policies.google.com/privacy" target="_blank">Google'ın Gizlilik Politikası</a></li>
-                    <li><strong>AdMob/Google Ads:</strong> Reklam gösterimi<br><a href="https://adssettings.google.com" target="_blank">Reklam Kişiselleştirme Ayarları</a></li>
-                    <li><strong>Firebase:</strong> Veri depolama, analiz<br><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Gizlilik Politikası</a></li>
+                    <li><strong>Google Analytics:</strong> Kullanım analizi<br>
+                        <a href="https://policies.google.com/privacy" target="_blank">Google'ın Gizlilik Politikası <i class="fas fa-external-link-alt" style="font-size: 12px;"></i></a>
+                    </li>
+                    <li><strong>AdMob/Google Ads:</strong> Reklam gösterimi<br>
+                        <a href="https://adssettings.google.com" target="_blank">Reklam Kişiselleştirme Ayarları <i class="fas fa-external-link-alt" style="font-size: 12px;"></i></a>
+                    </li>
+                    <li><strong>Firebase:</strong> Veri depolama, analiz<br>
+                        <a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Gizlilik Politikası <i class="fas fa-external-link-alt" style="font-size: 12px;"></i></a>
+                    </li>
                 </ul>
             </section>
 
             <section>
-                <h2>7. Veri Güvenliği</h2>
+                <h2>6. Veri Güvenliği</h2>
                 <p>Verilerinizi korumak için:</p>
                 <ul>
                     <li><strong>Şifreleme:</strong> Veri iletimi ve depolama sırasında SSL/TLS şifrelemesi</li>
@@ -346,46 +412,54 @@
             </section>
 
             <section>
-                <h2>8. Kullanıcı Hakları</h2>
+                <h2>7. Kullanıcı Hakları</h2>
                 <table>
-                    <tr>
-                        <th>Hak</th>
-                        <th>Açıklama</th>
-                    </tr>
-                    <tr>
-                        <td>Bilgi Edinme</td>
-                        <td>Hangi verilerinizi işlediğimizi öğrenme</td>
-                    </tr>
-                    <tr>
-                        <td>Erişim</td>
-                        <td>Verilerinize erişim talep etme</td>
-                    </tr>
-                    <tr>
-                        <td>Silme</td>
-                        <td>Verilerinizin silinmesini talep etme</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Hak</th>
+                            <th>Açıklama</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Bilgi Edinme</td>
+                            <td>Hangi verilerinizi işlediğimizi öğrenme</td>
+                        </tr>
+                        <tr>
+                            <td>Erişim</td>
+                            <td>Verilerinize erişim talep etme</td>
+                        </tr>
+                        <tr>
+                            <td>Silme</td>
+                            <td>Verilerinizin silinmesini talep etme</td>
+                        </tr>
+                    </tbody>
                 </table>
                 
                 <h3>Haklarınızı Kullanmak İçin:</h3>
                 <ul>
-                    <li><strong>E-posta:</strong> ugka81@gmail.com</li>
-                    <li><strong>Adres:</strong> Yıldırım / BURSA / TÜRKİYE</li>
+                    <li><strong>E-posta:</strong> <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a></li>
+                    <li><strong>Adres:</strong> Yıldırım, Bursa, Türkiye</li>
+                    <li><strong>Uygulama içi:</strong> Ayarlar > Gizlilik bölümü</li>
                 </ul>
             </section>
 
             <section>
-                <h2>9. İletişim</h2>
-                <p><strong>Veri Sorumlusu:</strong> UKGames</p>
-                <p><strong>Adres:</strong> Yıldırım / BURSA / TÜRKİYE</p>
-                <p><strong>E-posta:</strong> ugka81@gmail.com</p>
-                <p>Ayrıca <a href="contact.html">İletişim Formu</a> üzerinden de bize ulaşabilirsiniz.</p>
+                <h2>8. İletişim</h2>
+                <p>
+                    <strong>Veri Sorumlusu:</strong> UKGames<br>
+                    <strong>Adres:</strong> Yıldırım, Bursa, Türkiye<br>
+                    <strong>E-posta:</strong> <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a>
+                </p>
             </section>
 
             <hr>
 
             <section>
                 <h3>Gizlilik Politikası Onayı</h3>
-                <p>Bu uygulamayı kullanmaya devam ederek, bu gizlilik politikasını kabul etmiş sayılırsınız. </p>
+                <div class="highlight-box">
+                    <p>Bu uygulamayı kullanmaya devam ederek, bu gizlilik politikasını kabul etmiş sayılırsınız.</p>
+                </div>
             </section>
         </div>
     </main>
@@ -394,7 +468,8 @@
         <p>&copy; 2025 UKGames. Tüm hakları saklıdır.</p>
         <div style="margin-top: 10px;">
             <a href="index.html">Ana Sayfa</a> |
-            <a href="terms-of-service.html">Kullanım Şartları</a>
+            <a href="terms.html">Kullanım Şartları</a> |
+            <a href="contact.html">İletişim</a>
         </div>
     </footer>
 
