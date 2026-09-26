@@ -2,8 +2,9 @@
 
 Run from the repository root:  python tools/build.py
 Edit the texts in STRINGS / GAMES below, then rebuild and commit the generated HTML.
-Legal texts live in tools/content/*.html (moved over unchanged from the previous site).
+Legal texts (privacy policy, terms) live in tools/content/*.html.
 """
+import hashlib
 import html
 import json
 import pathlib
@@ -14,6 +15,12 @@ SITE = "https://ukgames.net"
 EMAIL = "ugka81@gmail.com"
 GA_ID = "G-E5WFC0MHFP"
 YEAR = 2026
+
+
+def asset_url(rel):
+    # Content hash in the query string, so browsers fetch the new file right after a deploy.
+    digest = hashlib.sha1((ROOT / rel.lstrip("/")).read_bytes()).hexdigest()[:8]
+    return f"{rel}?v={digest}"
 
 FONTS = ("https://fonts.googleapis.com/css2?family=Bungee&family=DM+Mono:wght@500"
          "&family=Rethink+Sans:wght@400;600;700;800&display=swap")
@@ -213,7 +220,7 @@ def head(s, title, description, path, alternates=None, noindex=False):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="{asset_url('/assets/site.css')}">
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA_ID}');</script>
 """
@@ -254,7 +261,7 @@ def footer(s):
     <span>{e(s['rights'])}</span>
   </div>
 </footer>
-<script src="/assets/site.js" defer></script>
+<script src="{asset_url('/assets/site.js')}" defer></script>
 </body>
 </html>
 """
