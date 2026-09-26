@@ -27,6 +27,9 @@ SOCIALS = [
      '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.46-1.1-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>'),
 ]
 
+THEME_ICONS = ('<svg class="moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 14.6A8.5 8.5 0 0 1 9.4 3.3a8.5 8.5 0 1 0 11.3 11.3z"/></svg>'
+               '<svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>')
+
 PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.2 2.4c-.3.3-.4.7-.4 1.2v16.8c0 .5.1.9.4 1.2l9.3-9.6zM14.7 13.2l2.6 2.7-11 6.3zm0-2.4L6.3 1.8l11 6.3zm3.9 4.4 2.9-1.7c.8-.5.8-1.6 0-2.1l-2.9-1.7-2.8 2.8z"/></svg>'
 
 GAMES = [
@@ -108,7 +111,7 @@ STRINGS = {
                         ("Published", "2 games", "Google Play"), ("Next up", "SmashJeeps", "Online multiplayer")],
         "contact_h": "Say hello",
         "contact_p": "Questions about a game, a bug report, a collaboration idea or anything else: send me an email and I'll get back to you.",
-        "copy": "Copy", "copied": "Copied",
+        "copy": "Copy", "copied": "Copied", "theme": "Switch between light and dark theme",
         "privacy": "Privacy Policy", "terms": "Terms of Use",
         "rights": f"© {YEAR} UKGames",
         "notfound_h": "Page not found", "notfound_p": "This page doesn't exist or has moved.", "home": "Back to home",
@@ -156,7 +159,7 @@ STRINGS = {
                         ("Yayında", "2 oyun", "Google Play"), ("Sırada", "SmashJeeps", "Online çok oyunculu")],
         "contact_h": "Merhaba de",
         "contact_p": "Bir oyun hakkında soru, hata bildirimi, iş birliği fikri ya da başka bir şey: e-posta gönder, sana dönerim.",
-        "copy": "Kopyala", "copied": "Kopyalandı",
+        "copy": "Kopyala", "copied": "Kopyalandı", "theme": "Açık ve koyu tema arasında geç",
         "privacy": "Gizlilik Politikası", "terms": "Kullanım Şartları",
         "rights": f"© {YEAR} UKGames",
         "notfound_h": "Sayfa bulunamadı", "notfound_p": "Bu sayfa yok ya da taşındı.", "home": "Ana sayfaya dön",
@@ -192,7 +195,9 @@ def head(s, title, description, path, alternates=None, noindex=False):
 <title>{e(title)}</title>
 <meta name="description" content="{e(description)}">
 <link rel="canonical" href="{canonical}">{alt}{robots}
-<meta name="theme-color" content="#14213d">
+<meta name="theme-color" content="#eef6fc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1322" media="(prefers-color-scheme: dark)">
+<script>try{{var t=localStorage.getItem("ukg-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}}catch(e){{}}</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="UKGames">
 <meta property="og:title" content="{e(title)}">
@@ -225,6 +230,7 @@ def header(s, other_href):
     <a class="wordmark" href="{home}" aria-label="UKGames home">UK<b>GAMES</b></a>
     <nav class="nav" aria-label="Main">
       {links}
+      <button class="theme-toggle" type="button" id="theme-toggle" aria-label="{e(s['theme'])}" title="{e(s['theme'])}">{THEME_ICONS}</button>
       <a class="lang" href="{other_href}" hreflang="{s['other']}" lang="{s['other']}" title="{e(s['other_name'])}">{s['other_label']}</a>
     </nav>
   </div>

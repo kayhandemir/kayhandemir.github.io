@@ -24,3 +24,17 @@
     }
   });
 })();
+
+// Light / dark toggle. The page starts in the system theme; a click stores the visitor's choice.
+(function () {
+  var button = document.getElementById("theme-toggle");
+  if (!button) return;
+  var root = document.documentElement;
+  var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+  button.addEventListener("click", function () {
+    var current = root.getAttribute("data-theme") || (systemDark && systemDark.matches ? "dark" : "light");
+    var next = current === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("ukg-theme", next); } catch (e) {}
+  });
+})();
