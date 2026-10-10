@@ -302,9 +302,13 @@ p { margin: 0; }
 .coin-table td:last-child { text-align: right; font-family: var(--font-mono); font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .plus { color: var(--plus); } .minus { color: var(--minus); }
 .economy .note { margin-top: 14px; font-size: 13px; color: var(--text-soft); }
+.play-card { text-align: center; }
+.play-card img.cover { width: min(100%, 320px); margin: 0 auto 16px; border: var(--border); border-radius: calc(var(--radius) - 4px); filter: none; }
+.play-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 @media (max-width: 860px) {
   .smash .wrap { grid-template-columns: 1fr; }
   .economy { margin-top: 70px; }
+  .play-card { margin-top: 8px; }
 }
 
 /* ---------- About ---------- */
@@ -332,6 +336,19 @@ p { margin: 0; }
 .mail a:hover { color: var(--blast); }
 .mail button { font: inherit; font-weight: 800; font-size: 14px; }
 .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.contact .wrap { align-items: start; }
+.contact-form { display: grid; gap: 12px; background: var(--surface); color: var(--text); border: var(--border); border-radius: var(--radius); padding: clamp(16px, 3vw, 24px); }
+.contact-form label { display: grid; gap: 6px; font-weight: 700; font-size: 15px; }
+.contact-form input, .contact-form textarea { font: inherit; font-weight: 400; color: var(--text); background: transparent; border: 2px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%; }
+.contact-form input:focus, .contact-form textarea:focus { outline: 3px solid var(--blast); outline-offset: 1px; }
+.contact-form textarea { resize: vertical; min-height: 120px; }
+.contact-form button { justify-self: start; font: inherit; font-weight: 800; cursor: pointer; }
+.contact-form button:disabled { opacity: .6; cursor: wait; }
+.contact-form .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-status { min-height: 1.4em; margin: 0; font-weight: 700; }
+.form-status.is-ok { color: var(--plus); }
+.form-status.is-error { color: var(--minus); }
+.form-note { margin: 0; font-size: 13px; color: var(--text-soft); }
 .socials a { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; text-decoration: none; border: 2px solid var(--line); border-radius: 999px; padding: 6px 14px; background: var(--surface); color: var(--text); }
 .socials a:hover { background: var(--text); color: var(--bg); }
 .socials svg { width: 18px; height: 18px; }

@@ -38,3 +38,35 @@
     try { localStorage.setItem("ukg-theme", next); } catch (e) {}
   });
 })();
+
+// Contact form: posts to /api/contact (tools/server/contact_server.py) and shows the result under the button.
+(function () {
+  var form = document.getElementById("contact-form");
+  if (!form || !window.fetch) return;
+  var status = form.querySelector(".form-status");
+  var button = form.querySelector("button[type=submit]");
+  var say = function (key, isError) {
+    status.textContent = form.getAttribute("data-" + key);
+    status.className = "form-status" + (isError ? " is-error" : " is-ok");
+  };
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var data = {};
+    Array.prototype.forEach.call(form.elements, function (field) { if (field.name) data[field.name] = field.value; });
+    if (!data.name.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email.trim()) || data.message.trim().length < 5) {
+      say("invalid", true);
+      return;
+    }
+    button.disabled = true;
+    say("sending", false);
+    fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+      .then(function (response) {
+        if (response.ok) { form.reset(); say("sent", false); }
+        else if (response.status === 429) { say("limited", true); }
+        else if (response.status === 400) { say("invalid", true); }
+        else { say("error", true); }
+      })
+      .catch(function () { say("error", true); })
+      .then(function () { button.disabled = false; });
+  });
+})();

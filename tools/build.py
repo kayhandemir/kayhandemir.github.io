@@ -11,7 +11,11 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "tools" / "content"
-SITE = "https://ukgames.net"
+SITE = "https://ukgames.games"
+# Where the site used to live; visitors there are sent to the same page on SITE.
+OLD_HOSTS_PATTERN = r"(^|\.)ukgames\.net$|\.github\.io$"
+CRAZYGAMES_URL = "https://www.crazygames.com/game/bumper-brawl"
+ITCH_URL = "https://kayhandemir.itch.io/bumper-brawl"
 EMAIL = "ugka81@gmail.com"
 GA_ID = "G-E5WFC0MHFP"
 YEAR = 2026
@@ -80,45 +84,49 @@ STRINGS = {
     "en": {
         "lang": "en", "prefix": "", "other": "tr", "other_label": "TR", "other_name": "Türkçe",
         "title": "UKGames | Indie games made with Unity",
-        "description": "UKGames is an indie studio in Bursa, Turkey. Play ZigZag Mix and Color Blocks on Google Play, "
-                       "and follow SmashJeeps, an online vehicle combat game in development.",
-        "nav": ["Games", "SmashJeeps", "About", "Contact"],
+        "description": "UKGames is an indie studio in Bursa, Turkey. Play Bumper Brawl, an online car combat game, "
+                       "in your browser, and ZigZag Mix and Color Blocks on Google Play.",
+        "nav": ["Games", "Bumper Brawl", "About", "Contact"],
         "eyebrow": "Indie studio · Bursa, Turkey",
         "h1": 'Small studio.<br><span class="hl">Loud games.</span>',
         "lede": "UKGames is Uğur Kayhandemir's one-person studio. I build arcade and puzzle games with Unity and C#, "
                 "tuned to run smoothly on everyday phones.",
-        "cta_games": "See the games", "cta_smash": "What's SmashJeeps?",
+        "cta_games": "See the games", "cta_smash": "Play Bumper Brawl",
         "facts": [("2", "games on Google Play"), ("15K+", "ZigZag Mix downloads"), ("Unity", "C# · URP")],
-        "poster_tag": "In development", "poster_title": "SmashJeeps",
-        "poster_alt": "SmashJeeps artwork: jeeps racing through rockets and explosions",
+        "poster_tag": "Play now", "poster_title": "Bumper Brawl",
+        "poster_alt": "Bumper Brawl: cars crashing into each other in a city arena",
         "games_h": "Games", "games_p": "Free to play on Google Play.",
         "shots_alt": "{name} screenshot {n}",
         "play_small": "Get it on", "play_big": "Google Play",
-        "smash_label": "In development",
-        "smash_intro": "An online vehicle combat arena for 2 to 4 players. Pick a jeep, grab weapons from mystery boxes "
-                       "and smash your friends before the timer runs out.",
+        "smash_label": "Play now · free",
+        "smash_intro": "An online car combat arena. Hit Quick Play, grab weapons from mystery boxes and smash everyone "
+                       "else before the timer runs out. Formerly known as SmashJeeps.",
         "smash_features": [
-            ("R", "Rockets, mines, spikes, shields and fake boxes", "Every weapon has its own tricks, and fake boxes explode on whoever grabs them."),
-            ("+", "Health packs fall from the sky", "A new pack drops every 40 seconds. Everyone hears it coming."),
-            ("⇄", "Play with friends online", "Host a match, share the join code, and set the match length from 30 seconds to 10 minutes."),
-            ("✓", "Your profile follows you", "Start as a guest, link an account later. Stats, coins and settings are saved."),
+            ("R", "Rockets, homing rockets, TNT, mines, spikes and fake boxes", "Every weapon has its own tricks, and fake boxes explode on whoever grabs them."),
+            ("⚑", "Two modes, six maps", "Smash the most cars, or grab the crown and hold on to it. From a desert canyon to a downtown grid."),
+            ("⇄", "Quick Play or play with friends", "Jump into a match in seconds on our game servers, or share a join code. Bots fill empty places."),
+            ("✓", "Garage, quests and levels", "Earn gold, unlock new cars, paint them and upgrade engines and weapons. Your profile follows you."),
         ],
-        "economy_h": "Coin economy",
-        "economy_rows": [("Starting coins", "100", ""), ("Every minute you play", "+10", "plus"),
-                         ("Smash another jeep", "+50", "plus"), ("Respawn", "−5", "minus"),
-                         ("Shield · Mine · Rocket", "30 · 40 · 70", "")],
-        "economy_note": "Values from the current test build. They may change before release.",
-        "jeep_alt": "Red SmashJeeps jeep",
+        "play_h": "Play Bumper Brawl",
+        "play_soon": "Google Play: coming soon",
+        "cover_alt": "Bumper Brawl cover art",
         "about_h": "About",
         "about_p": [
             "Hi, I'm <strong>Uğur Kayhandemir</strong>. I make games with the <strong>Unity</strong> engine, and I care about clean C# code, optimized graphics and controls that feel right.",
-            "UKGames started with small mobile games on Google Play. Now I'm building my first online multiplayer game, SmashJeeps.",
+            "UKGames started with small mobile games on Google Play. My first online multiplayer game, Bumper Brawl, is out in the browser and coming to Google Play.",
         ],
         "about_facts": [("Based in", "Bursa", "Yıldırım, Türkiye"), ("Engine", "Unity", "C#, URP, Netcode"),
-                        ("Published", "2 games", "Google Play"), ("Next up", "SmashJeeps", "Online multiplayer")],
+                        ("Published", "2 games", "Google Play"), ("Latest", "Bumper Brawl", "Online multiplayer")],
         "contact_h": "Say hello",
         "contact_p": "Questions about a game, a bug report, a collaboration idea or anything else: send me an email and I'll get back to you.",
         "copy": "Copy", "copied": "Copied", "theme": "Switch between light and dark theme",
+        "form": {"name": "Your name", "email": "Your email", "message": "Your message", "send": "Send message",
+                 "sending": "Sending...", "sent": "Thanks! Your message is on its way. I'll reply by email.",
+                 "invalid": "Please write your name, a valid email address and a message.",
+                 "limited": "Too many messages from here. Please try again in an hour.",
+                 "error": "The message couldn't be sent. Please email me instead.",
+                 "note": "I use your name and email only to reply.", "privacy": "Privacy Policy",
+                 "noscript": "The form needs JavaScript. You can email me instead."},
         "privacy": "Privacy Policy", "terms": "Terms of Use",
         "rights": f"© {YEAR} UKGames",
         "notfound_h": "Page not found", "notfound_p": "This page doesn't exist or has moved.", "home": "Back to home",
@@ -128,45 +136,49 @@ STRINGS = {
     "tr": {
         "lang": "tr", "prefix": "/tr", "other": "en", "other_label": "EN", "other_name": "English",
         "title": "UKGames | Unity ile geliştirilen bağımsız oyunlar",
-        "description": "UKGames, Bursa'da bağımsız bir oyun stüdyosu. ZigZag Mix ve Color Blocks'u Google Play'de oyna, "
-                       "geliştirme aşamasındaki online araç savaşı oyunu SmashJeeps'i takip et.",
-        "nav": ["Oyunlar", "SmashJeeps", "Hakkımda", "İletişim"],
+        "description": "UKGames, Bursa'da bağımsız bir oyun stüdyosu. Online araba savaşı oyunu Bumper Brawl'u tarayıcında, "
+                       "ZigZag Mix ve Color Blocks'u Google Play'de oyna.",
+        "nav": ["Oyunlar", "Bumper Brawl", "Hakkımda", "İletişim"],
         "eyebrow": "Bağımsız stüdyo · Bursa",
         "h1": 'Küçük stüdyo.<br><span class="hl">Gürültülü oyunlar.</span>',
         "lede": "UKGames, Uğur Kayhandemir'in tek kişilik stüdyosu. Unity ve C# ile, her telefonda akıcı çalışan "
                 "arcade ve bulmaca oyunları geliştiriyorum.",
-        "cta_games": "Oyunlara bak", "cta_smash": "SmashJeeps nedir?",
+        "cta_games": "Oyunlara bak", "cta_smash": "Bumper Brawl'u oyna",
         "facts": [("2", "oyun Google Play'de"), ("15K+", "ZigZag Mix indirmesi"), ("Unity", "C# · URP")],
-        "poster_tag": "Geliştiriliyor", "poster_title": "SmashJeeps",
-        "poster_alt": "SmashJeeps görseli: roketler ve patlamalar arasında yarışan cipler",
+        "poster_tag": "Şimdi oyna", "poster_title": "Bumper Brawl",
+        "poster_alt": "Bumper Brawl: şehir arenasında birbirine çarpan arabalar",
         "games_h": "Oyunlar", "games_p": "Google Play'de ücretsiz.",
         "shots_alt": "{name} ekran görüntüsü {n}",
         "play_small": "Hemen indir", "play_big": "Google Play",
-        "smash_label": "Geliştiriliyor",
-        "smash_intro": "2 ila 4 oyunculu online araç savaşı arenası. Cipini seç, gizemli kutulardan silah topla ve "
-                       "süre bitmeden arkadaşlarını ez.",
+        "smash_label": "Şimdi oyna · ücretsiz",
+        "smash_intro": "Online araba savaşı arenası. Quick Play'e bas, gizemli kutulardan silah topla ve süre bitmeden "
+                       "herkesi ez. Eski adıyla SmashJeeps.",
         "smash_features": [
-            ("R", "Roket, mayın, diken, kalkan ve sahte kutu", "Her silahın kendi numarası var. Sahte kutu onu alanın yüzünde patlar."),
-            ("+", "Gökten can paketi düşer", "Her 40 saniyede bir yeni paket iner. Geldiğini herkes duyar."),
-            ("⇄", "Arkadaşlarınla online oyna", "Maçı kur, katılım kodunu paylaş, maç süresini 30 saniye ile 10 dakika arasında seç."),
-            ("✓", "Profilin seninle gelir", "Misafir olarak başla, hesabını sonra bağla. İstatistik, coin ve ayarların kaydedilir."),
+            ("R", "Roket, güdümlü roket, TNT, mayın, diken ve sahte kutu", "Her silahın kendi numarası var. Sahte kutu onu alanın yüzünde patlar."),
+            ("⚑", "İki mod, altı harita", "En çok arabayı ez ya da tacı kap ve bırakma. Çöl kanyonundan şehir merkezine."),
+            ("⇄", "Quick Play ya da arkadaşlarınla", "Oyun sunucularımızda saniyeler içinde maça gir ya da katılım kodu paylaş. Boş yerleri botlar doldurur."),
+            ("✓", "Garaj, görevler ve seviyeler", "Altın kazan, yeni arabalar aç, boya, motor ve silahları geliştir. Profilin seninle gelir."),
         ],
-        "economy_h": "Coin ekonomisi",
-        "economy_rows": [("Başlangıç coini", "100", ""), ("Oynadığın her dakika", "+10", "plus"),
-                         ("Başka bir cipi ez", "+50", "plus"), ("Yeniden doğma", "−5", "minus"),
-                         ("Kalkan · Mayın · Roket", "30 · 40 · 70", "")],
-        "economy_note": "Değerler şu anki test sürümünden. Çıkıştan önce değişebilir.",
-        "jeep_alt": "Kırmızı SmashJeeps cipi",
+        "play_h": "Bumper Brawl'u oyna",
+        "play_soon": "Google Play: yakında",
+        "cover_alt": "Bumper Brawl kapak görseli",
         "about_h": "Hakkımda",
         "about_p": [
             "Merhaba, ben <strong>Uğur Kayhandemir</strong>. <strong>Unity</strong> motoruyla oyun geliştiriyorum. Temiz C# kodu, optimize grafikler ve eline iyi oturan kontroller benim için öncelik.",
-            "UKGames, Google Play'deki küçük mobil oyunlarla başladı. Şimdi ilk online çok oyunculu oyunum SmashJeeps'i geliştiriyorum.",
+            "UKGames, Google Play'deki küçük mobil oyunlarla başladı. İlk online çok oyunculu oyunum Bumper Brawl tarayıcıda yayında ve Google Play'e geliyor.",
         ],
         "about_facts": [("Konum", "Bursa", "Yıldırım, Türkiye"), ("Motor", "Unity", "C#, URP, Netcode"),
-                        ("Yayında", "2 oyun", "Google Play"), ("Sırada", "SmashJeeps", "Online çok oyunculu")],
+                        ("Yayında", "2 oyun", "Google Play"), ("Son oyun", "Bumper Brawl", "Online çok oyunculu")],
         "contact_h": "Merhaba de",
         "contact_p": "Bir oyun hakkında soru, hata bildirimi, iş birliği fikri ya da başka bir şey: e-posta gönder, sana dönerim.",
         "copy": "Kopyala", "copied": "Kopyalandı", "theme": "Açık ve koyu tema arasında geç",
+        "form": {"name": "Adın", "email": "E-posta adresin", "message": "Mesajın", "send": "Mesajı gönder",
+                 "sending": "Gönderiliyor...", "sent": "Teşekkürler! Mesajın yola çıktı, sana e-postayla döneceğim.",
+                 "invalid": "Lütfen adını, geçerli bir e-posta adresini ve mesajını yaz.",
+                 "limited": "Buradan çok fazla mesaj gönderildi. Lütfen bir saat sonra tekrar dene.",
+                 "error": "Mesaj gönderilemedi. Lütfen bana e-posta gönder.",
+                 "note": "Adını ve e-postanı yalnızca sana cevap vermek için kullanırım.", "privacy": "Gizlilik Politikası",
+                 "noscript": "Form için JavaScript gerekiyor. Bana e-posta da gönderebilirsin."},
         "privacy": "Gizlilik Politikası", "terms": "Kullanım Şartları",
         "rights": f"© {YEAR} UKGames",
         "notfound_h": "Sayfa bulunamadı", "notfound_p": "Bu sayfa yok ya da taşındı.", "home": "Ana sayfaya dön",
@@ -198,6 +210,7 @@ def head(s, title, description, path, alternates=None, noindex=False):
 <html lang="{s['lang']}">
 <head>
 <meta charset="utf-8">
+<script>if(/{OLD_HOSTS_PATTERN}/.test(location.hostname))location.replace("{SITE}"+location.pathname+location.search+location.hash);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{e(title)}</title>
 <meta name="description" content="{e(description)}">
@@ -231,7 +244,7 @@ def header(s, other_href):
     home = p + "/"
     links = "".join(
         f'<a class="nav-section" href="{home}#{anchor}">{e(label)}</a>'
-        for anchor, label in zip(["games", "smashjeeps", "about", "contact"], s["nav"]))
+        for anchor, label in zip(["games", "bumperbrawl", "about", "contact"], s["nav"]))
     return f"""<header class="site-header">
   <div class="wrap">
     <a class="wordmark" href="{home}" aria-label="UKGames home">UK<b>GAMES</b></a>
@@ -314,6 +327,24 @@ def structured_data(s):
     return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>\n'
 
 
+def contact_form(s):
+    f = s["form"]
+    privacy = "/page/privacy-policy" + ("-tr" if s["lang"] == "tr" else "")
+    messages = " ".join(f'data-{k}="{e(f[k])}"' for k in ("sending", "sent", "invalid", "limited", "error"))
+    # The "website" field is a trap for bots: people never see it (contact_server.py drops anything that fills it).
+    return f"""<form class="contact-form" id="contact-form" action="/api/contact" method="post" novalidate {messages}>
+      <input type="hidden" name="lang" value="{s['lang']}">
+      <label class="trap" aria-hidden="true">Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <label>{e(f['name'])}<input type="text" name="name" maxlength="80" autocomplete="name" required></label>
+      <label>{e(f['email'])}<input type="email" name="email" maxlength="120" autocomplete="email" required></label>
+      <label>{e(f['message'])}<textarea name="message" rows="5" maxlength="4000" required></textarea></label>
+      <button class="btn btn-blast" type="submit">{e(f['send'])}</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note">{e(f['note'])} <a href="{privacy}">{e(f['privacy'])}</a></p>
+      <noscript><p class="form-note">{e(f['noscript'])}</p></noscript>
+    </form>"""
+
+
 def home_page(s):
     p = s["prefix"]
     other = "/" if s["lang"] == "tr" else "/tr/"
@@ -321,7 +352,6 @@ def home_page(s):
     features = "".join(
         f'<li><span class="ic" aria-hidden="true">{e(ic)}</span><div><b>{e(t)}</b><span>{e(d)}</span></div></li>'
         for ic, t, d in s["smash_features"])
-    rows = "".join(f'<tr><td>{e(k)}</td><td class="{c}">{e(v)}</td></tr>' for k, v, c in s["economy_rows"])
     about_p = "".join(f"<p>{x}</p>" for x in s["about_p"])
     about_facts = "".join(
         f'<div class="fact"><dt>{e(k)}</dt><dd>{e(v)}<small>{e(sub)}</small></dd></div>'
@@ -339,13 +369,13 @@ def home_page(s):
       <p class="lede">{e(s['lede'])}</p>
       <div class="actions">
         <a class="btn btn-blast" href="#games">{e(s['cta_games'])}</a>
-        <a class="btn" href="#smashjeeps">{e(s['cta_smash'])}</a>
+        <a class="btn" href="#bumperbrawl">{e(s['cta_smash'])}</a>
       </div>
       <div class="hero-facts">{facts}</div>
     </div>
     <figure class="poster">
-      <img src="/img/smashjeeps-art-820.jpg" srcset="/img/smashjeeps-art-820.jpg 820w, /img/smashjeeps-art.jpg 1456w"
-           sizes="(max-width: 860px) 92vw, 540px" width="1456" height="816" alt="{e(s['poster_alt'])}" fetchpriority="high">
+      <img src="/img/bumperbrawl-cover-820.jpg" srcset="/img/bumperbrawl-cover-820.jpg 820w, /img/bumperbrawl-cover.jpg 1456w"
+           sizes="(max-width: 860px) 92vw, 540px" width="1456" height="819" alt="{e(s['poster_alt'])}" fetchpriority="high">
       <figcaption><span>{e(s['poster_tag'])}</span>{e(s['poster_title'])}</figcaption>
     </figure>
   </div>
@@ -360,19 +390,23 @@ def home_page(s):
   </div>
 </section>
 
-<section class="section smash" id="smashjeeps">
+<section class="section smash" id="bumperbrawl">
+  <span id="smashjeeps"></span>
   <div class="wrap">
     <div>
       <span class="label">{e(s['smash_label'])}</span>
-      <h2>SmashJeeps</h2>
+      <h2>Bumper Brawl</h2>
       <p class="intro">{e(s['smash_intro'])}</p>
       <ul class="features">{features}</ul>
     </div>
-    <aside class="economy">
-      <img src="/img/smashjeeps-jeep.png" alt="{e(s['jeep_alt'])}" width="420" height="295" loading="lazy">
-      <h3>{e(s['economy_h'])}</h3>
-      <table class="coin-table"><tbody>{rows}</tbody></table>
-      <p class="note">{e(s['economy_note'])}</p>
+    <aside class="economy play-card">
+      <img class="cover" src="/img/bumperbrawl-square.jpg" alt="{e(s['cover_alt'])}" width="420" height="420" loading="lazy">
+      <h3>{e(s['play_h'])}</h3>
+      <div class="play-links">
+        <a class="btn btn-blast" href="{CRAZYGAMES_URL}" rel="noopener" target="_blank">CrazyGames</a>
+        <a class="btn" href="{ITCH_URL}" rel="noopener" target="_blank">itch.io</a>
+      </div>
+      <p class="note">{e(s['play_soon'])}</p>
     </aside>
   </div>
 </section>
@@ -392,14 +426,13 @@ def home_page(s):
     <div>
       <h2>{e(s['contact_h'])}</h2>
       <p>{e(s['contact_p'])}</p>
-    </div>
-    <div>
       <div class="mail">
         <a href="mailto:{EMAIL}">{EMAIL}</a>
         <button class="btn" type="button" id="copy-email" data-email="{EMAIL}" data-done="{e(s['copied'])}">{e(s['copy'])}</button>
       </div>
       <div class="socials">{socials}</div>
     </div>
+    {contact_form(s)}
   </div>
 </section>
 </main>
@@ -439,6 +472,7 @@ def redirect_page(target, lang="en"):
 <html lang="{lang}">
 <head>
 <meta charset="utf-8">
+<script>if(/{OLD_HOSTS_PATTERN}/.test(location.hostname))location.replace("{SITE}"+location.pathname+location.search+location.hash);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>UKGames</title>
 <link rel="canonical" href="{SITE}{target}">
