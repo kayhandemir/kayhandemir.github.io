@@ -25,3 +25,14 @@ bash tools/deploy.sh       # rebuild and publish to ukgames.games (needs ~/.ssh/
 `/api/contact`). It keeps messages in `/var/lib/ukgames-contact/messages.jsonl` for 90 days and emails them through
 Gmail SMTP. The Gmail app password lives only on the server, in `/etc/ukgames-contact.env` (`SMTP_PASSWORD=`).
 To update the handler: copy the file to `/opt/ukgames-contact/` and `systemctl restart ukgames-contact`.
+
+## Live game stats
+
+`tools/server/stats_server.py` runs on the VPS as `ukgames-stats.service` (127.0.0.1:8082, behind nginx at
+`/api/event` and `/api/stats`). Bumper Brawl posts anonymous events to `/api/event` (game opened, a heartbeat every
+minute, game created, match started/ended; see `GameStats.cs` in the game). The home pages show the numbers in the
+live ticker under the header (`site.js`), which stays hidden while `/api/stats` has nothing to show. Counters are in
+`/var/lib/ukgames-stats/stats.db` (SQLite, per day in UTC and in total).
+Google Analytics forwarding is optional: fill in `GA_MEASUREMENT_ID` and `GA_API_SECRET` in `/etc/ukgames-stats.env`
+(GA4 > Admin > Data streams > Measurement Protocol API secrets) and restart the service; events arrive as `bb_*`.
+To update the handler: copy the file to `/opt/ukgames-stats/` and `systemctl restart ukgames-stats`.

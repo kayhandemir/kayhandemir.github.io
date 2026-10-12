@@ -396,3 +396,37 @@ p { margin: 0; }
   .btn, .btn:hover { transition: none; transform: none; }
   .poster img, .poster figcaption, .shots img:nth-child(odd) { transform: none; }
 }
+
+/* ---------- Live ticker (Bumper Brawl stats, site.js) ---------- */
+.live {
+  display: flex; align-items: stretch; overflow: hidden;
+  background: var(--smash-bg); color: var(--smash-soft);
+  border-bottom: var(--border);
+  font-family: var(--font-mono); font-size: 14px; font-weight: 500;
+}
+.live[hidden] { display: none; }
+.live-badge {
+  flex: none; display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 14px 9px var(--gutter);
+  background: var(--jeep); color: var(--white); text-decoration: none;
+  letter-spacing: .1em; text-transform: uppercase; position: relative; z-index: 1;
+}
+.live-badge i { width: 9px; height: 9px; border-radius: 50%; background: var(--white); animation: live-pulse 1.6s ease-in-out infinite; }
+.live-track { flex: 1; min-width: 0; overflow: hidden; display: flex; align-items: center; }
+.live-items { display: flex; width: max-content; animation: live-scroll 40s linear infinite; }
+.live:hover .live-items { animation-play-state: paused; }
+.live-group { display: flex; flex: none; }
+.live-item { white-space: nowrap; padding-inline: 22px; }
+.live-item::after { content: "●"; color: var(--blast); margin-left: 44px; font-size: 9px; vertical-align: 2px; }
+@keyframes live-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes live-pulse { 50% { opacity: .3; } }
+@media (max-width: 720px) {
+  .live { font-size: 13px; }
+  .live-item { padding-inline: 16px; }
+  .live-item::after { margin-left: 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-items { animation: none; width: auto; }
+  .live-group { flex-wrap: wrap; row-gap: 4px; padding-block: 8px; }
+  .live-badge i { animation: none; }
+}

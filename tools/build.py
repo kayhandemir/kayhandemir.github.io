@@ -119,6 +119,19 @@ STRINGS = {
                         ("Published", "2 games", "Google Play"), ("Latest", "Bumper Brawl", "Online multiplayer")],
         "contact_h": "Say hello",
         "contact_p": "Questions about a game, a bug report, a collaboration idea or anything else: send me an email and I'll get back to you.",
+        "live": {"badge": "Live", "label": "Bumper Brawl right now",
+                 "online": "{n} players online now", "online_one": "1 player online now", "in_match": "{n} in a match",
+                 "today_matches": "{n} matches played today", "today_rooms": "{n} games created today",
+                 "today_sessions": "Game opened {n} times today", "top_map": "Most played map today: {map}",
+                 "total_matches": "{n} matches all time", "total_hours": "{n} hours of brawling",
+                 "peak": "Record: {n} players at once",
+                 "net_rate": "Game servers moving {n} Mbit/s right now", "net_month": "{n} GB of game traffic this month",
+                 "recent_match": "{mode} on {map} just ended with {n} players", "recent_room": "A player created a new game",
+                 "now": "just now", "min": "{n} min ago", "hour": "{n} h ago",
+                 "info": ["Bumper Brawl is free to play right in your browser", "Quick Play drops you into a match in seconds",
+                          "Rockets, homing rockets, TNT, mines, spikes and fake boxes", "Two modes, six maps",
+                          "Bots fill the empty places, so every match is full", "Earn gold, unlock cars and upgrade them in the garage",
+                          "Google Play version coming soon"]},
         "copy": "Copy", "copied": "Copied", "theme": "Switch between light and dark theme",
         "form": {"name": "Your name", "email": "Your email", "message": "Your message", "send": "Send message",
                  "sending": "Sending...", "sent": "Thanks! Your message is on its way. I'll reply by email.",
@@ -171,6 +184,19 @@ STRINGS = {
                         ("Yayında", "2 oyun", "Google Play"), ("Son oyun", "Bumper Brawl", "Online çok oyunculu")],
         "contact_h": "Merhaba de",
         "contact_p": "Bir oyun hakkında soru, hata bildirimi, iş birliği fikri ya da başka bir şey: e-posta gönder, sana dönerim.",
+        "live": {"badge": "Canlı", "label": "Bumper Brawl şu anda",
+                 "online": "Şu an {n} oyuncu çevrimiçi", "online_one": "Şu an 1 oyuncu çevrimiçi", "in_match": "{n} kişi maçta",
+                 "today_matches": "Bugün {n} maç oynandı", "today_rooms": "Bugün {n} oda kuruldu",
+                 "today_sessions": "Oyun bugün {n} kez açıldı", "top_map": "Bugün en çok oynanan harita: {map}",
+                 "total_matches": "Toplam {n} maç", "total_hours": "Toplam {n} saat maç",
+                 "peak": "Rekor: aynı anda {n} oyuncu",
+                 "net_rate": "Oyun sunucuları şu an {n} Mbit/s veri taşıyor", "net_month": "Bu ay {n} GB oyun trafiği",
+                 "recent_match": "{map} haritasında {n} oyunculu {mode} maçı bitti", "recent_room": "Bir oyuncu yeni oda kurdu",
+                 "now": "az önce", "min": "{n} dk önce", "hour": "{n} sa önce",
+                 "info": ["Bumper Brawl tarayıcında ücretsiz oynanıyor", "Quick Play ile saniyeler içinde maça gir",
+                          "Roket, güdümlü roket, TNT, mayın, diken ve sahte kutu", "İki mod, altı harita",
+                          "Boş yerleri botlar doldurur, her maç dolu", "Garajda altın kazan, araba aç ve geliştir",
+                          "Google Play sürümü yakında"]},
         "copy": "Kopyala", "copied": "Kopyalandı", "theme": "Açık ve koyu tema arasında geç",
         "form": {"name": "Adın", "email": "E-posta adresin", "message": "Mesajın", "send": "Mesajı gönder",
                  "sending": "Gönderiliyor...", "sent": "Teşekkürler! Mesajın yola çıktı, sana e-postayla döneceğim.",
@@ -345,6 +371,17 @@ def contact_form(s):
     </form>"""
 
 
+def live_ticker(s):
+    # Filled in by site.js from /api/stats (tools/server/stats_server.py); stays hidden until there is something to show.
+    live = s["live"]
+    texts = e(json.dumps({k: v for k, v in live.items() if k not in ("badge", "label")}, ensure_ascii=False))
+    return f"""<section class="live" id="live" aria-label="{e(live['label'])}" data-texts="{texts}" hidden>
+  <a class="live-badge" href="#bumperbrawl"><i aria-hidden="true"></i>{e(live['badge'])}</a>
+  <div class="live-track"><div class="live-items" aria-live="off"></div></div>
+</section>
+"""
+
+
 def home_page(s):
     p = s["prefix"]
     other = "/" if s["lang"] == "tr" else "/tr/"
@@ -361,7 +398,7 @@ def home_page(s):
     out = head(s, s["title"], s["description"], p + "/", [("en", "/"), ("tr", "/tr/"), ("x-default", "/")])
     out += structured_data(s) + "</head>\n<body>\n" + header(s, other)
     out += f"""<main>
-<section class="hero">
+{live_ticker(s)}<section class="hero">
   <div class="wrap">
     <div>
       <span class="eyebrow">{e(s['eyebrow'])}</span>
