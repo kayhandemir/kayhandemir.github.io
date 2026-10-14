@@ -14,7 +14,8 @@ CONTENT = ROOT / "tools" / "content"
 SITE = "https://ukgames.games"
 # Where the site used to live; visitors there are sent to the same page on SITE.
 OLD_HOSTS_PATTERN = r"(^|\.)ukgames\.net$|\.github\.io$"
-CRAZYGAMES_URL = "https://www.crazygames.com/game/bumper-brawl"
+# The web build, served from this site (nginx alias, outside the html folder that deploy.sh replaces).
+PLAY_URL = "/bumperbrawl/play/"
 ITCH_URL = "https://kayhandemir.itch.io/bumper-brawl"
 EMAIL = "ugka81@gmail.com"
 GA_ID = "G-E5WFC0MHFP"
@@ -108,6 +109,7 @@ STRINGS = {
             ("✓", "Garage, quests and levels", "Earn gold, unlock new cars, paint them and upgrade engines and weapons. Your profile follows you."),
         ],
         "play_h": "Play Bumper Brawl",
+        "play_here": "Play now",
         "play_soon": "Google Play: coming soon",
         "cover_alt": "Bumper Brawl cover art",
         "about_h": "About",
@@ -173,6 +175,7 @@ STRINGS = {
             ("✓", "Garaj, görevler ve seviyeler", "Altın kazan, yeni arabalar aç, boya, motor ve silahları geliştir. Profilin seninle gelir."),
         ],
         "play_h": "Bumper Brawl'u oyna",
+        "play_here": "Hemen oyna",
         "play_soon": "Google Play: yakında",
         "cover_alt": "Bumper Brawl kapak görseli",
         "about_h": "Hakkımda",
@@ -440,7 +443,7 @@ def home_page(s):
       <img class="cover" src="/img/bumperbrawl-square.jpg" alt="{e(s['cover_alt'])}" width="420" height="420" loading="lazy">
       <h3>{e(s['play_h'])}</h3>
       <div class="play-links">
-        <a class="btn btn-blast" href="{CRAZYGAMES_URL}" rel="noopener" target="_blank">CrazyGames</a>
+        <a class="btn btn-blast" href="{PLAY_URL}">{e(s['play_here'])}</a>
         <a class="btn" href="{ITCH_URL}" rel="noopener" target="_blank">itch.io</a>
       </div>
       <p class="note">{e(s['play_soon'])}</p>
