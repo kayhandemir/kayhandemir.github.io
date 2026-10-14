@@ -19,6 +19,15 @@ python tools/build.py      # only rebuild
 bash tools/deploy.sh       # rebuild and publish to ukgames.games (needs ~/.ssh/bumperbrawl_vps)
 ```
 
+## Bumper Brawl web build
+
+The game is played at `/bumperbrawl/play/` (the site's play buttons link there). Its files live outside the site
+folder that `deploy.sh` replaces, in `/var/www/ukgames.games/games/bumperbrawl/play/`, and nginx serves them through
+`/etc/nginx/snippets/bumperbrawl-play.conf` (included in the site's server block): the gzip `.unityweb` files go out
+with `Content-Encoding: gzip`, the wasm as `application/wasm`, cached for a year (hashed names). To update it, upload a
+Gzip + decompression fallback web build (the itch one) to `play_new`, `chown -R www-data:www-data` it, then swap:
+`play` -> `play_old`, `play_new` -> `play`.
+
 ## Contact form
 
 `tools/server/contact_server.py` runs on the VPS as `ukgames-contact.service` (127.0.0.1:8081, behind nginx at
