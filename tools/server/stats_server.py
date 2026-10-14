@@ -5,12 +5,18 @@ nginx passes /api/event and /api/stats here (127.0.0.1:8082).
 
 POST /api/event   Bumper Brawl reports what happens in the game (GameStats.cs). The body is one JSON object:
                     e  event: session_start (the game opened), heartbeat (every minute while it is open),
-                       room_created (a player created a game), match_start, match_end (sent by whoever runs the match)
+                       room_created (a player created a game), match_start, match_end (sent by whoever runs the match),
+                       step (a player's step into play, once per launch: see STEPS)
                     s  random id the game makes on each launch (not stored on disk, not tied to an account)
                     p  platform (crazygames, itch, web, android, ios, desktop, server)
                     v  game version
-                    a  where the player is: menu or match (heartbeat)
-                    m  map, g  game mode, n  players in the match, d  match length in seconds
+                    a  where the player is: menu or match (heartbeat); the step's name (step)
+                    m  map, g  game mode, n  players in the match, or which finished match (step match_done),
+                    d  match length in seconds
+                    t  milliseconds the game took to load (session_start)
+                    r  days since the device first played, 0 = a new player (session_start; -1 or missing = unknown)
+                    f  1 on the device's first launch of the UTC day (session_start)
+GET  /api/funnel  per-day counts of the steps, new and returning players and loading time (last FUNNEL_DAYS days).
 GET  /api/stats   the numbers the website's live ticker shows (site.js), cached for a few seconds.
 
 Counters are kept per day (UTC) and in total in SQLite (STATS_DB). Who is online is only kept in memory: a session
@@ -47,10 +53,19 @@ RECENT_KEPT = 30
 RECENT_SHOWN = 8
 MAX_MATCH_SECONDS = 3600
 MAX_PLAYERS = 16
+MAX_LOAD_MS = 600000
+MAX_DAYS = 3650
+FUNNEL_DAYS = 14
 NET_INTERFACE = os.environ.get("NET_INTERFACE", "eth0")
 NET_SAMPLE_SECONDS = 60
 
-EVENTS = {"session_start", "heartbeat", "room_created", "match_start", "match_end"}
+EVENTS = {"session_start", "heartbeat", "room_created", "match_start", "match_end", "step"}
+# A player's way into play, in order (GameStats.STEP_*). match_done comes with n = 1, 2, 3, 5 or 10.
+STEPS = ("menu", "connecting", "connected", "connect_failed", "map_loaded", "in_match", "match_done")
+MATCH_MILESTONES = {1, 2, 3, 5, 10}
+# Days after the first launch that count as a return (return_d1 today / new_players yesterday = D1 retention).
+RETURN_DAYS = {1, 7, 30}
+FUNNEL_PREFIXES = ("step:", "sessions", "new_players", "returning", "return_d", "active_devices", "load_")
 PLATFORMS = {"crazygames", "itch", "web", "android", "ios", "desktop", "server"}
 SESSION_PATTERN = re.compile(r"^[0-9a-f]{16,32}$")
 LABEL_PATTERN = re.compile(r"[^A-Za-z0-9 ._'-]")
@@ -199,6 +214,24 @@ def record(event):
     if name == "session_start":
         add("sessions")
         add("sessions:" + event["p"])
+        if event["t"] > 0:
+            add("load_ms:" + event["p"], event["t"])
+            add("load_count:" + event["p"])
+        # Once per device and day: how many played today, how many are new, how many came back.
+        if event["r"] >= 0 and event["f"] == 1:
+            add("active_devices:" + event["p"])
+            if event["r"] == 0:
+                add("new_players")
+                add("new_players:" + event["p"])
+            else:
+                add("returning")
+                if event["r"] in RETURN_DAYS:
+                    add(f"return_d{event['r']}")
+                    add(f"return_d{event['r']}:" + event["p"])
+    if name == "step":
+        key = "step:" + event["a"] + (f":{event['n']}" if event["a"] == "match_done" else "")
+        add(key)
+        add(key + ":" + event["p"])
     if name in ("session_start", "heartbeat") and event["p"] != "server":
         _online[event["s"]] = (now, "match" if event["a"] == "match" else "menu", event["p"])
         raise_to("peak_online", online_counts(now)[0])
@@ -227,13 +260,20 @@ def parse_event(data):
         "s": str(data.get("s", "")).lower(),
         "p": str(data.get("p", "")).lower(),
         "v": label(data.get("v"), 20),
-        "a": label(data.get("a"), 10).lower(),
+        "a": label(data.get("a"), 20).lower(),
         "m": label(data.get("m")),
         "g": label(data.get("g"), 20).upper(),
         "n": number(data.get("n"), 0, MAX_PLAYERS),
         "d": number(data.get("d"), 0, MAX_MATCH_SECONDS),
+        "t": number(data.get("t"), 0, MAX_LOAD_MS),
+        # Older builds don't send it: unknown, not a new player.
+        "r": number(data.get("r"), -1, MAX_DAYS) if "r" in data else -1,
+        "f": 1 if data.get("f") == 1 else 0,
     }
     if event["e"] not in EVENTS or not SESSION_PATTERN.match(event["s"]):
+        return None
+    if event["e"] == "step" and (event["a"] not in STEPS
+                                 or (event["a"] == "match_done" and event["n"] not in MATCH_MILESTONES)):
         return None
     if event["p"] not in PLATFORMS:
         event["p"] = "web"
@@ -254,6 +294,13 @@ def forward_to_ga(event):
         params["players"] = event["n"]
     if event["e"] == "match_end":
         params["duration_sec"] = event["d"]
+    if event["e"] == "step":
+        params["step"] = event["a"]
+        if event["a"] == "match_done":
+            params["match_number"] = event["n"]
+    if event["e"] == "session_start":
+        params["load_ms"] = event["t"]
+        params["days_since_first"] = event["r"]
     payload = {"client_id": event["s"], "events": [{"name": "bb_" + event["e"], "params": params}]}
     try:
         _ga_queue.put_nowait(payload)
@@ -315,6 +362,21 @@ def build_stats():
     }
 
 
+def build_funnel():
+    """The steps and player counts of the last FUNNEL_DAYS days, newest first, with D1 retention where yesterday had
+    new players."""
+    days = []
+    for i in range(FUNNEL_DAYS):
+        day = time.strftime("%Y-%m-%d", time.gmtime(time.time() - i * 86400))
+        values = {k: v for k, v in counters(day).items() if k.startswith(FUNNEL_PREFIXES)}
+        days.append({"day": day, "counts": values})
+    for today_entry, yesterday_entry in zip(days, days[1:]):
+        new_yesterday = yesterday_entry["counts"].get("new_players", 0)
+        if new_yesterday:
+            today_entry["d1_retention"] = round(today_entry["counts"].get("return_d1", 0) / new_yesterday, 4)
+    return {"days": days, "steps": list(STEPS), "now": int(time.time())}
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "ukgames-stats"
 
@@ -340,7 +402,12 @@ class Handler(BaseHTTPRequestHandler):
         self.reply(204, b"")
 
     def do_GET(self):
-        if self.path.split("?")[0] != "/api/stats":
+        path = self.path.split("?")[0]
+        if path == "/api/funnel":
+            with _lock:
+                body = build_funnel()
+            return self.reply(200, body, 60)
+        if path != "/api/stats":
             return self.reply(404, {"ok": False, "error": "not_found"})
         with _lock:
             if time.time() - _cache["time"] > STATS_CACHE_SECONDS:

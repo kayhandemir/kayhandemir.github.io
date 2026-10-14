@@ -29,8 +29,10 @@ To update the handler: copy the file to `/opt/ukgames-contact/` and `systemctl r
 ## Live game stats
 
 `tools/server/stats_server.py` runs on the VPS as `ukgames-stats.service` (127.0.0.1:8082, behind nginx at
-`/api/event` and `/api/stats`). Bumper Brawl posts anonymous events to `/api/event` (game opened, a heartbeat every
-minute, game created, match started/ended; see `GameStats.cs` in the game). The home pages show the numbers in the
+`/api/event`, `/api/stats` and `/api/funnel`). Bumper Brawl posts anonymous events to `/api/event` (game opened with
+its loading time and days since the device first played, a heartbeat every minute, game created, match started/ended,
+and each player's steps into play once per launch; see `GameStats.cs` in the game). `/api/funnel` lists the last 14
+days of steps, new and returning players (with D1 retention) and loading time, per platform. The home pages show the numbers in the
 live ticker under the header (`site.js`), which stays hidden while `/api/stats` has nothing to show. Counters are in
 `/var/lib/ukgames-stats/stats.db` (SQLite, per day in UTC and in total).
 Google Analytics forwarding is optional: fill in `GA_MEASUREMENT_ID` and `GA_API_SECRET` in `/etc/ukgames-stats.env`
