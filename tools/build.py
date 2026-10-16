@@ -13,7 +13,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "tools" / "content"
 SITE = "https://ukgames.games"
 # Where the site used to live; visitors there are sent to the same page on SITE.
-OLD_HOSTS_PATTERN = r"(^|\.)ukgames\.net$|\.github\.io$"
+OLD_HOSTS_PATTERN = r"\.github\.io$"
 # The web build, served from this site (nginx alias, outside the html folder that deploy.sh replaces).
 PLAY_URL = "/bumperbrawl/play/"
 ITCH_URL = "https://kayhandemir.itch.io/bumper-brawl"
@@ -573,7 +573,7 @@ def main():
     write("tr/index.html", home_page(STRINGS["tr"]))
     for slug in LEGAL:
         write(f"page/{slug}.html", legal_page(slug))
-    # Old URLs keep working: previous ukgames.net routes and the first GitHub Pages site.
+    # Old URLs keep working: earlier page routes and the first GitHub Pages site.
     write("page/terms-of-service.html", redirect_page("/page/terms"))
     for slug in LEGAL:
         write(f"tr/page/{slug}.html", redirect_page(f"/page/{slug}", LEGAL[slug][0]))

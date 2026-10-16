@@ -1,8 +1,9 @@
 # UKGames website
 
 Source of [ukgames.games](https://ukgames.games/), served by nginx on the Hostinger VPS (194.5.159.67).
-This repository is the source and the backup. GitHub Pages still serves it on the old domain ukgames.net until that
-expires; every page sends visitors there to the same page on ukgames.games.
+This repository is the source and the backup. GitHub keeps a copy on kayhandemir.github.io (a user site can't be
+switched off); every page opened there sends the visitor to the same page on ukgames.games. The old domain
+ukgames.net is no longer used.
 
 - English home: `/`, Turkish home: `/tr/`
 - Legal pages: `/page/privacy-policy`, `/page/privacy-policy-tr`, `/page/terms`, `/page/terms-tr`
