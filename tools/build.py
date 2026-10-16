@@ -252,7 +252,7 @@ def head(s, title, description, path, alternates=None, noindex=False):
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(description)}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:image" content="{SITE}/img/og-image.jpg">
+<meta property="og:image" content="{SITE}{asset_url('/img/og-image.jpg')}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -414,7 +414,7 @@ def home_page(s):
       <div class="hero-facts">{facts}</div>
     </div>
     <figure class="poster">
-      <img src="/img/bumperbrawl-cover-820.jpg" srcset="/img/bumperbrawl-cover-820.jpg 820w, /img/bumperbrawl-cover.jpg 1456w"
+      <img src="{asset_url('/img/bumperbrawl-cover-820.jpg')}" srcset="{asset_url('/img/bumperbrawl-cover-820.jpg')} 820w, {asset_url('/img/bumperbrawl-cover.jpg')} 1456w"
            sizes="(max-width: 860px) 92vw, 540px" width="1456" height="819" alt="{e(s['poster_alt'])}" fetchpriority="high">
       <figcaption><span>{e(s['poster_tag'])}</span>{e(s['poster_title'])}</figcaption>
     </figure>
@@ -440,7 +440,7 @@ def home_page(s):
       <ul class="features">{features}</ul>
     </div>
     <aside class="economy play-card">
-      <img class="cover" src="/img/bumperbrawl-square.jpg" alt="{e(s['cover_alt'])}" width="420" height="420" loading="lazy">
+      <img class="cover" src="{asset_url('/img/bumperbrawl-square.jpg')}" alt="{e(s['cover_alt'])}" width="420" height="420" loading="lazy">
       <h3>{e(s['play_h'])}</h3>
       <div class="play-links">
         <a class="btn btn-blast" href="{PLAY_URL}">{e(s['play_here'])}</a>
