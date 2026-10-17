@@ -103,7 +103,11 @@
     }
     (stats.recent || []).slice(0, 3).forEach(function (r) {
       var when = " · " + ago(stats.now - r.t);
-      if (r.e === "match_end" && r.m) list.push(fill("recent_match", { map: r.m, mode: r.g, n: num(r.n) }) + when);
+      if (r.e === "match_end" && r.m) {
+        // Matches only bots played (or one player with bots) read better without "0 players" / "1 players".
+        var key = r.n > 1 ? "recent_match" : r.n === 1 ? "recent_match_one" : "recent_match_bots";
+        list.push(fill(key, { map: r.m, mode: r.g, n: num(r.n) }) + when);
+      }
       else if (r.e === "room_created") list.push(texts.recent_room + when);
     });
     if (today.matches > 0) list.push(fill("today_matches", { n: num(today.matches) }));
