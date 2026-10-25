@@ -513,6 +513,8 @@ def legal_page(slug):
 
 
 def redirect_page(target, lang="en"):
+    # No noindex: Google reads an instant meta refresh as a permanent redirect and moves the old URL's ranking to
+    # the target; noindex on top would make it drop the old URL instead of following it.
     s = STRINGS[lang]
     return f"""<!doctype html>
 <html lang="{lang}">
@@ -522,7 +524,6 @@ def redirect_page(target, lang="en"):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>UKGames</title>
 <link rel="canonical" href="{SITE}{target}">
-<meta name="robots" content="noindex">
 <meta http-equiv="refresh" content="0; url={target}">
 <script>location.replace("{target}" + location.hash);</script>
 </head>
@@ -533,14 +534,14 @@ def redirect_page(target, lang="en"):
 
 def language_switch_page():
     # Old site links: /set-language?lang=tr&redirect=/
-    return """<!doctype html>
+    return f"""<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex">
 <title>UKGames</title>
+<link rel="canonical" href="{SITE}/">
 <script>var l=new URLSearchParams(location.search).get("lang");location.replace(l==="tr"?"/tr/":"/");</script>
-<meta http-equiv="refresh" content="1; url=/">
+<meta http-equiv="refresh" content="0; url=/">
 </head>
 <body><p><a href="/">UKGames</a></p></body>
 </html>
