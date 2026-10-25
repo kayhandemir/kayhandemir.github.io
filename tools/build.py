@@ -587,6 +587,8 @@ def main():
     # The first site's policy URLs may still be registered in Google Play / AdMob, so they serve the full text.
     write("privacy-policy.html", legal_page("privacy-policy-tr"))
     write("terms.html", legal_page("terms-tr"))
+    # An early Turkish privacy policy linked here; Google still asks for it.
+    write("terms-of-service.html", redirect_page("/page/terms-tr", "tr"))
     write("contact.html", redirect_page("/tr/#contact", "tr"))
     write("en/index.html", redirect_page("/"))
     write("set-language.html", language_switch_page())
