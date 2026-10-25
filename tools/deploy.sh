@@ -4,8 +4,11 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-SERVER="root@194.5.159.67"
+# The VPS moved to Lithuania on 2026-10-21. Each computer has its own key on it: bumperbrawl_vps where it exists,
+# the default id_ed25519 otherwise (the laptop).
+SERVER="root@145.223.90.99"
 KEY="$HOME/.ssh/bumperbrawl_vps"
+if [ ! -f "$KEY" ]; then KEY="$HOME/.ssh/id_ed25519"; fi
 SITE_DIR="/var/www/ukgames.games"
 
 python tools/build.py
