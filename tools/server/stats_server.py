@@ -12,6 +12,7 @@ POST /api/event   Bumper Brawl reports what happens in the game (GameStats.cs). 
                     v  game version
                     a  where the player is: menu or match (heartbeat); the step's name (step)
                     m  map, g  game mode, n  players in the match, or which finished match (step match_done),
+                       or for a first match step (fm_...) the tutorial step number or the 30-second slice of the match
                     d  match length in seconds
                     t  milliseconds the game took to load (session_start)
                     r  days since the device first played, 0 = a new player (session_start; -1 or missing = unknown)
@@ -63,6 +64,10 @@ EVENTS = {"session_start", "heartbeat", "room_created", "match_start", "match_en
 # A player's way into play, in order (GameStats.STEP_*). match_done comes with n = 1, 2, 3, 5 or 10.
 STEPS = ("menu", "connecting", "connected", "connect_failed", "map_loaded", "in_match", "match_done")
 MATCH_MILESTONES = {1, 2, 3, 5, 10}
+# A new player's first match, so the funnel shows where in it they leave (GameStats.ReportFirstMatch): fm_ and what
+# happened (a tutorial step's kind, skip, fight, play, smashed, menu, away), counted per n.
+FIRST_MATCH_PATTERN = re.compile(r"^fm_[a-z]{2,12}$")
+MAX_FIRST_MATCH_N = 60
 # Days after the first launch that count as a return (return_d1 today / new_players yesterday = D1 retention).
 RETURN_DAYS = {1, 7, 30}
 FUNNEL_PREFIXES = ("step:", "sessions", "new_players", "returning", "return_d", "active_devices", "load_")
@@ -229,7 +234,8 @@ def record(event):
                     add(f"return_d{event['r']}")
                     add(f"return_d{event['r']}:" + event["p"])
     if name == "step":
-        key = "step:" + event["a"] + (f":{event['n']}" if event["a"] == "match_done" else "")
+        has_number = event["a"] == "match_done" or FIRST_MATCH_PATTERN.match(event["a"])
+        key = "step:" + event["a"] + (f":{event['n']}" if has_number else "")
         add(key)
         add(key + ":" + event["p"])
     if name in ("session_start", "heartbeat") and event["p"] != "server":
@@ -272,8 +278,10 @@ def parse_event(data):
     }
     if event["e"] not in EVENTS or not SESSION_PATTERN.match(event["s"]):
         return None
-    if event["e"] == "step" and (event["a"] not in STEPS
-                                 or (event["a"] == "match_done" and event["n"] not in MATCH_MILESTONES)):
+    if event["e"] == "step" and FIRST_MATCH_PATTERN.match(event["a"]):
+        event["n"] = number(data.get("n"), 0, MAX_FIRST_MATCH_N)
+    elif event["e"] == "step" and (event["a"] not in STEPS
+                                   or (event["a"] == "match_done" and event["n"] not in MATCH_MILESTONES)):
         return None
     if event["p"] not in PLATFORMS:
         event["p"] = "web"
@@ -298,6 +306,8 @@ def forward_to_ga(event):
         params["step"] = event["a"]
         if event["a"] == "match_done":
             params["match_number"] = event["n"]
+        elif FIRST_MATCH_PATTERN.match(event["a"]):
+            params["step_number"] = event["n"]
     if event["e"] == "session_start":
         params["load_ms"] = event["t"]
         params["days_since_first"] = event["r"]
