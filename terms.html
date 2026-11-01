@@ -24,12 +24,9 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/img/icon-512.png" type="image/png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Mono:wght@500&family=Rethink+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=4b498032">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-E5WFC0MHFP"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E5WFC0MHFP');</script>
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=5b960002">
+<link rel="stylesheet" href="/assets/site.css?v=743dcf6b">
+<script>window.ukgAnalytics=function(){if(window.gtag)return;var g=document.createElement("script");g.async=true;g.src="https://www.googletagmanager.com/gtag/js?id=G-E5WFC0MHFP";document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag("js",new Date());gtag("config","G-E5WFC0MHFP");};try{if(localStorage.getItem("ukg-consent")==="granted")ukgAnalytics();}catch(e){}</script>
 </head>
 <body>
 <header class="site-header">
@@ -47,7 +44,7 @@
     <article class="legal">
       <h1>Kullanım Şartları</h1>
       <p class="alt"><a href="/page/terms" hreflang="en">English</a></p>
-<p>Son güncelleme: 14 Ekim 2026</p>
+<p>Son güncelleme: 1 Kasım 2026</p>
 <p>Bu Kullanım Şartları ("Şartlar"); <strong>ZigZag Mix</strong>, <strong>Color Blocks</strong> ve <strong>Bumper Brawl</strong> dahil UKGames tarafından yayınlanan oyunlar ile <strong>ukgames.games</strong> sitesi için geçerlidir. UKGames, Bursa, Türkiye'de yaşayan bireysel geliştirici Uğur Kayhandemir'in ("biz") oyun markasıdır. Oyunlarımızı indirerek, kurarak veya oynayarak ya da siteyi kullanarak bu Şartları kabul etmiş olursunuz. Kabul etmiyorsanız lütfen kullanmayın.</p>
 
 <h2>1. Kimler oynayabilir</h2>
@@ -72,7 +69,7 @@
 <li>diğer oyunculara taciz, tehdit veya hakarette bulunmak ya da sohbette yasa dışı, cinsel veya nefret içeren içerik paylaşmak;</li>
 <li>hile yapmak, hataları bilerek istismar etmek veya diğer oyuncuların oyununu bozmak.</li>
 </ul>
-<p>Bu kurallara uymazsanız adınızı sıfırlayabilir, ilerlemenizi silebilir veya hesabınızı önceden bildirmeksizin askıya alabilir ya da kapatabiliriz. Sohbet otomatik olarak filtrelenir, ancak filtre her şeyi yakalayamayabilir; yazdıklarınızdan siz sorumlusunuz. Online özellikler oyun sunucularımıza, üçüncü taraf hizmetlere (Unity Gaming Services) ve internet bağlantınıza bağlıdır; zaman zaman kullanılamayabilir.</p>
+<p>Bu kurallara uymazsanız adınızı sıfırlayabilir, ilerlemenizi silebilir veya hesabınızı önceden bildirmeksizin askıya alabilir ya da kapatabiliriz. Sohbetteki, oyuncu adlarındaki ve lobi adlarındaki uygunsuz kelimeler otomatik olarak gizlenir, ancak filtre her şeyi yakalayamayabilir; yazdıklarınızdan siz sorumlusunuz. Bir oyuncuyu veya bir adı bildirmek için adı, zamanı ve nerede oynadığınızı <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a> adresine yazın; her bildirime bakarız. Online özellikler oyun sunucularımıza, üçüncü taraf hizmetlere (Unity Gaming Services) ve internet bağlantınıza bağlıdır; zaman zaman kullanılamayabilir.</p>
 
 <h2>5. Coin'ler, eşyalar ve uygulama içi satın almalar</h2>
 <ul>
@@ -109,7 +106,7 @@
 <p>Bu Şartlar Türkiye Cumhuriyeti kanunlarına tabidir. Uyuşmazlıklarda Bursa mahkemeleri ve icra daireleri yetkilidir; bu hüküm, emredici mevzuat uyarınca tüketici hakem heyetlerine veya yaşadığınız yerdeki mahkemelere başvurma haklarınızı etkilemez.</p>
 
 <h2>15. İletişim</h2>
-<p>Bu Şartlarla ilgili sorularınız için: <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a></p>
+<p>Bu Şartlarla ilgili sorularınız için: <a href="mailto:ugka81@gmail.com">ugka81@gmail.com</a><br>UKGames (Uğur Kayhandemir), Namazgah Mah., Yıldırım, Bursa, Türkiye</p>
 
     </article>
   </div>
@@ -122,10 +119,18 @@
       <a href="/page/privacy-policy-tr">Gizlilik Politikası</a>
       <a href="/page/terms-tr">Kullanım Şartları</a>
       <a href="/tr/#contact">İletişim</a>
+      <button type="button" class="consent-open" id="consent-open">Çerez ayarları</button>
     </nav>
     <span>© 2026 UKGames</span>
   </div>
 </footer>
-<script src="/assets/site.js?v=2b0d7b3e" defer></script>
+<div class="consent" id="consent" role="dialog" aria-label="Çerez ayarları" hidden>
+  <p>Sitenin nasıl kullanıldığını görmek için Google Analytics çerezlerini kullanabilir miyiz? Yalnızca kabul edersen yerleştirilir. <a href="/page/privacy-policy-tr">Gizlilik Politikası</a></p>
+  <div class="consent-buttons">
+    <button type="button" class="btn consent-reject" data-choice="denied">Reddet</button>
+    <button type="button" class="btn btn-blast" data-choice="granted">Kabul et</button>
+  </div>
+</div>
+<script src="/assets/site.js?v=ce9d4b44" defer></script>
 </body>
 </html>

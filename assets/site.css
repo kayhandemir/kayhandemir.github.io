@@ -430,3 +430,18 @@ p { margin: 0; }
   .live-group { flex-wrap: wrap; row-gap: 4px; padding-block: 8px; }
   .live-badge i { animation: none; }
 }
+
+/* Cookie consent bar (site.js) and its "Cookie settings" link in the footer. */
+.consent {
+  position: fixed; z-index: 50; left: var(--gutter); right: var(--gutter); bottom: 16px; max-width: 640px; margin-inline: auto;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding: 16px 18px;
+  background: var(--surface); color: var(--text); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+  font-size: 15px;
+}
+.consent[hidden] { display: none; }
+.consent p { flex: 1 1 260px; margin: 0; }
+.consent a { color: inherit; text-decoration: underline; }
+.consent-buttons { display: flex; gap: 10px; }
+.consent-reject { background: var(--surface-2); color: var(--text); }
+.consent-open { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; }
+.consent-open:hover { color: var(--sun); }

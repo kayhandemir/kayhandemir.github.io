@@ -25,12 +25,9 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/img/icon-512.png" type="image/png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Mono:wght@500&family=Rethink+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=4b498032">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-E5WFC0MHFP"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E5WFC0MHFP');</script>
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=5b960002">
+<link rel="stylesheet" href="/assets/site.css?v=743dcf6b">
+<script>window.ukgAnalytics=function(){if(window.gtag)return;var g=document.createElement("script");g.async=true;g.src="https://www.googletagmanager.com/gtag/js?id=G-E5WFC0MHFP";document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag("js",new Date());gtag("config","G-E5WFC0MHFP");};try{if(localStorage.getItem("ukg-consent")==="granted")ukgAnalytics();}catch(e){}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://ukgames.games/#org", "name": "UKGames", "url": "https://ukgames.games/", "logo": "https://ukgames.games/img/icon-512.png", "email": "ugka81@gmail.com", "founder": {"@type": "Person", "name": "Uğur Kayhandemir"}, "address": {"@type": "PostalAddress", "addressLocality": "Bursa", "addressCountry": "TR"}, "sameAs": ["https://www.instagram.com/ugurkayhandemir", "https://www.linkedin.com/in/u%C4%9Fur-kayhandemir", "https://github.com/kayhandemir"]}, {"@type": "MobileApplication", "name": "ZigZag Mix", "operatingSystem": "Android", "applicationCategory": "GameApplication", "url": "https://play.google.com/store/apps/details?id=com.UGame.ZigZagMix", "image": "https://ukgames.games/img/zigzag-icon.jpg", "publisher": {"@id": "https://ukgames.games/#org"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "MobileApplication", "name": "Color Blocks", "operatingSystem": "Android", "applicationCategory": "GameApplication", "url": "https://play.google.com/store/apps/details?id=com.UKGames.ColorBlocks", "image": "https://ukgames.games/img/colorblocks-icon.jpg", "publisher": {"@id": "https://ukgames.games/#org"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}]}</script>
 </head>
 <body>
@@ -165,10 +162,18 @@
       <a href="/page/privacy-policy-tr">Gizlilik Politikası</a>
       <a href="/page/terms-tr">Kullanım Şartları</a>
       <a href="/tr/#contact">İletişim</a>
+      <button type="button" class="consent-open" id="consent-open">Çerez ayarları</button>
     </nav>
     <span>© 2026 UKGames</span>
   </div>
 </footer>
-<script src="/assets/site.js?v=2b0d7b3e" defer></script>
+<div class="consent" id="consent" role="dialog" aria-label="Çerez ayarları" hidden>
+  <p>Sitenin nasıl kullanıldığını görmek için Google Analytics çerezlerini kullanabilir miyiz? Yalnızca kabul edersen yerleştirilir. <a href="/page/privacy-policy-tr">Gizlilik Politikası</a></p>
+  <div class="consent-buttons">
+    <button type="button" class="btn consent-reject" data-choice="denied">Reddet</button>
+    <button type="button" class="btn btn-blast" data-choice="granted">Kabul et</button>
+  </div>
+</div>
+<script src="/assets/site.js?v=ce9d4b44" defer></script>
 </body>
 </html>

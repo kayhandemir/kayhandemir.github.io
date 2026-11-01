@@ -170,3 +170,38 @@
   setInterval(load, 30000);
   document.addEventListener("visibilitychange", load);
 })();
+
+// Google Analytics only with consent (KVKK cookie guidance): the head script loads it when "granted" is stored, the
+// bar asks once, and "Cookie settings" in the footer asks again. Turning it off removes its cookies and reloads, so
+// the already-running tag stops too.
+(function () {
+  var bar = document.getElementById("consent");
+  if (!bar) return;
+  var read = function () { try { return localStorage.getItem("ukg-consent"); } catch (e) { return null; } };
+  var removeAnalyticsCookies = function () {
+    document.cookie.split(";").forEach(function (cookie) {
+      var name = cookie.split("=")[0].trim();
+      if (name !== "_ga" && name.indexOf("_ga_") !== 0) return;
+      [location.hostname, "." + location.hostname.replace(/^www\./, "")].forEach(function (domain) {
+        document.cookie = name + "=; Max-Age=0; path=/; domain=" + domain;
+      });
+      document.cookie = name + "=; Max-Age=0; path=/";
+    });
+  };
+  bar.addEventListener("click", function (event) {
+    var choice = event.target.getAttribute("data-choice");
+    if (!choice) return;
+    var previous = read();
+    try { localStorage.setItem("ukg-consent", choice); } catch (e) {}
+    bar.hidden = true;
+    if (choice === "granted") {
+      if (window.ukgAnalytics) window.ukgAnalytics();
+    } else {
+      removeAnalyticsCookies();
+      if (previous === "granted") location.reload();
+    }
+  });
+  var open = document.getElementById("consent-open");
+  if (open) open.addEventListener("click", function () { bar.hidden = false; });
+  if (read() !== "granted" && read() !== "denied") bar.hidden = false;
+})();

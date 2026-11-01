@@ -27,8 +27,6 @@ def asset_url(rel):
     digest = hashlib.sha1((ROOT / rel.lstrip("/")).read_bytes()).hexdigest()[:8]
     return f"{rel}?v={digest}"
 
-FONTS = ("https://fonts.googleapis.com/css2?family=Bungee&family=DM+Mono:wght@500"
-         "&family=Rethink+Sans:wght@400;600;700;800&display=swap")
 
 SOCIALS = [
     ("Instagram", "https://www.instagram.com/ugurkayhandemir",
@@ -152,6 +150,8 @@ STRINGS = {
                  "noscript": "The form needs JavaScript. You can email me instead."},
         "privacy": "Privacy Policy", "terms": "Terms of Use",
         "rights": f"© {YEAR} UKGames",
+        "consent": {"text": "May we use Google Analytics cookies to see how the site is used? They are set only if you accept.",
+                    "accept": "Accept", "reject": "Reject", "settings": "Cookie settings"},
         "notfound_h": "Page not found", "notfound_p": "This page doesn't exist or has moved.", "home": "Back to home",
         "redirect": "This page has moved.", "redirect_link": "Continue",
         "legal_alt": ("Türkçe", "tr"),
@@ -226,6 +226,9 @@ STRINGS = {
                  "noscript": "Form için JavaScript gerekiyor. Bana e-posta da gönderebilirsin."},
         "privacy": "Gizlilik Politikası", "terms": "Kullanım Şartları",
         "rights": f"© {YEAR} UKGames",
+        "consent": {"text": "Sitenin nasıl kullanıldığını görmek için Google Analytics çerezlerini kullanabilir miyiz? "
+                            "Yalnızca kabul edersen yerleştirilir.",
+                    "accept": "Kabul et", "reject": "Reddet", "settings": "Çerez ayarları"},
         "notfound_h": "Sayfa bulunamadı", "notfound_p": "Bu sayfa yok ya da taşındı.", "home": "Ana sayfaya dön",
         "redirect": "Bu sayfa taşındı.", "redirect_link": "Devam et",
         "legal_alt": ("English", "en"),
@@ -275,12 +278,9 @@ def head(s, title, description, path, alternates=None, noindex=False):
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/img/icon-512.png" type="image/png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="{FONTS}">
+<link rel="stylesheet" href="{asset_url('/assets/fonts/fonts.css')}">
 <link rel="stylesheet" href="{asset_url('/assets/site.css')}">
-<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA_ID}');</script>
+<script>window.ukgAnalytics=function(){{if(window.gtag)return;var g=document.createElement("script");g.async=true;g.src="https://www.googletagmanager.com/gtag/js?id={GA_ID}";document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){{dataLayer.push(arguments);}};gtag("js",new Date());gtag("config","{GA_ID}");}};try{{if(localStorage.getItem("ukg-consent")==="granted")ukgAnalytics();}}catch(e){{}}</script>
 """
 
 
@@ -307,6 +307,7 @@ def footer(s):
     p = s["prefix"]
     privacy = "/page/privacy-policy" + ("-tr" if s["lang"] == "tr" else "")
     terms = "/page/terms" + ("-tr" if s["lang"] == "tr" else "")
+    c = s["consent"]
     return f"""<footer class="site-footer">
   <div class="wrap">
     <a class="wordmark" href="{p}/">UK<b>GAMES</b></a>
@@ -315,10 +316,18 @@ def footer(s):
       <a href="{privacy}">{e(s['privacy'])}</a>
       <a href="{terms}">{e(s['terms'])}</a>
       <a href="{p}/#contact">{e(s['nav'][3])}</a>
+      <button type="button" class="consent-open" id="consent-open">{e(c['settings'])}</button>
     </nav>
     <span>{e(s['rights'])}</span>
   </div>
 </footer>
+<div class="consent" id="consent" role="dialog" aria-label="{e(c['settings'])}" hidden>
+  <p>{e(c['text'])} <a href="{privacy}">{e(s['privacy'])}</a></p>
+  <div class="consent-buttons">
+    <button type="button" class="btn consent-reject" data-choice="denied">{e(c['reject'])}</button>
+    <button type="button" class="btn btn-blast" data-choice="granted">{e(c['accept'])}</button>
+  </div>
+</div>
 <script src="{asset_url('/assets/site.js')}" defer></script>
 </body>
 </html>
