@@ -7,7 +7,8 @@ ukgames.net is no longer used.
 
 - English home: `/`, Turkish home: `/tr/`
 - Legal pages: `/page/privacy-policy`, `/page/privacy-policy-tr`, `/page/terms`, `/page/terms-tr`
-  (account deletion for Google Play: `/page/privacy-policy#delete-account`)
+  (account deletion for Google Play: Bumper Brawl `/page/privacy-policy#delete-account`,
+  ZigZag Mix `/page/zigzag-mix-data-deletion`, Color Blocks `/page/color-blocks-data-deletion`; Turkish pages end in `-tr`)
 - `app-ads.txt` must stay in the root for AdMob.
 
 ## Editing

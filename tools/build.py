@@ -241,6 +241,15 @@ LEGAL = {
     "privacy-policy-tr": ("tr", "Gizlilik Politikası", "privacy-policy-tr.html", "privacy-policy"),
     "terms": ("en", "Terms of Use", "terms.html", "terms-tr"),
     "terms-tr": ("tr", "Kullanım Şartları", "terms-tr.html", "terms"),
+    # Google Play "delete account / data" URLs, one per Android game.
+    "zigzag-mix-data-deletion": ("en", "ZigZag Mix: Data Deletion", "zigzag-mix-data-deletion.html",
+                                 "zigzag-mix-data-deletion-tr"),
+    "zigzag-mix-data-deletion-tr": ("tr", "ZigZag Mix: Veri Silme", "zigzag-mix-data-deletion-tr.html",
+                                    "zigzag-mix-data-deletion"),
+    "color-blocks-data-deletion": ("en", "Color Blocks: Data Deletion", "color-blocks-data-deletion.html",
+                                   "color-blocks-data-deletion-tr"),
+    "color-blocks-data-deletion-tr": ("tr", "Color Blocks: Veri Silme", "color-blocks-data-deletion-tr.html",
+                                      "color-blocks-data-deletion"),
 }
 
 
@@ -515,7 +524,13 @@ def legal_page(slug):
     body = body.replace("<table>", '<div class="table-scroll"><table>').replace("</table>", "</table></div>")
     alt_name, alt_lang = s["legal_alt"]
     path = f"/page/{slug}"
-    out = head(s, f"{title} | UKGames", f"{title} for games and apps published by UKGames.", path,
+    if "data-deletion" in slug:
+        game = title.split(":")[0]
+        description = (f"{game} oyunundaki verilerinizi nasıl sileceğiniz (UKGames)." if lang == "tr"
+                       else f"How to delete your data from {game} by UKGames.")
+    else:
+        description = f"{title} for games and apps published by UKGames."
+    out = head(s, f"{title} | UKGames", description, path,
                [(lang, path), (alt_lang, f"/page/{alt_slug}")])
     out += "</head>\n<body>\n" + header(s, f"/page/{alt_slug}")
     out += f"""<main class="legal-page">
