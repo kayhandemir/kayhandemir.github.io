@@ -337,7 +337,7 @@ p { margin: 0; }
   display: flex; flex-wrap: wrap; align-items: center; gap: 12px; color: var(--text);
   background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px;
 }
-.mail a { font-family: var(--font-mono); font-weight: 500; font-size: clamp(17px, 2.2vw, 22px); text-decoration: none; word-break: break-all; flex: 1 1 220px; }
+.mail a { font-family: var(--font-mono); font-weight: 500; font-size: clamp(15px, 1.9vw, 22px); text-decoration: none; overflow-wrap: anywhere; flex: 1 1 270px; }
 .mail a:hover { color: var(--blast); }
 .mail button { font: inherit; font-weight: 800; font-size: 14px; }
 .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
