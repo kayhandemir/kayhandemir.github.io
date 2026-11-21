@@ -17,8 +17,12 @@ OLD_HOSTS_PATTERN = r"\.github\.io$"
 # The web build, served from this site (nginx alias, outside the html folder that deploy.sh replaces).
 PLAY_URL = "/bumperbrawl/play/"
 ITCH_URL = "https://kayhandemir.itch.io/bumper-brawl"
-EMAIL = "ugka81@gmail.com"
+BB_PLAY_URL = "https://play.google.com/store/apps/details?id=com.ukgames.bumperbrawl"
+EMAIL = "studioukgames@gmail.com"
 GA_ID = "G-E5WFC0MHFP"
+# AdSense publisher id: its script on every page lets AdSense check the site (and serves ads only where we place
+# them; Auto ads stay off in AdSense). The game page loads it itself (WebGL template).
+ADSENSE_CLIENT = "ca-pub-1260030724213776"
 YEAR = 2026
 
 
@@ -84,21 +88,21 @@ STRINGS = {
         "lang": "en", "prefix": "", "other": "tr", "other_label": "TR", "other_name": "Türkçe",
         "title": "UKGames | Indie games made with Unity",
         "description": "UKGames is an indie studio in Bursa, Turkey. Play Bumper Brawl, an online car combat game, "
-                       "in your browser, and ZigZag Mix and Color Blocks on Google Play.",
+                       "on Android and in your browser, and ZigZag Mix and Color Blocks on Google Play.",
         "nav": ["Games", "Bumper Brawl", "About", "Contact"],
         "eyebrow": "Indie studio · Bursa, Turkey",
         "h1": 'Small studio.<br><span class="hl">Loud games.</span>',
         "lede": "UKGames is Uğur Kayhandemir's one-person studio. I build arcade, puzzle and online multiplayer games "
                 "with Unity and C#, tuned to run smoothly on everyday phones and right in the browser.",
         "cta_games": "See the games", "cta_smash": "Play Bumper Brawl",
-        "facts": [("2", "games on Google Play"), ("15K+", "ZigZag Mix downloads"), ("Unity", "C# · URP")],
+        "facts": [("3", "games on Google Play"), ("15K+", "ZigZag Mix downloads"), ("Unity", "C# · URP")],
         "poster_tag": "Play now", "poster_title": "Bumper Brawl",
         "poster_alt": "Bumper Brawl: cars crashing into each other in a city arena",
         "games_h": "Games", "games_p": "Free to play on Google Play.",
         "shots_alt": "{name} screenshot {n}",
         "play_small": "Get it on", "play_big": "Google Play",
         "smash_label": "Play now · free",
-        "smash_intro": "Free car combat in your browser, on a phone or a computer. Hit Quick Play and you are in a match "
+        "smash_intro": "Free car combat on Android and in your browser. Hit Quick Play and you are in a match "
                        "against bots within seconds: grab weapons from mystery boxes, ram the others off the road and "
                        "smash more cars than anyone before the clock runs out. Formerly known as SmashJeeps.",
         "smash_features": [
@@ -110,15 +114,15 @@ STRINGS = {
         ],
         "play_h": "Play Bumper Brawl",
         "play_here": "Play now",
-        "play_soon": "Google Play: coming soon",
+        "play_soon": "Free on Android and in your browser",
         "cover_alt": "Bumper Brawl cover art",
         "about_h": "About",
         "about_p": [
             "Hi, I'm <strong>Uğur Kayhandemir</strong>. I make games with the <strong>Unity</strong> engine, and I care about clean C# code, optimized graphics and controls that feel right.",
-            "UKGames started with small mobile games on Google Play. Bumper Brawl, my first online multiplayer game, is free to play in the browser, here and on itch.io, on phones and computers alike, and its Android version is on the way to Google Play.",
+            "UKGames started with small mobile games on Google Play. Bumper Brawl, my first online multiplayer game, is free to play on Android through Google Play and in the browser, here and on itch.io.",
         ],
         "about_facts": [("Based in", "Bursa", "Yıldırım, Türkiye"), ("Engine", "Unity", "C#, URP, Netcode, Addressables"),
-                        ("Published", "2 games", "Google Play"), ("Latest", "Bumper Brawl", "Online multiplayer")],
+                        ("Published", "3 games", "Google Play"), ("Latest", "Bumper Brawl", "Online multiplayer")],
         "contact_h": "Say hello",
         "contact_p": "Questions about a game, a bug report, a collaboration idea or anything else: send me an email and I'll get back to you.",
         "live": {"badge": "Live", "label": "Bumper Brawl right now",
@@ -139,7 +143,7 @@ STRINGS = {
                           "Nine weapons in the mystery boxes, from homing rockets to spinning blades",
                           "God Mode: while it lasts, every car you touch is smashed",
                           "Daily quests, reward chests and a garage full of cars, paints and stickers",
-                          "Create Game opens a room on our own servers in Europe", "Google Play version coming soon"]},
+                          "Create Game opens a room on our own servers in Europe", "Now on Google Play for Android"]},
         "copy": "Copy", "copied": "Copied", "theme": "Switch between light and dark theme",
         "form": {"name": "Your name", "email": "Your email", "message": "Your message", "send": "Send message",
                  "sending": "Sending...", "sent": "Thanks! Your message is on its way. I'll reply by email.",
@@ -159,7 +163,7 @@ STRINGS = {
     "tr": {
         "lang": "tr", "prefix": "/tr", "other": "en", "other_label": "EN", "other_name": "English",
         "title": "UKGames | Unity ile geliştirilen bağımsız oyunlar",
-        "description": "UKGames, Bursa'da bağımsız bir oyun stüdyosu. Online araba savaşı oyunu Bumper Brawl'u tarayıcında, "
+        "description": "UKGames, Bursa'da bağımsız bir oyun stüdyosu. Online araba savaşı oyunu Bumper Brawl'u Android'de ve tarayıcında, "
                        "ZigZag Mix ve Color Blocks'u Google Play'de oyna.",
         "nav": ["Oyunlar", "Bumper Brawl", "Hakkımda", "İletişim"],
         "eyebrow": "Bağımsız stüdyo · Bursa",
@@ -167,14 +171,14 @@ STRINGS = {
         "lede": "UKGames, Uğur Kayhandemir'in tek kişilik stüdyosu. Unity ve C# ile, her telefonda ve doğrudan "
                 "tarayıcıda akıcı çalışan arcade, bulmaca ve online çok oyunculu oyunlar geliştiriyorum.",
         "cta_games": "Oyunlara bak", "cta_smash": "Bumper Brawl'u oyna",
-        "facts": [("2", "oyun Google Play'de"), ("15K+", "ZigZag Mix indirmesi"), ("Unity", "C# · URP")],
+        "facts": [("3", "oyun Google Play'de"), ("15K+", "ZigZag Mix indirmesi"), ("Unity", "C# · URP")],
         "poster_tag": "Şimdi oyna", "poster_title": "Bumper Brawl",
         "poster_alt": "Bumper Brawl: şehir arenasında birbirine çarpan arabalar",
         "games_h": "Oyunlar", "games_p": "Google Play'de ücretsiz.",
         "shots_alt": "{name} ekran görüntüsü {n}",
         "play_small": "Hemen indir", "play_big": "Google Play",
         "smash_label": "Şimdi oyna · ücretsiz",
-        "smash_intro": "Tarayıcında, telefonda ya da bilgisayarda ücretsiz araba savaşı. Quick Play'e bas, saniyeler "
+        "smash_intro": "Android'de ve tarayıcında ücretsiz araba savaşı. Quick Play'e bas, saniyeler "
                        "içinde botlara karşı maçtasın: gizemli kutulardan silah topla, rakiplerini yoldan çıkar ve süre "
                        "bitmeden herkesten çok araba parçala. Eski adıyla SmashJeeps.",
         "smash_features": [
@@ -186,15 +190,15 @@ STRINGS = {
         ],
         "play_h": "Bumper Brawl'u oyna",
         "play_here": "Hemen oyna",
-        "play_soon": "Google Play: yakında",
+        "play_soon": "Android'de ve tarayıcıda ücretsiz",
         "cover_alt": "Bumper Brawl kapak görseli",
         "about_h": "Hakkımda",
         "about_p": [
             "Merhaba, ben <strong>Uğur Kayhandemir</strong>. <strong>Unity</strong> motoruyla oyun geliştiriyorum. Temiz C# kodu, optimize grafikler ve eline iyi oturan kontroller benim için öncelik.",
-            "UKGames, Google Play'deki küçük mobil oyunlarla başladı. İlk online çok oyunculu oyunum Bumper Brawl, burada ve itch.io'da tarayıcıda ücretsiz; telefonda da bilgisayarda da oynanıyor. Android sürümü Google Play yolunda.",
+            "UKGames, Google Play'deki küçük mobil oyunlarla başladı. İlk online çok oyunculu oyunum Bumper Brawl, Google Play'den Android'de, burada ve itch.io'da da tarayıcıda ücretsiz.",
         ],
         "about_facts": [("Konum", "Bursa", "Yıldırım, Türkiye"), ("Motor", "Unity", "C#, URP, Netcode, Addressables"),
-                        ("Yayında", "2 oyun", "Google Play"), ("Son oyun", "Bumper Brawl", "Online çok oyunculu")],
+                        ("Yayında", "3 oyun", "Google Play"), ("Son oyun", "Bumper Brawl", "Online çok oyunculu")],
         "contact_h": "Merhaba de",
         "contact_p": "Bir oyun hakkında soru, hata bildirimi, iş birliği fikri ya da başka bir şey: e-posta gönder, sana dönerim.",
         "live": {"badge": "Canlı", "label": "Bumper Brawl şu anda",
@@ -215,7 +219,7 @@ STRINGS = {
                           "Gizemli kutularda dokuz silah: güdümlü roketten dönen bıçaklara",
                           "God Mode: sürdüğü sürece dokunduğun her araba parçalanır",
                           "Günlük görevler, ödül sandıkları, araba, boya ve çıkartmalarla dolu bir garaj",
-                          "Create Game, Avrupa'daki kendi sunucularımızda oda açar", "Google Play sürümü yakında"]},
+                          "Create Game, Avrupa'daki kendi sunucularımızda oda açar", "Artık Google Play'de, Android'de"]},
         "copy": "Kopyala", "copied": "Kopyalandı", "theme": "Açık ve koyu tema arasında geç",
         "form": {"name": "Adın", "email": "E-posta adresin", "message": "Mesajın", "send": "Mesajı gönder",
                  "sending": "Gönderiliyor...", "sent": "Teşekkürler! Mesajın yola çıktı, sana e-postayla döneceğim.",
@@ -290,6 +294,7 @@ def head(s, title, description, path, alternates=None, noindex=False):
 <link rel="stylesheet" href="{asset_url('/assets/fonts/fonts.css')}">
 <link rel="stylesheet" href="{asset_url('/assets/site.css')}">
 <script>window.ukgAnalytics=function(){{if(window.gtag)return;var g=document.createElement("script");g.async=true;g.src="https://www.googletagmanager.com/gtag/js?id={GA_ID}";document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){{dataLayer.push(arguments);}};gtag("js",new Date());gtag("config","{GA_ID}");}};try{{if(localStorage.getItem("ukg-consent")==="granted")ukgAnalytics();}}catch(e){{}}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}" crossorigin="anonymous"></script>
 """
 
 
@@ -477,6 +482,7 @@ def home_page(s):
       <img class="cover" src="{asset_url('/img/bumperbrawl-square.jpg')}" alt="{e(s['cover_alt'])}" width="420" height="420" loading="lazy">
       <h3>{e(s['play_h'])}</h3>
       <div class="play-links">
+        {play_button(s, BB_PLAY_URL, "Bumper Brawl")}
         <a class="btn btn-blast" href="{PLAY_URL}">{e(s['play_here'])}</a>
         <a class="btn" href="{ITCH_URL}" rel="noopener" target="_blank">itch.io</a>
       </div>
