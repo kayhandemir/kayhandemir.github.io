@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>if(/\.github\.io$/.test(location.hostname))location.replace("https://ukgames.games"+location.pathname+location.search+location.hash);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Devlog: Building Bumper Brawl | Bumper Brawl Guide</title>
+<meta name="description" content="How a one-person studio built an online car brawler for phones and browsers: web limits, phone performance, lag and bots.">
+<link rel="canonical" href="https://ukgames.games/guide/devlog-building-bumper-brawl">
+<link rel="alternate" hreflang="en" href="https://ukgames.games/guide/devlog-building-bumper-brawl">
+<link rel="alternate" hreflang="tr" href="https://ukgames.games/tr/guide/devlog-building-bumper-brawl">
+<meta name="theme-color" content="#eef6fc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1322" media="(prefers-color-scheme: dark)">
+<script>try{var t=localStorage.getItem("ukg-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UKGames">
+<meta property="og:title" content="Devlog: Building Bumper Brawl | Bumper Brawl Guide">
+<meta property="og:description" content="How a one-person studio built an online car brawler for phones and browsers: web limits, phone performance, lag and bots.">
+<meta property="og:url" content="https://ukgames.games/guide/devlog-building-bumper-brawl">
+<meta property="og:image" content="https://ukgames.games/img/og-image.jpg?v=2495d284">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/img/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=5b960002">
+<link rel="stylesheet" href="/assets/site.css?v=7ce0d267">
+<script>window.ukgAnalytics=function(){if(window.gtag)return;var g=document.createElement("script");g.async=true;g.src="https://www.googletagmanager.com/gtag/js?id=G-E5WFC0MHFP";document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag("js",new Date());gtag("config","G-E5WFC0MHFP");};try{if(localStorage.getItem("ukg-consent")==="granted")ukgAnalytics();}catch(e){}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1260030724213776" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/" aria-label="UKGames home">UK<b>GAMES</b></a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-section" href="/#games">Games</a><a class="nav-section" href="/#bumperbrawl">Bumper Brawl</a><a class="nav-section" href="/#about">About</a><a class="nav-section" href="/#contact">Contact</a><a class="nav-section" href="/guide/">Guide</a>
+      <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Switch between light and dark theme" title="Switch between light and dark theme"><svg class="moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 14.6A8.5 8.5 0 0 1 9.4 3.3a8.5 8.5 0 1 0 11.3 11.3z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></button>
+      <a class="lang" href="/tr/guide/devlog-building-bumper-brawl" hreflang="tr" lang="tr" title="Türkçe">TR</a>
+    </nav>
+  </div>
+</header>
+<main class="legal-page">
+  <div class="wrap">
+    <article class="legal guide">
+      <p class="crumbs"><a href="/guide/">Bumper Brawl Guide</a></p>
+      <h1>Devlog: Building Bumper Brawl</h1>
+<p class="byline">By Uğur Kayhandemir · November 2026</p>
+<p>Bumper Brawl started life as a small project called SmashJeeps: a few jeeps on a flat plane, ramming each other. Today it is an online car combat game with four modes, six maps, nine weapons and players on phones and in browsers around the world. I built it alone, with Unity and C#. This post is about the parts that turned out to be harder than they looked, and what I learned from them.</p>
+
+<h2>One game, two very different homes</h2>
+<p>From the start I wanted the game to run both as an Android app and in a web browser, with no download. That sounds like one target; in practice it is two. A phone has a real GPU driver and a real network stack. A browser tab has WebGL, a single thread for most of the work, and no raw network sockets at all.</p>
+<p>The browser limits shaped a lot of decisions. In the browser the game talks to its servers over <strong>WebSockets</strong>, because that is what a browser allows, and phones and browsers still end up in the same rooms. Download size matters far more on the web than on a phone with a store, so textures, sounds and maps are compressed and split up, and each map is only loaded when it is needed. And because a browser can keep an old tab open for days, the web page has to notice when a new version is out and reload itself, instead of trying to join a server that no longer speaks its language.</p>
+
+<h2>Making it run on everyday phones</h2>
+<p>My target was not the newest phone, but the three or four year old one most people actually have. The first versions of the bigger maps ran fine on my computer and dropped frames on a mid-range phone as soon as a few explosions went off.</p>
+<p>Measuring showed two culprits. The first was the number of <strong>draw calls</strong>: every tree, rock and lamp was drawn separately. Merging static scenery into larger meshes, adding simpler versions of objects for the distance, and turning off what the camera cannot see cut that number to a fraction. The second was <strong>spikes</strong> rather than a slow average: the first time a weapon was fired, the phone had to compile its shaders and create its effects, and the game froze for a moment exactly when the action was busiest. The fix was to prepare those things during loading, behind the progress bar, and to reuse effects from a pool instead of creating new ones in the middle of a fight.</p>
+<p>The lesson I keep relearning: measure on the device that matters, not on the development machine. The editor tells you very little about how a phone will feel.</p>
+
+<h2>Online play and the problem of time</h2>
+<p>Multiplayer is where most of the work went. Bumper Brawl uses Unity's Netcode for GameObjects with a <strong>server that has the final say</strong>: it runs the match clock, the scores, the damage and the bots. That keeps cheating hard, and keeps every player's game in agreement about who smashed whom.</p>
+<p>The hard part is that every player sees the world a little late. A message from my phone to the server and back takes time, often a tenth of a second or more. So on my screen, the other cars are always where they were a moment ago, while my own car is where I am driving it right now. In a slow game that does not matter. In a game about two cars hitting each other at full speed, it matters a lot: on one screen the cars touch, and on the other they missed.</p>
+<p>The game has to make both screens feel right. When you bump into another car, your own device works out the bump straight away, so it feels instant. The server then checks it against what it knows and shares the result with everyone. For bots, which live on the server, I am now reworking how they meet human players: the server keeps a solid stand-in for each human's car where that player will see it, so bots bump into you where your screen shows them, instead of into an outdated picture of you. Problems like this are never solved once; each change gets tested with simulated delay before it goes out, and measured again with real players afterwards.</p>
+
+<h2>Bots that behave like players</h2>
+<p>A car game with four people in a room of six needs someone to fill the gaps, and an empty room is no fun at all. Bots in Bumper Brawl drive with the same physics, use the same mystery boxes and follow the same rules as players. What makes them feel alive are small, human habits: they look for boxes when they have no weapon, chase whoever has little health left, try to dodge mines, hold a grudge for a few seconds against whoever hit them last, and use ramps.</p>
+<p>They also grow with you. New players meet slow rookies who miss a lot; experienced players meet bots that react quickly and lead their shots. The goal is never to make bots unbeatable, but to keep every match close enough to be exciting.</p>
+
+<h2>Servers for a one-person studio</h2>
+<p>Running game servers costs money every hour, whether anyone plays or not. So the server rooms start on demand: when someone creates a game, a room opens on our server in Europe, and it closes again when the last player leaves. Quick Play runs on the player's own device and needs no server at all, which is also why it starts in seconds.</p>
+
+<h2>Small things that add up</h2>
+<p>A lot of what makes a game feel finished is invisible until it is missing: an announcer calling out a triple smash, the camera shaking on a big hit, street lamps that fall over when you drive through them, rain that makes the road slippery, a short slow motion when the last car goes down. The game is also translated into seventeen languages, from Turkish and English to Japanese and Thai, because a big share of the players are in Asia.</p>
+
+<h2>What is next</h2>
+<p>The game keeps changing based on what players do: which maps they pick, where they get stuck, which weapons they never use. If you play it and have an idea or find a bug, I would love to hear from you through the <a href="/#contact">contact form</a>. And if you have not played yet, the <a href="/guide/how-to-play">how to play guide</a> will get you started in a couple of minutes.</p>
+
+      <nav class="guide-nav" aria-label="All guide pages"><a class="prev" href="/guide/faq"><small>Previous</small>FAQ</a></nav>
+    <aside class="guide-cta">
+      <h2>Ready to play?</h2>
+      <p>Free in your browser, no download, or on Android.</p>
+      <div class="play-links">
+        <a class="btn btn-blast" href="/bumperbrawl/play/">Play now</a>
+        <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.ukgames.bumperbrawl" rel="noopener" target="_blank" aria-label="Bumper Brawl: Get it on Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.2 2.4c-.3.3-.4.7-.4 1.2v16.8c0 .5.1.9.4 1.2l9.3-9.6zM14.7 13.2l2.6 2.7-11 6.3zm0-2.4L6.3 1.8l11 6.3zm3.9 4.4 2.9-1.7c.8-.5.8-1.6 0-2.1l-2.9-1.7-2.8 2.8z"/></svg><span><small>Get it on</small>Google Play</span></a>
+      </div>
+    </aside>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="wordmark" href="/">UK<b>GAMES</b></a>
+    <nav aria-label="Footer">
+      <a href="/#games">Games</a>
+      <a href="/guide/">Guide</a>
+      <a href="/page/privacy-policy">Privacy Policy</a>
+      <a href="/page/terms">Terms of Use</a>
+      <a href="/#contact">Contact</a>
+      <button type="button" class="consent-open" id="consent-open">Cookie settings</button>
+    </nav>
+    <span>© 2026 UKGames</span>
+  </div>
+</footer>
+<div class="consent" id="consent" role="dialog" aria-label="Cookie settings" hidden>
+  <p>May we use Google Analytics cookies to see how the site is used? They are set only if you accept. <a href="/page/privacy-policy">Privacy Policy</a></p>
+  <div class="consent-buttons">
+    <button type="button" class="btn consent-reject" data-choice="denied">Reject</button>
+    <button type="button" class="btn btn-blast" data-choice="granted">Accept</button>
+  </div>
+</div>
+<script src="/assets/site.js?v=ce9d4b44" defer></script>
+</body>
+</html>

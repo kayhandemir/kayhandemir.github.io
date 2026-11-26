@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<script>if(/\.github\.io$/.test(location.hostname))location.replace("https://ukgames.games"+location.pathname+location.search+location.hash);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geliştirici Günlüğü: Bumper Brawl&#x27;ı Yapmak | Bumper Brawl Rehberi</title>
+<meta name="description" content="Tek kişilik bir stüdyo telefonlar ve tarayıcılar için çevrimiçi bir araba dövüşü oyununu nasıl yaptı: web sınırları, telefon performansı, gecikme ve botlar.">
+<link rel="canonical" href="https://ukgames.games/tr/guide/devlog-building-bumper-brawl">
+<link rel="alternate" hreflang="en" href="https://ukgames.games/guide/devlog-building-bumper-brawl">
+<link rel="alternate" hreflang="tr" href="https://ukgames.games/tr/guide/devlog-building-bumper-brawl">
+<meta name="theme-color" content="#eef6fc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1322" media="(prefers-color-scheme: dark)">
+<script>try{var t=localStorage.getItem("ukg-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UKGames">
+<meta property="og:title" content="Geliştirici Günlüğü: Bumper Brawl&#x27;ı Yapmak | Bumper Brawl Rehberi">
+<meta property="og:description" content="Tek kişilik bir stüdyo telefonlar ve tarayıcılar için çevrimiçi bir araba dövüşü oyununu nasıl yaptı: web sınırları, telefon performansı, gecikme ve botlar.">
+<meta property="og:url" content="https://ukgames.games/tr/guide/devlog-building-bumper-brawl">
+<meta property="og:image" content="https://ukgames.games/img/og-image.jpg?v=2495d284">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/img/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=5b960002">
+<link rel="stylesheet" href="/assets/site.css?v=7ce0d267">
+<script>window.ukgAnalytics=function(){if(window.gtag)return;var g=document.createElement("script");g.async=true;g.src="https://www.googletagmanager.com/gtag/js?id=G-E5WFC0MHFP";document.head.appendChild(g);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag("js",new Date());gtag("config","G-E5WFC0MHFP");};try{if(localStorage.getItem("ukg-consent")==="granted")ukgAnalytics();}catch(e){}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1260030724213776" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/tr/" aria-label="UKGames home">UK<b>GAMES</b></a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-section" href="/tr/#games">Oyunlar</a><a class="nav-section" href="/tr/#bumperbrawl">Bumper Brawl</a><a class="nav-section" href="/tr/#about">Hakkımda</a><a class="nav-section" href="/tr/#contact">İletişim</a><a class="nav-section" href="/tr/guide/">Rehber</a>
+      <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Açık ve koyu tema arasında geç" title="Açık ve koyu tema arasında geç"><svg class="moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.7 14.6A8.5 8.5 0 0 1 9.4 3.3a8.5 8.5 0 1 0 11.3 11.3z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></button>
+      <a class="lang" href="/guide/devlog-building-bumper-brawl" hreflang="en" lang="en" title="English">EN</a>
+    </nav>
+  </div>
+</header>
+<main class="legal-page">
+  <div class="wrap">
+    <article class="legal guide">
+      <p class="crumbs"><a href="/tr/guide/">Bumper Brawl Rehberi</a></p>
+      <h1>Geliştirici Günlüğü: Bumper Brawl&#x27;ı Yapmak</h1>
+<p class="byline">Uğur Kayhandemir · Kasım 2026</p>
+<p>Bumper Brawl, SmashJeeps adında küçük bir proje olarak başladı: düz bir zeminde birbirine çarpan birkaç cip. Bugün dört modu, altı haritası ve dokuz silahı olan, dünyanın dört bir yanında telefonlarda ve tarayıcılarda oynanan çevrimiçi bir araba dövüşü oyunu. Tek başıma, Unity ve C# ile yaptım. Bu yazı göründüğünden zor çıkan kısımlar ve onlardan öğrendiklerim hakkında.</p>
+
+<h2>Tek oyun, çok farklı iki ev</h2>
+<p>En başından oyunun hem Android uygulaması olarak hem de indirme gerektirmeden tarayıcıda çalışmasını istedim. Kulağa tek hedef gibi geliyor; pratikte iki hedef. Telefonun gerçek bir ekran kartı sürücüsü ve gerçek bir ağ yığını var. Tarayıcı sekmesinde ise WebGL, işin çoğu için tek bir iş parçacığı ve hiç ham ağ soketi yok.</p>
+<p>Tarayıcının sınırları birçok kararı belirledi. Tarayıcıda oyun sunucularla <strong>WebSocket</strong> üzerinden konuşuyor, çünkü tarayıcının izin verdiği bu; telefonlar ve tarayıcılar yine de aynı odalarda buluşuyor. İndirme boyutu web'de mağazası olan bir telefondan çok daha önemli; bu yüzden dokular, sesler ve haritalar sıkıştırılıp parçalara ayrıldı ve her harita ancak gerektiğinde yükleniyor. Tarayıcı eski bir sekmeyi günlerce açık tutabildiği için de web sayfası yeni sürüm çıktığını fark edip kendini yenilemek zorunda; yoksa artık aynı dili konuşmayan bir sunucuya bağlanmaya çalışır.</p>
+
+<h2>Sıradan telefonlarda çalıştırmak</h2>
+<p>Hedefim en yeni telefon değil, çoğu insanın gerçekten elinde olan üç dört yıllık telefondu. Büyük haritaların ilk sürümleri bilgisayarımda sorunsuz çalışıyor, orta seviye bir telefonda ise birkaç patlama olur olmaz kare düşürüyordu.</p>
+<p>Ölçümler iki suçlu gösterdi. Birincisi <strong>çizim çağrılarının</strong> sayısıydı: her ağaç, kaya ve lamba ayrı ayrı çiziliyordu. Sabit dekoru daha büyük modellerde birleştirmek, uzaktaki nesneler için daha basit sürümler eklemek ve kameranın görmediğini kapatmak bu sayıyı çok küçük bir kısmına indirdi. İkincisi yavaş bir ortalama değil, <strong>ani takılmalardı</strong>: bir silah ilk kez ateşlendiğinde telefon onun gölgelendiricilerini derlemek ve efektlerini oluşturmak zorunda kalıyor, oyun da tam aksiyonun en yoğun anında bir an donuyordu. Çözüm, bunları yükleme sırasında, ilerleme çubuğunun arkasında hazırlamak ve efektleri kavganın ortasında yeniden oluşturmak yerine bir havuzdan tekrar kullanmaktı.</p>
+<p>Tekrar tekrar öğrendiğim ders: geliştirme makinesinde değil, önemli olan cihazda ölç. Editör bir telefonun nasıl hissettireceği hakkında çok az şey söyler.</p>
+
+<h2>Çevrimiçi oyun ve zaman sorunu</h2>
+<p>Emeğin çoğu çok oyunculu kısma gitti. Bumper Brawl, Unity'nin Netcode for GameObjects kütüphanesini <strong>son sözü sunucunun söylediği</strong> bir yapıyla kullanıyor: maç saatini, skorları, hasarı ve botları sunucu yönetiyor. Bu hem hileyi zorlaştırıyor hem de kimin kimi yok ettiği konusunda her oyuncunun oyununu aynı fikirde tutuyor.</p>
+<p>Zor kısım, her oyuncunun dünyayı biraz geç görmesi. Telefonumdan sunucuya gidip gelen bir mesaj zaman alıyor, çoğu zaman saniyenin onda biri ya da daha fazla. Yani benim ekranımda diğer arabalar her zaman bir an önce oldukları yerdeler, benim arabam ise tam şu an sürdüğüm yerde. Yavaş bir oyunda bunun önemi yok. Tam hızda birbirine çarpan iki arabanın oyununda ise çok önemli: bir ekranda arabalar değiyor, diğerinde ıskalıyor.</p>
+<p>Oyunun iki ekranı da doğru hissettirmesi gerekiyor. Başka bir arabaya çarptığında çarpışmayı hemen kendi cihazın hesaplıyor, böylece anında hissediliyor. Sunucu sonra bunu kendi bildikleriyle karşılaştırıp sonucu herkesle paylaşıyor. Sunucuda yaşayan botların insan oyuncularla nasıl karşılaştığını şu an yeniden düzenliyorum: sunucu her insanın arabası için, o oyuncunun göreceği yerde katı bir vekil tutuyor; böylece botlar sana senin eski bir görüntüne değil, ekranında göründükleri yerde çarpıyor. Bu tür sorunlar hiçbir zaman tek seferde çözülmüyor; her değişiklik yayına çıkmadan önce yapay gecikmeyle test ediliyor, sonra da gerçek oyuncularla yeniden ölçülüyor.</p>
+
+<h2>Oyuncu gibi davranan botlar</h2>
+<p>Altı kişilik bir odada dört kişiyle oynanan bir araba oyununun boşlukları dolduracak birine ihtiyacı var; boş bir oda hiç eğlenceli değil. Bumper Brawl'daki botlar aynı fizikle sürüyor, aynı ? kutularını kullanıyor ve oyuncularla aynı kurallara uyuyor. Onları canlı gösteren küçük, insani alışkanlıklar: silahları yokken kutu arıyorlar, canı azalanın peşine düşüyorlar, mayınlardan kaçmaya çalışıyorlar, kendilerine son vurana birkaç saniye kin tutuyorlar ve rampaları kullanıyorlar.</p>
+<p>Ayrıca seninle birlikte büyüyorlar. Yeni oyuncular çok ıskalayan yavaş acemilerle, deneyimli oyuncular hızlı tepki veren ve atışlarını önden hesaplayan botlarla karşılaşıyor. Amaç botları yenilmez yapmak değil, her maçı heyecanlı olacak kadar çekişmeli tutmak.</p>
+
+<h2>Tek kişilik bir stüdyo için sunucular</h2>
+<p>Oyun sunucusu çalıştırmak, oynayan olsun olmasın her saat para tutuyor. Bu yüzden sunucu odaları talep üzerine açılıyor: biri oyun kurduğunda Avrupa'daki sunucumuzda bir oda açılıyor, son oyuncu çıkınca da kapanıyor. Hızlı Oyun oyuncunun kendi cihazında çalışıyor ve hiç sunucuya ihtiyaç duymuyor; saniyeler içinde başlamasının sebebi de bu.</p>
+
+<h2>Birikerek büyüyen küçük şeyler</h2>
+<p>Bir oyunu bitmiş hissettiren şeylerin çoğu, eksik olana kadar görünmez: üçlü imhayı haykıran bir spiker, büyük bir darbede sarsılan kamera, içinden geçince devrilen sokak lambaları, yolu kaygan yapan yağmur, son araba düştüğünde kısa bir ağır çekim. Oyun ayrıca Türkçe ve İngilizceden Japonca ve Taycaya kadar on yedi dile çevrildi, çünkü oyuncuların büyük bir kısmı Asya'da.</p>
+
+<h2>Sırada ne var</h2>
+<p>Oyun, oyuncuların yaptıklarına göre değişmeye devam ediyor: hangi haritaları seçtikleri, nerede takıldıkları, hangi silahları hiç kullanmadıkları. Oynarsan ve bir fikrin olursa ya da bir hata bulursan <a href="/tr/#contact">iletişim formundan</a> duymayı çok isterim. Henüz oynamadıysan <a href="/tr/guide/how-to-play">nasıl oynanır rehberi</a> seni birkaç dakikada oyuna hazırlar.</p>
+
+      <nav class="guide-nav" aria-label="Tüm rehber sayfaları"><a class="prev" href="/tr/guide/faq"><small>Önceki</small>Sık Sorulan Sorular</a></nav>
+    <aside class="guide-cta">
+      <h2>Oynamaya hazır mısın?</h2>
+      <p>Tarayıcında indirmeden ya da Android&#x27;de ücretsiz.</p>
+      <div class="play-links">
+        <a class="btn btn-blast" href="/bumperbrawl/play/">Hemen oyna</a>
+        <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.ukgames.bumperbrawl" rel="noopener" target="_blank" aria-label="Bumper Brawl: Hemen indir Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.2 2.4c-.3.3-.4.7-.4 1.2v16.8c0 .5.1.9.4 1.2l9.3-9.6zM14.7 13.2l2.6 2.7-11 6.3zm0-2.4L6.3 1.8l11 6.3zm3.9 4.4 2.9-1.7c.8-.5.8-1.6 0-2.1l-2.9-1.7-2.8 2.8z"/></svg><span><small>Hemen indir</small>Google Play</span></a>
+      </div>
+    </aside>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="wordmark" href="/tr/">UK<b>GAMES</b></a>
+    <nav aria-label="Footer">
+      <a href="/tr/#games">Oyunlar</a>
+      <a href="/tr/guide/">Rehber</a>
+      <a href="/page/privacy-policy-tr">Gizlilik Politikası</a>
+      <a href="/page/terms-tr">Kullanım Şartları</a>
+      <a href="/tr/#contact">İletişim</a>
+      <button type="button" class="consent-open" id="consent-open">Çerez ayarları</button>
+    </nav>
+    <span>© 2026 UKGames</span>
+  </div>
+</footer>
+<div class="consent" id="consent" role="dialog" aria-label="Çerez ayarları" hidden>
+  <p>Sitenin nasıl kullanıldığını görmek için Google Analytics çerezlerini kullanabilir miyiz? Yalnızca kabul edersen yerleştirilir. <a href="/page/privacy-policy-tr">Gizlilik Politikası</a></p>
+  <div class="consent-buttons">
+    <button type="button" class="btn consent-reject" data-choice="denied">Reddet</button>
+    <button type="button" class="btn btn-blast" data-choice="granted">Kabul et</button>
+  </div>
+</div>
+<script src="/assets/site.js?v=ce9d4b44" defer></script>
+</body>
+</html>

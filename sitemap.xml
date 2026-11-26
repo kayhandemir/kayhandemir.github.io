@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ukgames.games/</loc></url>
   <url><loc>https://ukgames.games/tr/</loc></url>
+  <url><loc>https://ukgames.games/guide/</loc></url>
+  <url><loc>https://ukgames.games/guide/how-to-play</loc></url>
+  <url><loc>https://ukgames.games/guide/weapons</loc></url>
+  <url><loc>https://ukgames.games/guide/modes</loc></url>
+  <url><loc>https://ukgames.games/guide/maps</loc></url>
+  <url><loc>https://ukgames.games/guide/progress</loc></url>
+  <url><loc>https://ukgames.games/guide/tips</loc></url>
+  <url><loc>https://ukgames.games/guide/faq</loc></url>
+  <url><loc>https://ukgames.games/guide/devlog-building-bumper-brawl</loc></url>
+  <url><loc>https://ukgames.games/tr/guide/</loc></url>
+  <url><loc>https://ukgames.games/tr/guide/how-to-play</loc></url>
+  <url><loc>https://ukgames.games/tr/guide/weapons</loc></url>
+  <url><loc>https://ukgames.games/tr/guide/modes</loc></url>
+  <url><loc>https://ukgames.games/tr/guide/maps</loc></url>
+  <url><loc>https://ukgames.games/tr/guide/progress</loc></url>
+  <url><loc>https://ukgames.games/tr/guide/tips</loc></url>
+  <url><loc>https://ukgames.games/tr/guide/faq</loc></url>
+  <url><loc>https://ukgames.games/tr/guide/devlog-building-bumper-brawl</loc></url>
   <url><loc>https://ukgames.games/page/privacy-policy</loc></url>
   <url><loc>https://ukgames.games/page/privacy-policy-tr</loc></url>
   <url><loc>https://ukgames.games/page/terms</loc></url>

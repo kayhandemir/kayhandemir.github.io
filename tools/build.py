@@ -161,6 +161,15 @@ STRINGS = {
         "notfound_h": "Page not found", "notfound_p": "This page doesn't exist or has moved.", "home": "Back to home",
         "redirect": "This page has moved.", "redirect_link": "Continue",
         "legal_alt": ("Türkçe", "tr"),
+        "guide": {"nav": "Guide", "name": "Bumper Brawl Guide", "home": "Guide",
+                  "title": "Bumper Brawl Guide: how to play, weapons, modes and maps",
+                  "description": "Everything about Bumper Brawl, the free online car combat game: controls, the nine "
+                                 "weapons, the four modes, the six maps, progress and the garage, tips and FAQ.",
+                  "intro": "Bumper Brawl is a free car combat game for the browser and Android. These pages explain "
+                           "how it works, from your first match to the last map, written by the developer.",
+                  "read": "Read", "prev": "Previous", "next": "Next", "all": "All guide pages",
+                  "cta_h": "Ready to play?", "cta_p": "Free in your browser, no download, or on Android.",
+                  "cta_button": "Guide", "home_link": "Read the Bumper Brawl guide"},
     },
     "tr": {
         "lang": "tr", "prefix": "/tr", "other": "en", "other_label": "EN", "other_name": "English",
@@ -238,6 +247,15 @@ STRINGS = {
         "notfound_h": "Sayfa bulunamadı", "notfound_p": "Bu sayfa yok ya da taşındı.", "home": "Ana sayfaya dön",
         "redirect": "Bu sayfa taşındı.", "redirect_link": "Devam et",
         "legal_alt": ("English", "en"),
+        "guide": {"nav": "Rehber", "name": "Bumper Brawl Rehberi", "home": "Rehber",
+                  "title": "Bumper Brawl Rehberi: nasıl oynanır, silahlar, modlar ve haritalar",
+                  "description": "Ücretsiz çevrimiçi araba dövüşü oyunu Bumper Brawl hakkında her şey: kontroller, "
+                                 "dokuz silah, dört mod, altı harita, ilerleme ve garaj, ipuçları ve sık sorulan sorular.",
+                  "intro": "Bumper Brawl tarayıcıda ve Android'de ücretsiz bir araba dövüşü oyunu. Bu sayfalar, ilk "
+                           "maçından son haritaya kadar oyunun nasıl işlediğini anlatıyor; geliştiricisi tarafından yazıldı.",
+                  "read": "Oku", "prev": "Önceki", "next": "Sonraki", "all": "Tüm rehber sayfaları",
+                  "cta_h": "Oynamaya hazır mısın?", "cta_p": "Tarayıcında indirmeden ya da Android'de ücretsiz.",
+                  "cta_button": "Rehber", "home_link": "Bumper Brawl rehberini oku"},
     },
 }
 
@@ -257,6 +275,32 @@ LEGAL = {
     "color-blocks-data-deletion-tr": ("tr", "Color Blocks: Veri Silme", "color-blocks-data-deletion-tr.html",
                                       "color-blocks-data-deletion"),
 }
+
+
+# Bumper Brawl guide: /guide/<slug> (English) and /tr/guide/<slug> (Turkish). Texts in tools/content/guide/<lang>/.
+GUIDE = [
+    ("how-to-play", {"en": ("How to Play", "Controls, mystery boxes, the shield, NOS, God Mode, health packs and the market: everything for your first matches."),
+                     "tr": ("Nasıl Oynanır", "Kontroller, ? kutuları, kalkan, NOS, God Mode, can paketleri ve market: ilk maçların için her şey.")}),
+    ("weapons", {"en": ("Weapons Guide", "All nine weapons from the ? boxes, what each one does and when to use it."),
+                 "tr": ("Silahlar Rehberi", "? kutularındaki dokuz silah, her birinin ne yaptığı ve ne zaman kullanılacağı.")}),
+    ("modes", {"en": ("Game Modes", "Smash, Gold Rush, Last Car Standing and Bomb Tag: the rules and how to win each one, plus league points."),
+               "tr": ("Oyun Modları", "Yok Et, Altın Avı, Son Kalan Araba ve Bomba Pası: kurallar, her birini kazanma yolları ve lig puanı.")}),
+    ("maps", {"en": ("Maps", "The six arenas, the level each one opens at, how to play them and how the weather changes a match."),
+              "tr": ("Haritalar", "Altı arena, her birinin açıldığı seviye, nasıl oynanacakları ve hava durumunun maça etkisi.")}),
+    ("progress", {"en": ("Progress and the Garage", "Gold and diamonds, levels, quests and chests, the nine cars, upgrades and looks."),
+                  "tr": ("İlerleme ve Garaj", "Altın ve elmas, seviyeler, görevler ve sandıklar, dokuz araba, geliştirmeler ve görünüm.")}),
+    ("tips", {"en": ("Tips for New Players", "Ten habits that move you up the scoreboard, from always carrying a weapon to reading the mode."),
+              "tr": ("Yeni Başlayanlara İpuçları", "Her zaman silah taşımaktan modu okumaya, seni skor tablosunda yukarı taşıyan on alışkanlık.")}),
+    ("faq", {"en": ("FAQ", "Is it free, which devices it runs on, playing with friends, servers, lag and more."),
+             "tr": ("Sık Sorulan Sorular", "Ücretsiz mi, hangi cihazlarda çalışır, arkadaşlarla oynamak, sunucular, takılma ve dahası.")}),
+    ("devlog-building-bumper-brawl", {"en": ("Devlog: Building Bumper Brawl", "How a one-person studio built an online car brawler for phones and browsers: web limits, phone performance, lag and bots."),
+                                      "tr": ("Geliştirici Günlüğü: Bumper Brawl'ı Yapmak", "Tek kişilik bir stüdyo telefonlar ve tarayıcılar için çevrimiçi bir araba dövüşü oyununu nasıl yaptı: web sınırları, telefon performansı, gecikme ve botlar.")}),
+]
+
+
+def guide_path(lang, slug=""):
+    base = "/guide/" if lang == "en" else "/tr/guide/"
+    return base + slug
 
 
 def e(text):
@@ -306,6 +350,7 @@ def header(s, other_href):
     links = "".join(
         f'<a class="nav-section" href="{home}#{anchor}">{e(label)}</a>'
         for anchor, label in zip(["games", "bumperbrawl", "about", "contact"], s["nav"]))
+    links += f'<a class="nav-section" href="{guide_path(s["lang"])}">{e(s["guide"]["nav"])}</a>'
     return f"""<header class="site-header">
   <div class="wrap">
     <a class="wordmark" href="{home}" aria-label="UKGames home">UK<b>GAMES</b></a>
@@ -329,6 +374,7 @@ def footer(s):
     <a class="wordmark" href="{p}/">UK<b>GAMES</b></a>
     <nav aria-label="Footer">
       <a href="{p}/#games">{e(s['nav'][0])}</a>
+      <a href="{guide_path(s['lang'])}">{e(s['guide']['nav'])}</a>
       <a href="{privacy}">{e(s['privacy'])}</a>
       <a href="{terms}">{e(s['terms'])}</a>
       <a href="{p}/#contact">{e(s['nav'][3])}</a>
@@ -479,6 +525,7 @@ def home_page(s):
       <h2>Bumper Brawl</h2>
       <p class="intro">{e(s['smash_intro'])}</p>
       <ul class="features">{features}</ul>
+      <p class="guide-link"><a class="btn" href="{guide_path(s['lang'])}">{e(s['guide']['home_link'])}</a></p>
     </div>
     <aside class="economy play-card">
       <img class="cover" src="{asset_url('/img/bumperbrawl-square.jpg')}" alt="{e(s['cover_alt'])}" width="420" height="420" loading="lazy">
@@ -554,6 +601,75 @@ def legal_page(slug):
     return out + footer(s)
 
 
+def guide_cta(s):
+    g = s["guide"]
+    return f"""    <aside class="guide-cta">
+      <h2>{e(g['cta_h'])}</h2>
+      <p>{e(g['cta_p'])}</p>
+      <div class="play-links">
+        <a class="btn btn-blast" href="{PLAY_URL}">{e(s['play_here'])}</a>
+        {play_button(s, BB_PLAY_URL, "Bumper Brawl")}
+      </div>
+    </aside>
+"""
+
+
+def guide_index(lang):
+    s = STRINGS[lang]
+    g = s["guide"]
+    other = "tr" if lang == "en" else "en"
+    path = guide_path(lang)
+    items = "".join(
+        f'<li><a href="{guide_path(lang, slug)}"><b>{e(t[lang][0])}</b><span>{e(t[lang][1])}</span></a></li>'
+        for slug, t in GUIDE)
+    out = head(s, g["title"], g["description"], path, [("en", guide_path("en")), ("tr", guide_path("tr"))])
+    out += "</head>\n<body>\n" + header(s, guide_path(other))
+    out += f"""<main class="legal-page">
+  <div class="wrap">
+    <article class="legal guide">
+      <h1>{e(g['name'])}</h1>
+      <p class="lede">{e(g['intro'])}</p>
+      <ul class="guide-list">{items}</ul>
+{guide_cta(s)}    </article>
+  </div>
+</main>
+"""
+    return out + footer(s)
+
+
+def guide_page(lang, slug):
+    s = STRINGS[lang]
+    g = s["guide"]
+    other = "tr" if lang == "en" else "en"
+    slugs = [x for x, _ in GUIDE]
+    i = slugs.index(slug)
+    title, description = dict(GUIDE)[slug][lang]
+    body = (CONTENT / "guide" / lang / f"{slug}.html").read_text(encoding="utf-8")
+    body = body.replace("<table>", '<div class="table-scroll"><table>').replace("</table>", "</table></div>")
+    body = body.replace('<div class="table-scroll"><div class="table-scroll">', '<div class="table-scroll">').replace("</table></div></div>", "</table></div>")
+    path = guide_path(lang, slug)
+    nav = []
+    if i > 0:
+        nav.append(f'<a class="prev" href="{guide_path(lang, slugs[i - 1])}"><small>{e(g["prev"])}</small>{e(dict(GUIDE)[slugs[i - 1]][lang][0])}</a>')
+    if i < len(slugs) - 1:
+        nav.append(f'<a class="next" href="{guide_path(lang, slugs[i + 1])}"><small>{e(g["next"])}</small>{e(dict(GUIDE)[slugs[i + 1]][lang][0])}</a>')
+    out = head(s, f"{title} | {g['name']}", description, path,
+               [("en", guide_path("en", slug)), ("tr", guide_path("tr", slug))])
+    out += "</head>\n<body>\n" + header(s, guide_path(other, slug))
+    out += f"""<main class="legal-page">
+  <div class="wrap">
+    <article class="legal guide">
+      <p class="crumbs"><a href="{guide_path(lang)}">{e(g['name'])}</a></p>
+      <h1>{e(title)}</h1>
+{body}
+      <nav class="guide-nav" aria-label="{e(g['all'])}">{''.join(nav)}</nav>
+{guide_cta(s)}    </article>
+  </div>
+</main>
+"""
+    return out + footer(s)
+
+
 def redirect_page(target, lang="en"):
     s = STRINGS[lang]
     return f"""<!doctype html>
@@ -605,7 +721,8 @@ def not_found_page():
 
 
 def sitemap():
-    urls = ["/", "/tr/"] + [f"/page/{slug}" for slug in LEGAL]
+    urls = ["/", "/tr/"] + [guide_path(lang, slug) for lang in ("en", "tr") for slug in [""] + [x for x, _ in GUIDE]]
+    urls += [f"/page/{slug}" for slug in LEGAL]
     items = "".join(f"  <url><loc>{SITE}{u}</loc></url>\n" for u in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{items}</urlset>\n'
 
@@ -621,6 +738,11 @@ def main():
     write("tr/index.html", home_page(STRINGS["tr"]))
     for slug in LEGAL:
         write(f"page/{slug}.html", legal_page(slug))
+    for lang in ("en", "tr"):
+        folder = "guide" if lang == "en" else "tr/guide"
+        write(f"{folder}/index.html", guide_index(lang))
+        for slug, _ in GUIDE:
+            write(f"{folder}/{slug}.html", guide_page(lang, slug))
     # Old URLs keep working: earlier page routes and the first GitHub Pages site.
     write("page/terms-of-service.html", redirect_page("/page/terms"))
     for slug in LEGAL:

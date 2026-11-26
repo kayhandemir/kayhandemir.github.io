@@ -390,6 +390,31 @@ p { margin: 0; }
 .legal th, .legal td { text-align: left; padding: 9px 12px; border: 2px solid var(--line); vertical-align: top; }
 .legal th { background: var(--band); color: var(--text); }
 
+/* ---------- Bumper Brawl guide ---------- */
+.legal.guide > p.crumbs { font-size: 14px; margin-bottom: 6px; }
+.legal.guide > p.crumbs a { color: var(--text-soft); }
+.legal.guide > p.lede { font-family: inherit; font-size: 17px; color: var(--text-soft); margin: 10px 0 8px; }
+.legal.guide p.byline { font-family: var(--font-mono); font-size: 14px; }
+.legal.guide h1 { margin-bottom: 18px; }
+.guide-list { list-style: none; padding: 0 !important; margin: 20px 0 0 !important; display: grid; gap: 12px; }
+.guide-list li { margin: 0 !important; }
+.guide-list a { display: block; text-decoration: none; border: 2px solid var(--line); border-radius: var(--radius); padding: 14px 18px; background: var(--bg); }
+.guide-list a:hover { border-color: var(--blast); }
+.guide-list b { display: block; font-size: 18px; color: var(--text); margin-bottom: 4px; }
+.guide-list span { color: var(--text-soft); font-size: 15px; }
+.guide-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 36px; padding-top: 18px; border-top: 2px dashed var(--dash); }
+.guide-nav a { text-decoration: none; font-weight: 700; max-width: 48%; }
+.guide-nav a small { display: block; font-family: var(--font-mono); font-weight: 400; font-size: 13px; color: var(--text-soft); }
+.guide-nav .next { margin-left: auto; text-align: right; }
+.guide-cta { margin-top: 32px; padding: 20px 22px; border: var(--border); border-radius: var(--radius); background: var(--band); }
+.legal .guide-cta h2 { margin: 0 0 6px; padding: 0; border: 0; }
+.guide-cta .play-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.guide-cta .play-links a { text-decoration: none; }
+.legal .guide-cta .btn-blast { color: var(--on-accent); }
+.legal .guide-cta .btn-play { color: var(--play-fg); }
+.legal .guide-link .btn { text-decoration: none; }
+.guide-link { margin-top: 22px; }
+
 /* ---------- Small pages (404, redirects) ---------- */
 .center-page { min-height: 60vh; display: grid; place-items: center; text-align: center; padding-block: 60px; }
 .center-page h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(56px, 12vw, 120px); line-height: 1.1; }
